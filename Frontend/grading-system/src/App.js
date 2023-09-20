@@ -5,24 +5,32 @@ import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
  
   return (
     <div className="App">
-      <header className="App-header"> 
+      <header className="container App-header"> 
         <h1>Sistema de Calificaciones</h1>
-        <nav>
-          <ul>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/About">About As</NavLink></li>
-            <li><NavLink to="/Contact">Contact</NavLink></li>
-            <li><NavLink to="/Administracion/dashboard">Administracion</NavLink></li>
-          </ul>
-        </nav>
+        <div className="container">
+        <div className="d-flex justify-content-end">
+    
+
+
+      
+          <ul className="list-inline-item  ">
+            <li className="list-inline-item"><NavLink to="/">Home</NavLink></li>
+            <li className="list-inline-item"><NavLink to="/About">About As</NavLink></li>
+            <li className="list-inline-item"><NavLink to="/Contact">Contact</NavLink></li>
+            <li className="list-inline-item"><NavLink to="/Administracion/dashboard">Administracion</NavLink></li>
+          </ul></div></div>
+         
+        
+      
       </header>
+      <br></br>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={`/login/:rol`} element={<Login />} />
