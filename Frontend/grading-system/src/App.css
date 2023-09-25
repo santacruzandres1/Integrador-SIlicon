@@ -12,42 +12,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
- li:hover{
-  border-bottom: solid 2px white;
 
- }
-
- li{
-  padding: 5px;
- }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 20vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-size: calc(10px + 2vmin);
-  color: rgb(245, 238, 238);
-  margin: 0;
-  padding: 16px;
-}
-.App-header a {
-  color: white;
-  text-decoration: none;
-}
-.App-header a:hover {
-  color: #61dafb;
-}
-.App-header a.active {
-  color: #61dafb;
-  text-decoration: dotted;
-  pointer-events: none;
-}
-.App-header ul{
-  list-style-type: none;
-}
 .App-link {
   color: #61dafb;
 }
