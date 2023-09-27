@@ -129,7 +129,7 @@ const FormEditarUsuario = () => {
               </div>
               <br></br>
 
-              <button type="submit" className="btn btn-primary">Crear</button>
+              <button type="submit" className="btn btn-primary">Editar</button>
             </form>
           </div>
         </div>
