@@ -12,6 +12,7 @@ import FormEditMateria from '../formEditar/formEditMateria';
 import FormEditCurso from '../formEditar/formEditCurso';
 import FormCrearCurso from '../formCrear/formCrearCurso';
 import { Link } from 'react-router-dom';
+import Footer from '../footer/footer';
 
 let datos = [
   { id_usuario: 1, nombre: "lucas", apellido: "pradier", mail: "aasdas", rol: "alumno", dni: 33123 },
@@ -369,6 +370,7 @@ const DashboardUser = () => {
 
 
 
+            <Footer></Footer>
 
 
 

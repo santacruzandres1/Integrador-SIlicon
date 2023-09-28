@@ -1,10 +1,25 @@
 import React from 'react';
+import Header from '../../components/Header/header';
+import Footer from '../../components/footer/footer';
 
 const Contact = () => {
+    return (
 <>
-<h1>Contact</h1>
-<p>Esta es la página de Contact</p>
-</>
+<Header></Header>
+<div className='container'>
+<h1>Contacto</h1>
+<hr></hr><br></br>
+
+      <p>Si tienes alguna pregunta o comentario, no dudes en ponerte en contacto con nosotros:</p>
+      <br></br>
+      <ul>
+        <li>Correo Electrónico: info@tuempresa.com</li>
+        <li>Teléfono: +123 456 789</li>
+      </ul>
+</div>
+
+<Footer></Footer>
+</>  )
 }
 
 export default Contact;

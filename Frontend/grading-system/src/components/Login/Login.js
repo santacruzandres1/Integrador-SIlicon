@@ -1,5 +1,6 @@
  import React, { useState } from 'react';
  import { useParams } from 'react-router-dom';
+import Header from '../Header/header';
 
   const Login = () => {
    const [user, setUser] = useState(null);
@@ -64,6 +65,7 @@
 
   return (
     <>
+    <Header></Header>
     <div className='container'><h2>Login {rol}</h2></div>
      <div className="container mt-5">
      <div className="row justify-content-center">
