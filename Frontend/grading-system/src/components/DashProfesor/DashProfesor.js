@@ -52,7 +52,7 @@ const DashProfesor = () => {
 
                             <input className="form-control me-2"
                                 type="text"
-                                placeholder="Buscar por nombre"
+                                placeholder="Buscar por Alumno"
 
                                 onChange={handleSearch}
                                 value={searchTerm}
@@ -97,7 +97,7 @@ const DashProfesor = () => {
 
             <div className="container item">
 
-                <table class="table">
+                <table class="table table-striped-columns">
                     <thead>
                         <tr>
                             <th scope="col">Alumno</th>

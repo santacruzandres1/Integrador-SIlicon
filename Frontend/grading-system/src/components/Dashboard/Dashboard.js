@@ -11,7 +11,7 @@ import FormCrearMateria from '../formCrear/formCrearMateria';
 import FormEditMateria from '../formEditar/formEditMateria';
 import FormEditCurso from '../formEditar/formEditCurso';
 import FormCrearCurso from '../formCrear/formCrearCurso';
-import { Link } from 'react-router-dom';
+
 import Footer from '../footer/footer';
 
 let datos = [
@@ -60,7 +60,7 @@ const DashboardUser = () => {
   };
 
   const filteredData = datos.filter((item) =>
-    item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    item.apellido[0].toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -79,18 +79,19 @@ const DashboardUser = () => {
         <h3>Seleccione que desea administrar</h3><br></br><br></br>
         <div class="row justify-content-center align-items-center g-2">
           <div class="col">
-            <Link to='#usuario' class="btn btn-dark">Usuarios</Link>
+            <a href="#usuario" class="btn btn-dark">Usuarios</a>
           </div>
           <div class="col">
-            <Link to="#materia" class="btn btn-dark">Materias</Link></div>
-          <div Link to="#curso" class="col"><button type="button" class="btn btn-dark">Cursos</button></div>
+            <a href='#materia' class="btn btn-dark">Materias</a></div>
+          <div    class="col"><a href='#curso' type="button" class="btn btn-dark">Cursos</a></div>
         </div>
+        <div id='usuario'></div>
       </div>
       <br></br>
-      <hr></hr>
+      <hr ></hr>
       <br></br><br></br>
       <br></br>
-      <div id='usuario' className='titulo'>
+      <div  className='titulo'>
         <h2> ADMINISTRACION USUARIOS </h2>
 
       </div>
@@ -106,7 +107,7 @@ const DashboardUser = () => {
           
               <input className="form-control "
                 type="text"
-                placeholder="Buscar por nombre"
+                placeholder="Buscar por Apellido"
                 onChange={handleSearch}
                 value={searchTerm}
               />
@@ -155,7 +156,7 @@ const DashboardUser = () => {
 
       <div className="container item">
         <div className='container'>
-          <table class="table">
+          <table class="table table-striped-columns">
             <thead>
               <tr>
                 <th scope="col">ID</th>
@@ -167,6 +168,7 @@ const DashboardUser = () => {
 
               </tr>
             </thead>
+            <div  id='materia'></div>
             {filteredData.map(datos => (
               <tbody>
                 <tr >
@@ -184,8 +186,10 @@ const DashboardUser = () => {
                 </tr>
 
               </tbody>))}
+             
           </table>
         </div>
+       
         <br></br>
 
 
@@ -197,21 +201,21 @@ const DashboardUser = () => {
 
       <div>
         <hr></hr><br></br>
-        <h2 id='materia'>ADMINISTRACIÓN MATERIAS </h2>
+        <h2>ADMINISTRACIÓN MATERIAS </h2>
 
       </div>
       <br></br>
       <div className="container ">
-        <div class="row justify-content-center align-items-center g-2">
-          <div class="col-2">  <button onClick={handleShowCrearMateria} className="btn btn-dark  ">Agregar Materia</button></div>
-          <div class="col-4 offset-4"><div className="container-fluid">
-            <form className="d-flex" role="search">
-              <input className="form-control me-2" type="search" placeholder="Buscar Materia" aria-label="Search"></input>
-              <span className="btn btn-dark">Buscar</span>
-            </form>
-          </div></div>
+        
+       
+          <div class="row justify-content-start">
+          <div className="col-4 ">
+           <button onClick={handleShowCrearMateria} className="btn btn-dark  ">Agregar Materia</button>
+           </div>
+           </div>
+          
+         
 
-        </div>
 
 
         <Modal show={showModalCrearMateria} onHide={handleCloseCrearMateria}>
@@ -247,8 +251,8 @@ const DashboardUser = () => {
 
 
       <div className="container item">
-
-        <table class="table">
+      <div id='curso'></div>
+        <table class="table table-striped-columns">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -259,6 +263,7 @@ const DashboardUser = () => {
 
             </tr>
           </thead>
+         
           {materias.map(mate => (
             <tbody>
               <tr >
@@ -282,19 +287,15 @@ const DashboardUser = () => {
 
       <div>
         <hr></hr><br></br>
-        <h2 id='curso'>ADMINISTRACIÓN CURSOS </h2>
+        <h2 >ADMINISTRACIÓN CURSOS </h2>
 
       </div>
       <br></br>
       <div className="container ">
-        <div class="row justify-content-center align-items-center g-2">
-          <div class="col-2">  <button onClick={handleShowCrearCurso} className="btn btn-dark  ">Agregar Curso</button></div>
-          <div class="col-4 offset-4"><div className="container-fluid">
-            <form className="d-flex" role="search">
-              <input className="form-control me-2" type="search" placeholder="Buscar Curso" aria-label="Search"></input>
-              <button className="btn btn-dark" type="submit">Buscar</button>
-            </form>
-          </div></div>
+      <div class="row justify-content-start">
+          <div className="col-4 ">
+           <button onClick={handleShowCrearCurso} className="btn btn-dark  ">Agregar Curso</button></div>
+          
 
         </div>
 
@@ -332,9 +333,9 @@ const DashboardUser = () => {
       <br></br> <br></br>
 
 
-      <div className="container item">
-
-        <table class="table">
+      <div className="container  ">
+            
+        <table class="table table-striped-columns">
           <thead>
             <tr>
               <th scope="col">ID</th>

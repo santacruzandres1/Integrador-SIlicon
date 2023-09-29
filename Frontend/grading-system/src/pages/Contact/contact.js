@@ -17,7 +17,7 @@ const Contact = () => {
         <li>Teléfono: +123 456 789</li>
       </ul>
 </div>
-
+<br></br><br></br><br></br><br></br><br></br>
 <Footer></Footer>
 </>  )
 }

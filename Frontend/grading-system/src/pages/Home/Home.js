@@ -15,6 +15,7 @@ const Home = () => {
             <br></br>
             <LoginRol />
         </div>
+        <br></br><br></br>
         <Footer></Footer></>
     )
 }

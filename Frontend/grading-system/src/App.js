@@ -10,15 +10,14 @@ import Contact from './pages/Contact/contact';
 
 import FormCrearUsuario from './components/formCrear/formCrearUsuario';
 
+
 function App() {
 
  
   return (
     <div className="App">
      
-      
-      
-      <br></br>
+    
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={`/login/:rol`} element={<Login />} />
