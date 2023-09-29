@@ -3,7 +3,7 @@ import './Dashboard.css';
 import { Button, Modal } from 'react-bootstrap';
 import DashboardAlumno from '../DashboardAlumno/DashboardAlumno';
 import DashProfesor from '../DashProfesor/DashProfesor';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../Header/header';
 import FormEditarUsuario from '../formEditar/formEditarUser';
 import FormCrearUsuario from '../formCrear/formCrearUsuario';
@@ -15,9 +15,9 @@ import FormCrearCurso from '../formCrear/formCrearCurso';
 import Footer from '../footer/footer';
 
 let datos = [
-  { id_usuario: 1, nombre: "lucas", apellido: "pradier", mail: "aasdas", rol: "alumno", dni: 33123 },
-  { id_usuario: 2, nombre: "andres", apellido: "santa", mail: "aasdas", rol: "docente", dni: 5234251 },
-  { id_usuario: 3, nombre: "matiuas", apellido: "safaf", mail: "fghfd", rol: "admin", dni: 41214 }
+  { id_usuario: 1, nombre: "Lucas", apellido: "Pradier", mail: "lucaspradier@gmail.com", rol: "alumno", dni: 33123 },
+  { id_usuario: 2, nombre: "Andres", apellido: "SantaCruz", mail: "santacruzandres@gmail.com", rol: "docente", dni: 5234251 },
+  { id_usuario: 3, nombre: "Matias", apellido: "Benegas", mail: "matiasbenegas@gmail.com", rol: "admin", dni: 41214 }
 ]
 
 let materias = [
@@ -59,10 +59,15 @@ const DashboardUser = () => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = datos.filter((item) =>
-    item.apellido[0].toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
+  const filteredData = datos.filter((item) => {
+  const apellido = item.apellido ; 
+  const searchTermLowerCase = searchTerm.toLowerCase();
+  const apellidoLowerCase = apellido.toLowerCase();
+  const regex = new RegExp(`^${searchTermLowerCase}[a-z]*$`);
+  return regex.test(apellidoLowerCase);
+});
+   
+  
   return (
     <>
 
