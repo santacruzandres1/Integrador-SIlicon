@@ -10,7 +10,7 @@ const Header = () => {
     return (
 
         <>
-            <div className=" container"  >
+           
                 <Navbar  fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand > <h1 className="nav">Sistema de Calificaciones</h1></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -28,7 +28,7 @@ const Header = () => {
 
                     </Navbar.Collapse>
                 </Navbar>
-            </div>
+           
 
             <div className='espacio'></div></>
     )

@@ -28,7 +28,7 @@ const FormCrearUsuario = () => {
   return (
     <>
 
-      <div className='container'><h2>Crear Usuario</h2></div>
+      <div className='container text-center'><h2 >Crear Usuario</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">

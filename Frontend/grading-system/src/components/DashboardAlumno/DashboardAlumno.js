@@ -52,7 +52,7 @@ const DashboardAlumno = () => {
       </div>
 
 
-
+<br></br>
 
 
 

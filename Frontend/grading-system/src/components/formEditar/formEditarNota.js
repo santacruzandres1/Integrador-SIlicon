@@ -18,7 +18,8 @@ const FormEditarNota = () => {
 
   return (
     <>
-      <div className='container'><h2>Editar Nota</h2></div>
+      <br></br>
+            <div className='container text-center'><h2>Editar Nota</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
@@ -42,7 +43,7 @@ const FormEditarNota = () => {
 
 
               <div className="form-group">
-                <label htmlFor="materia"><h4>materia</h4></label>
+                <label htmlFor="materia"><h4>Materia</h4></label>
                 <input
                   type="text"
                   id="materia"
@@ -84,7 +85,9 @@ const FormEditarNota = () => {
               <br></br>
 
               <button type="submit" className="btn btn-primary">Editar</button>
+              
             </form>
+  
           </div>
         </div>
       </div></>

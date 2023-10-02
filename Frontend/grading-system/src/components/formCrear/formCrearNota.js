@@ -18,7 +18,8 @@ const FormCrearNota = () => {
 
   return (
     <>
-      <div className='container'><h2>Crear Nota</h2></div>
+      <br></br>
+            <div className='container text-center'><h2>Crear Nota</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
@@ -38,7 +39,7 @@ const FormCrearNota = () => {
               <br></br>
 
               <div className="form-group">
-                <label htmlFor="materia"><h4>materia</h4></label>
+                <label htmlFor="materia"><h4>Materia</h4></label>
                 <input
                   type="text"
                   id="materia"

@@ -3,7 +3,7 @@ import './Dashboard.css';
 import { Button, Modal } from 'react-bootstrap';
 import DashboardAlumno from '../DashboardAlumno/DashboardAlumno';
 import DashProfesor from '../DashProfesor/DashProfesor';
-import { useState, useEffect } from 'react';
+import { useState  } from 'react';
 import Header from '../Header/header';
 import FormEditarUsuario from '../formEditar/formEditarUser';
 import FormCrearUsuario from '../formCrear/formCrearUsuario';
@@ -53,6 +53,18 @@ const DashboardUser = () => {
   const handleCloseEditCurso = () => setShowModalEditCurso(false);
   const handleShowEditCurso = () => setShowModalEditCurso(true);
 
+  const [showModalDelUser, setShowModalDelUser] = useState(false);
+  const handleCloseDelUser = () => setShowModalDelUser(false);
+  const handleShowDelUser = () => setShowModalDelUser(true);
+
+  const [showModalDelMateria, setShowModalDelMateria] = useState(false);
+  const handleCloseDelMateria = () => setShowModalDelMateria(false);
+  const handleShowDelMateria = () => setShowModalDelMateria(true);
+
+  const [showModalDelCurso, setShowModalDelCurso] = useState(false);
+  const handleCloseDelCurso = () => setShowModalDelCurso(false);
+  const handleShowDelCurso = () => setShowModalDelCurso(true);
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {
@@ -60,14 +72,15 @@ const DashboardUser = () => {
   };
 
   const filteredData = datos.filter((item) => {
-  const apellido = item.apellido ; 
-  const searchTermLowerCase = searchTerm.toLowerCase();
-  const apellidoLowerCase = apellido.toLowerCase();
-  const regex = new RegExp(`^${searchTermLowerCase}[a-z]*$`);
-  return regex.test(apellidoLowerCase);
-});
-   
-  
+    const apellido = item.apellido;
+    const searchTermLowerCase = searchTerm.toLowerCase();
+    const apellidoLowerCase = apellido.toLowerCase();
+    const regex = new RegExp(`^${searchTermLowerCase}[a-z]*$`);
+    return regex.test(apellidoLowerCase);
+  });
+
+
+
   return (
     <>
 
@@ -88,7 +101,7 @@ const DashboardUser = () => {
           </div>
           <div class="col">
             <a href='#materia' class="btn btn-dark">Materias</a></div>
-          <div    class="col"><a href='#curso' type="button" class="btn btn-dark">Cursos</a></div>
+          <div class="col"><a href='#curso' type="button" class="btn btn-dark">Cursos</a></div>
         </div>
         <div id='usuario'></div>
       </div>
@@ -96,7 +109,7 @@ const DashboardUser = () => {
       <hr ></hr>
       <br></br><br></br>
       <br></br>
-      <div  className='titulo'>
+      <div className='titulo'>
         <h2> ADMINISTRACION USUARIOS </h2>
 
       </div>
@@ -109,14 +122,14 @@ const DashboardUser = () => {
 
 
             <div class="input-group mb-3">
-          
+
               <input className="form-control "
                 type="text"
                 placeholder="Buscar por Apellido"
                 onChange={handleSearch}
                 value={searchTerm}
               />
-  <span className="btn btn-dark">Buscar</span>
+              <span className="btn btn-dark">Buscar</span>
 
 
 
@@ -128,18 +141,22 @@ const DashboardUser = () => {
         </div>
 
         <Modal show={showModalCrear} onHide={handleCloseCrear}>
-
-          <Modal.Body>
+          
+            <br></br>
+            <Modal.Body>
 
             <FormCrearUsuario></FormCrearUsuario>
 
           </Modal.Body>
-          <Modal.Footer>
+            <Modal.Footer>
 
-            <Button variant="secondary" onClick={handleCloseCrear}>
-              Cerrar
-            </Button>
-          </Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseCrear}>
+                Cerrar
+              </Button>
+            </Modal.Footer>
+            
+            
+
         </Modal>
         <Modal show={showModalEdit} onHide={handleCloseEdit}>
 
@@ -153,6 +170,29 @@ const DashboardUser = () => {
             </Button>
 
           </Modal.Footer>
+        </Modal>
+
+        <Modal show={showModalDelUser} onHide={handleCloseDelUser}>
+
+          <Modal.Body >
+
+            <div className='container  text-center '>
+              <br></br>
+              <strong>¿Está seguro que desea eliminar este usuario?</strong><br></br><br></br>
+              <div className='row  '>
+                <div className='col'> <button className="btn btn-danger">Eliminar</button></div>
+                <div className='col offset-1'> <Button className="btn btn-dark" variant="secondary" onClick={handleCloseDelUser}>
+                  Cancelar
+                </Button></div>
+              </div>
+
+
+
+
+            </div>
+
+          </Modal.Body>
+
         </Modal>
 
       </div>
@@ -173,8 +213,10 @@ const DashboardUser = () => {
 
               </tr>
             </thead>
-            <div  id='materia'></div>
+            <div id='materia'></div>
             {filteredData.map(datos => (
+
+
               <tbody>
                 <tr >
                   <th scope="row">{datos.id_usuario}</th>
@@ -186,15 +228,19 @@ const DashboardUser = () => {
                   <div class="btn-group" role="group" aria-label="Basic example">
                     <button onClick={handleShowEdit} type="button" class="btn btn-dark">Editar</button>
 
-                    <button type="button" class="btn btn-dark">Borrar</button>
+                    <button onClick={handleShowDelUser} type="button" class="btn btn-dark">Borrar</button>
                   </div>
                 </tr>
 
               </tbody>))}
-             
+
+
+
+
+
           </table>
         </div>
-       
+
         <br></br>
 
 
@@ -211,15 +257,15 @@ const DashboardUser = () => {
       </div>
       <br></br>
       <div className="container ">
-        
-       
-          <div class="row justify-content-start">
+
+
+        <div class="row justify-content-start">
           <div className="col-4 ">
-           <button onClick={handleShowCrearMateria} className="btn btn-dark  ">Agregar Materia</button>
-           </div>
-           </div>
-          
-         
+            <button onClick={handleShowCrearMateria} className="btn btn-dark  ">Agregar Materia</button>
+          </div>
+        </div>
+
+
 
 
 
@@ -249,14 +295,34 @@ const DashboardUser = () => {
 
           </Modal.Footer>
         </Modal>
+        <Modal show={showModalDelMateria} onHide={handleCloseDelMateria}>
 
+          <Modal.Body >
+
+            <div className='container  text-center '>
+              <br></br>
+              <strong>¿Está seguro que desea eliminar esta materia?</strong><br></br><br></br>
+              <div className='row  '>
+                <div className='col'> <button className="btn btn-danger">Eliminar</button></div>
+                <div className='col offset-1'> <Button className="btn btn-dark" variant="secondary" onClick={handleCloseDelMateria}>
+                  Cancelar
+                </Button></div>
+              </div>
+
+
+
+
+            </div>
+
+          </Modal.Body>
+        </Modal>
 
       </div>
       <br></br> <br></br>
 
 
       <div className="container item">
-      <div id='curso'></div>
+        <div id='curso'></div>
         <table class="table table-striped-columns">
           <thead>
             <tr>
@@ -268,7 +334,7 @@ const DashboardUser = () => {
 
             </tr>
           </thead>
-         
+
           {materias.map(mate => (
             <tbody>
               <tr >
@@ -280,7 +346,7 @@ const DashboardUser = () => {
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <button onClick={handleShowEditMateria} type="button" class="btn btn-dark">Editar</button>
 
-                  <button type="button" class="btn btn-dark">Borrar</button>
+                  <button onClick={handleShowDelMateria} type="button" class="btn btn-dark">Borrar</button>
                 </div>
               </tr>
 
@@ -297,10 +363,10 @@ const DashboardUser = () => {
       </div>
       <br></br>
       <div className="container ">
-      <div class="row justify-content-start">
+        <div class="row justify-content-start">
           <div className="col-4 ">
-           <button onClick={handleShowCrearCurso} className="btn btn-dark  ">Agregar Curso</button></div>
-          
+            <button onClick={handleShowCrearCurso} className="btn btn-dark  ">Agregar Curso</button></div>
+
 
         </div>
 
@@ -333,13 +399,33 @@ const DashboardUser = () => {
           </Modal.Footer>
         </Modal>
 
+        <Modal show={showModalDelCurso} onHide={handleCloseDelCurso}>
 
+          <Modal.Body >
+
+            <div className='container  text-center '>
+              <br></br>
+              <strong>¿Está seguro que desea eliminar este curso?</strong><br></br><br></br>
+              <div className='row  '>
+                <div className='col'> <button className="btn btn-danger">Eliminar</button></div>
+                <div className='col offset-1'> <Button className="btn btn-dark" variant="secondary" onClick={handleCloseDelCurso}>
+                  Cancelar
+                </Button></div>
+              </div>
+
+
+
+
+            </div>
+
+          </Modal.Body>
+        </Modal>
       </div>
       <br></br> <br></br>
 
 
       <div className="container  ">
-            
+
         <table class="table table-striped-columns">
           <thead>
             <tr>
@@ -360,7 +446,7 @@ const DashboardUser = () => {
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <button onClick={handleShowEditCurso} type="button" class="btn btn-dark">Editar</button>
 
-                  <button type="button" class="btn btn-dark">Borrar</button>
+                  <button onClick={handleShowDelCurso} type="button" class="btn btn-dark">Borrar</button>
                 </div>
               </tr>
 
@@ -376,7 +462,7 @@ const DashboardUser = () => {
 
 
 
-            <Footer></Footer>
+      <Footer></Footer>
 
 
 
