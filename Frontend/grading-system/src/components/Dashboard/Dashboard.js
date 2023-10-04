@@ -12,6 +12,7 @@ import FormEditMateria from '../formEditar/formEditMateria';
 import FormEditCurso from '../formEditar/formEditCurso';
 import FormCrearCurso from '../formCrear/formCrearCurso';
 
+
 import Footer from '../footer/footer';
 
 let datos = [
@@ -78,7 +79,6 @@ const DashboardUser = () => {
     const regex = new RegExp(`^${searchTermLowerCase}[a-z]*$`);
     return regex.test(apellidoLowerCase);
   });
-
 
 
   return (
@@ -214,10 +214,12 @@ const DashboardUser = () => {
               </tr>
             </thead>
             <div id='materia'></div>
+            
+
             {filteredData.map(datos => (
 
 
-              <tbody>
+              <tbody id= 'data'>
                 <tr >
                   <th scope="row">{datos.id_usuario}</th>
                   <td>{datos.nombre}</td>
@@ -240,7 +242,7 @@ const DashboardUser = () => {
 
           </table>
         </div>
-
+        
         <br></br>
 
 

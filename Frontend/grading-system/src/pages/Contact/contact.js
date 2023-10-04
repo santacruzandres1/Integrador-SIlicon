@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '../../components/Header/header';
 import Footer from '../../components/footer/footer';
+import TablaPrueba from '../../components/Tablas/TablaPrueba';
+import TablaUsuarios from '../../components/Tablas/TablaUsuarios';
 
 const Contact = () => {
     return (
@@ -17,6 +19,8 @@ const Contact = () => {
         <li>Teléfono: +123 456 789</li>
       </ul>
 </div>
+<TablaPrueba></TablaPrueba>
+/ TablaUsuarios TablaUsuarios corregir fetch de tabla usuarios 
 <br></br><br></br><br></br><br></br><br></br>
 <Footer></Footer>
 </>  )
