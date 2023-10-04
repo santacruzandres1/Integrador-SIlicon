@@ -17,7 +17,7 @@ const LoginRol = () => {
             <br></br>
 
            
-            <div className='rol'>
+            <div className='rol container'>
 
                 <ul> 
                 <div class="row justify-content-center align-items-center g-2">
