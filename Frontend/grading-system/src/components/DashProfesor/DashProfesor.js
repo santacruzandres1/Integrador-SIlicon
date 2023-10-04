@@ -33,7 +33,7 @@ const DashProfesor = () => {
     };
 
     const filteredData = datos.filter((item) =>
-        item.alumno[0].toLowerCase().includes(searchTerm.toLowerCase())
+        item.alumno.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -62,7 +62,7 @@ const DashProfesor = () => {
                                 onChange={handleSearch}
                                 value={searchTerm}
                             />
-                            <button className="btn btn-dark" type="submit">Buscar</button>
+                            <span className="btn btn-dark" >Buscar</span>
                         </form>
                     </div></div>
 
