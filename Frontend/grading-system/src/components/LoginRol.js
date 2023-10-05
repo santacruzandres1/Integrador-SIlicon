@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Card from 'react-bootstrap/Card'; 
+
+
 export const rol = [
-    { id: 1, name: 'Docentes', imageID: 'https://www.flaticon.es/svg/static/icons/svg/3135/3135715.svg' },
-    { id: 2, name: 'Alumnos', imageID: 'https://www.flaticon.es/svg/static/icons/svg/3135/3135715.svg'  },
-    { id: 3, name: 'Administracion', imageID: 'https://www.flaticon.es/svg/static/icons/svg/3135/3135715.svg' }
+    { id: 1, name: 'Docentes',descripcion:'Gestione las calificaciones de los alumnos', imageID: 'https://www.flaticon.es/svg/static/icons/svg/3135/3135715.svg' },
+    { id: 2, name: 'Alumnos',descripcion:'Vea sus calificaciones', imageID: 'https://www.flaticon.es/svg/static/icons/svg/3135/3135715.svg'  },
+    { id: 3, name: 'Administracion',descripcion:'Gestione usuarios, cursos y materias de la institución', imageID: 'https://www.flaticon.es/svg/static/icons/svg/3135/3135715.svg' }
 ]  
 const LoginRol = () => {  
     
@@ -12,14 +15,26 @@ const LoginRol = () => {
         <div>
             <h3>Ingresa segun corresponda</h3>
             <br></br>
-            <div className='rol'>
+
+           
+            <div className='rol container'>
 
                 <ul> 
                 <div class="row justify-content-center align-items-center g-2">
                 {rol.map(rol => (
                      <div class="col">
+                       <Card style={{ width: '18rem' }}>
+    
+      <Card.Body>
+        <Card.Title>{rol.name}</Card.Title>
+        <Card.Text>
+         {rol.descripcion}
+        </Card.Text>
+        <Link  class="btn btn-dark " to={`/login/${rol.name}`}>Ingresar</Link> 
+      </Card.Body>
+    </Card>
                     <li key={rol.id}>
-                      <Link  class="btn btn-dark" to={`/login/${rol.name}`}>{rol.name}</Link> 
+                      
                     </li>
                     </div>
                 ))}

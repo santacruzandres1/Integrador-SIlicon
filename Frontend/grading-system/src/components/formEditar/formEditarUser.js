@@ -27,7 +27,8 @@ const FormEditarUsuario = () => {
 
   return (
     <>
-      <div className='container'><h2>Editar Usuario</h2></div>
+     <br></br>
+            <div className='container text-center'><h2>Editar Usuario</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">

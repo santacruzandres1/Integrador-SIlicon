@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 
 
 
@@ -9,6 +10,19 @@ let datos = [
   { materia:"Matematicas", nota: 6, etapa: "Recuperatorio"}
 ]
 const DashboardAlumno = () => {
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (e) => {
+      setSearchTerm(e.target.value);
+  };
+
+  const filteredData = datos.filter((item) =>
+      item.materia.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+
+
   return (
     <>
     <hr></hr>
@@ -20,7 +34,21 @@ const DashboardAlumno = () => {
       
       <br></br> <br></br>
 
+      <p>Escriba el nombre de la materia que desea informarse</p>
+      <div className="container col-6">
+                        <form className="d-flex" role="search">
+                      
+                            <input className="form-control me-2"
+                                type="text"
+                                placeholder="Materia"
 
+                                onChange={handleSearch}
+                                value={searchTerm}
+                            />
+                            <span className="btn btn-dark" >Buscar</span>
+                        </form>
+                    </div>
+<br></br>
       <div className="container item">
 
         <table class="table table-striped">
@@ -34,7 +62,7 @@ const DashboardAlumno = () => {
 
             </tr>
           </thead>
-          {datos.map(datos => (
+          {filteredData.map(datos => (
             <tbody>
               <tr >
                
@@ -52,7 +80,7 @@ const DashboardAlumno = () => {
       </div>
 
 
-
+<br></br>
 
 
 
