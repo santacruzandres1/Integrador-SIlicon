@@ -37,7 +37,7 @@ const FormEditarUsuario = () => {
               <div className="form-group">
                 <label htmlFor="nickname"><h4>Nickname</h4></label>
                 <input
-                  type="Nickname"
+                  type="text"
                   id="Nickname"
                   className="form-control"
                   value={Nickname}
