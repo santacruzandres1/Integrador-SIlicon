@@ -6,12 +6,12 @@ import DashProfesor from '../DashProfesor/DashProfesor';
 import { useState  } from 'react';
 import Header from '../Header/header';
 import FormEditarUsuario from '../formEditar/formEditarUser';
-import FormCrearUsuario from '../formCrear/formCrearUsuario';
+//import FormCrearUsuario from '../formCrear/formCrearUsuario';
 import FormCrearMateria from '../formCrear/formCrearMateria';
 import FormEditMateria from '../formEditar/formEditMateria';
 import FormEditCurso from '../formEditar/formEditCurso';
 import FormCrearCurso from '../formCrear/formCrearCurso';
-
+import TablaUsuarios from '../Tablas/TablaUsuarios';
 
 import Footer from '../footer/footer';
 
@@ -29,19 +29,22 @@ let cursos = [
 ]
 
 const DashboardUser = () => {
+//Modal Crear Usuario
+  // const [showModalCrear, setShowModalCrear] = useState(false);
+  // const handleCloseCrear = () => setShowModalCrear(false);
+  // const handleShowCrear = () => setShowModalCrear(true);
 
-  const [showModalCrear, setShowModalCrear] = useState(false);
-  const handleCloseCrear = () => setShowModalCrear(false);
-  const handleShowCrear = () => setShowModalCrear(true);
-
+  //Modal Editar Usuario
   const [showModalEdit, setShowModalEdit] = useState(false);
   const handleCloseEdit = () => setShowModalEdit(false);
   const handleShowEdit = () => setShowModalEdit(true);
 
+  //Modal Crear Materia
   const [showModalCrearMateria, setShowModalCrearMateria] = useState(false);
   const handleCloseCrearMateria = () => setShowModalCrearMateria(false);
   const handleShowCrearMateria = () => setShowModalCrearMateria(true);
 
+  //Modal Editar Materia
   const [showModalEditMateria, setShowModalEditMateria] = useState(false);
   const handleCloseEditMateria = () => setShowModalEditMateria(false);
   const handleShowEditMateria = () => setShowModalEditMateria(true);
@@ -74,7 +77,7 @@ const DashboardUser = () => {
 
   const filteredData = datos.filter((item) => {
     const apellido = item.apellido;
-    const searchTermLowerCase = searchTerm.toLowerCase();
+        const searchTermLowerCase = searchTerm.toLowerCase();
     const apellidoLowerCase = apellido.toLowerCase();
     const regex = new RegExp(`^${searchTermLowerCase}[a-z]*$`);
     return regex.test(apellidoLowerCase);
@@ -115,49 +118,29 @@ const DashboardUser = () => {
       </div>
       <br></br>
       <div className="container ">
-        <div class="row justify-content-center align-items-center g-2">
-          <div class="col-2 ">  <button onClick={handleShowCrear} className="btn btn-dark"  >Agregar Usuario</button></div>
-          <div class="col-4 offset-4">
+        
+      {/* FETCH FORMULARIO DE USUARIOS */}
+      <TablaUsuarios></TablaUsuarios>
 
 
-
-            <div class="input-group mb-3">
-
-              <input className="form-control "
-                type="text"
-                placeholder="Buscar por Apellido"
-                onChange={handleSearch}
-                value={searchTerm}
-              />
-              <span className="btn btn-dark">Buscar</span>
-
-
-
-
-
-
-            </div></div>
-
-        </div>
-
-        <Modal show={showModalCrear} onHide={handleCloseCrear}>
+        {/* <Modal show={showModalCrear} onHide={handleCloseCrear}> */}
           
             <br></br>
-            <Modal.Body>
+            {/* <Modal.Body> */}
 
-            <FormCrearUsuario></FormCrearUsuario>
+            {/* <FormCrearUsuario></FormCrearUsuario> */}
 
-          </Modal.Body>
-            <Modal.Footer>
+          {/* </Modal.Body> */}
+            {/* <Modal.Footer> */}
 
-              <Button variant="secondary" onClick={handleCloseCrear}>
-                Cerrar
-              </Button>
-            </Modal.Footer>
+              {/* <Button variant="secondary"> */}
+                {/* Cerrar */}
+              {/* </Button> */}
+            {/* </Modal.Footer> */}
             
             
 
-        </Modal>
+        {/* </Modal> */}
         <Modal show={showModalEdit} onHide={handleCloseEdit}>
 
           <Modal.Body>
