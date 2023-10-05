@@ -5,7 +5,6 @@ import React, { useState, } from 'react';
 
 const FormEditMateria = () => {
 
-    const [Id, setId] = useState('');
     const [Nombre, setNombre] = useState('');
     const [Profesor, setProfesor] = useState('');
     const [Curso, setCurso] = useState('');
@@ -18,25 +17,15 @@ const FormEditMateria = () => {
 
     return (
         <>
-            <div className='container'><h2>Editar Materia
+            <br></br>
+            <div className='container text-center'><h2>Editar Materia
             </h2></div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
 
                         <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="Id"><h4>Id</h4></label>
-                                <input
-                                    type="text"
-                                    id="Id"
-                                    className="form-control"
-                                    value={Id}
-                                    onChange={(e) => setId(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <br></br>
+                            
 
   
                               <div className="form-group">

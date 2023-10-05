@@ -3,15 +3,12 @@ import React, { useState,  } from 'react';
 
 
 
-const FormEditarUsuario = () => {
+const FormEditarUsuarioAlumno = () => {
 
   const [Nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
-  const [dni, setDni] = useState('');
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApeliido] = useState('');
   const [mail, setMail] = useState('');
-  const [rol, setRol] = useState('');
+  
 
 
 
@@ -61,60 +58,9 @@ const FormEditarUsuario = () => {
               </div>
               <br></br>
 
-              <div className="form-group">
-                <label htmlFor="nombre"><h4>Nombre</h4></label>
-                <input
-                  type="Nombre"
-                  id="Nombre"
-                  name='Nombre'
-                  className="form-control"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
+              
 
-              <div className="form-group">
-                <label htmlFor="apellido"><h4>Apellido</h4></label>
-                <input
-                  type="apellido"
-                  id="apellido"
-                  name='apellido'
-                  className="form-control"
-                  value={apellido}
-                  onChange={(e) => setApeliido(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
-
-              <div className="form-group">
-                <label htmlFor="dni"><h4>Dni</h4></label>
-                <input
-                  type="dni"
-                  id="dni"
-                  name='dni'
-                  className="form-control"
-                  value={dni}
-                  onChange={(e) => setDni(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
-              <div className="form-group">
-                <label htmlFor="rol"><h4>Rol</h4></label>
-                <input
-                  type="rol"
-                  id="rol"
-                  name='rol'
-                  className="form-control"
-                  value={rol}
-                  onChange={(e) => setRol(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
+          
 
               <div className="form-group">
                 <label htmlFor="mail"><h4>Mail</h4></label>
@@ -138,4 +84,4 @@ const FormEditarUsuario = () => {
   );
 };
 
-export default FormEditarUsuario       
+export default FormEditarUsuarioAlumno       

@@ -20,6 +20,11 @@ const DashProfesor = () => {
     const handleCloseEdit = () => setShowModalEdit(false);
     const handleShowEdit = () => setShowModalEdit(true);
   
+    const [showModalDel, setShowModalDel] = useState(false);
+  const handleCloseDel = () => setShowModalDel(false);
+  const handleShowDel = () => setShowModalDel(true);
+
+
 
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -57,7 +62,7 @@ const DashProfesor = () => {
                                 onChange={handleSearch}
                                 value={searchTerm}
                             />
-                            <button className="btn btn-dark" type="submit">Buscar</button>
+                            <span className="btn btn-dark" >Buscar</span>
                         </form>
                     </div></div>
 
@@ -70,7 +75,7 @@ const DashProfesor = () => {
 
 </Modal.Body>
 <Modal.Footer>
-  <Button variant="secondary" onClick={handleCloseCrear}>
+  <Button  variant="secondary" onClick={handleCloseCrear}>
     Cerrar
   </Button>
 
@@ -89,7 +94,27 @@ const DashProfesor = () => {
 
 </Modal.Footer>
 </Modal>
+<Modal show={showModalDel} onHide={handleCloseDel}>
 
+<Modal.Body >
+
+  <div className='container  text-center '>
+    <br></br>
+    <strong>¿Está seguro que desea eliminar esta nota?</strong><br></br><br></br>
+    <div className='row  '>
+      <div className='col'> <button className="btn btn-danger">Eliminar</button></div>
+      <div className='col offset-1'> <Button className="btn btn-dark" variant="secondary" onClick={handleCloseDel}>
+        Cancelar
+      </Button></div>
+    </div>
+
+
+
+
+  </div>
+
+</Modal.Body>
+</Modal>
 
             </div>
             <br></br> <br></br>
@@ -120,7 +145,7 @@ const DashProfesor = () => {
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button onClick={handleShowEdit} type="button" class="btn btn-dark">Editar</button>
 
-                                    <button type="button" class="btn btn-dark">Borrar</button>
+                                    <button onClick={handleShowDel} type="button" class="btn btn-dark">Borrar</button>
                                 </div>
                             </tr>
 

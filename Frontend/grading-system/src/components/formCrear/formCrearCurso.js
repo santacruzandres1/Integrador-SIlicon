@@ -5,7 +5,7 @@ import React, { useState, } from 'react';
 
 const FormCrearCurso = () => {
 
-    const [Id, setId] = useState('');
+  
     const [Nombre, setNombre] = useState('');
    
 
@@ -19,30 +19,21 @@ const FormCrearCurso = () => {
 
     return (
         <>
-            <div className='container'><h2>Crear Curso
+        <br></br>
+            <div className='container text-center'><h2>Crear Curso
             </h2></div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
 
                         <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="Id"><h4>Id</h4></label>
-                                <input
-                                    type="text"
-                                    id="Id"
-                                    className="form-control"
-                                    value={Id}
-                                    onChange={(e) => setId(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <br></br>
+                            
 
   
                               <div className="form-group">
                                 <label htmlFor="Nombre"><h4>Nombre</h4></label>
                                 <input
+                                   
                                     type="text"
                                     id="Nombre"
                                     className="form-control"
