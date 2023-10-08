@@ -6,7 +6,7 @@ import FormCrearUsuario from '../formCrear/formCrearUsuario';
 const TablaUsuarios = () => {
 
   //URL de la API de usuarios
-  const { data } = useFetch("http://localhost:3001/api/usuarios") ;
+  const { data, loading } = useFetch("http://localhost:3001/api/usuarios") ;
 
   //Filtro de búsqueda
   const [searchTerm, setSearchTerm] = useState('');
@@ -62,6 +62,7 @@ const TablaUsuarios = () => {
           </tr>
         </thead>
         <tbody>
+          {loading && <div className="text-center">Cargando...</div>}
           {filteredData.map((USUARIO, index) => (
             <tr key={index}>
               <th scope="row">{USUARIO.id_usuario}</th>
