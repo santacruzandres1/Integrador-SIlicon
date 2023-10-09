@@ -9,7 +9,7 @@ const FormEditarUsuario = () => {
   const [password, setPassword] = useState('');
   const [dni, setDni] = useState('');
   const [nombre, setNombre] = useState('');
-  const [apellido, setApeliido] = useState('');
+  const [apellido, setApellido] = useState('');
   const [mail, setMail] = useState('');
   const [rol, setRol] = useState('');
 
@@ -59,7 +59,7 @@ const FormEditarUsuario = () => {
                   name='apellido'
                   className="form-control"
                   value={apellido}
-                  onChange={(e) => setApeliido(e.target.value)}
+                  onChange={(e) => setApellido(e.target.value)}
                   required
                 />
               </div>
