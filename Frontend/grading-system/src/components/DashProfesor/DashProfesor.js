@@ -7,8 +7,8 @@ import FormEditarNota from '../formEditar/formEditarNota';
 
 
 let datos = [
-    { alumno: "raul", materia: "sql", nota: 5, etapa: "primer parcial" },
-    { alumno: "javier", materia: "sql", nota: 8, etapa: "primer parcial" },
+    { nombre: "raul",apellido:"pra", materia: "sql",  periodo_1: 5, periodo_2: 8, periodo_3:5 },
+    { nombre: "javier",apellido:"gom", materia:"wara", periodo_1: 5, periodo_2: 8, periodo_3:5 },
 ]
 const DashProfesor = () => {
 
@@ -33,7 +33,7 @@ const DashProfesor = () => {
     };
 
     const filteredData = datos.filter((item) =>
-        item.alumno.toLowerCase().includes(searchTerm.toLowerCase())
+        item.apellido[0].toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -57,7 +57,7 @@ const DashProfesor = () => {
 
                             <input className="form-control me-2"
                                 type="text"
-                                placeholder="Buscar por Alumno"
+                                placeholder="Buscar por Apellido del alumno"
 
                                 onChange={handleSearch}
                                 value={searchTerm}
@@ -125,10 +125,12 @@ const DashProfesor = () => {
                 <table class="table table-striped-columns">
                     <thead>
                         <tr>
-                            <th scope="col">Alumno</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col">Materia</th>
-                            <th scope="col">Nota</th>
-                            <th scope="col">Etapa</th>
+                            <th scope="col">Periodo 1</th>
+                            <th scope="col">Periodo 2</th>
+                            <th scope="col">Periodo 3</th>
 
 
                         </tr>
@@ -137,10 +139,12 @@ const DashProfesor = () => {
                         <tbody>
                             <tr >
 
-                                <td>{datos.alumno}</td>
+                                <td>{datos.nombre}</td>
+                                <td>{datos.apellido}</td>
                                 <td>{datos.materia}</td>
-                                <td>{datos.nota}</td>
-                                <td>{datos.etapa}</td>
+                                <td>{datos.periodo_1}</td>
+                                <td>{datos.periodo_2}</td>
+                                <td>{datos.periodo_3}</td>
 
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button onClick={handleShowEdit} type="button" class="btn btn-dark">Editar</button>
