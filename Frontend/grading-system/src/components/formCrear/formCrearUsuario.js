@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 const FormCrearUsuario = () => {
 
-  const [Nickname, setNickname] = useState('');
+ 
   const [password, setPassword] = useState('');
   const [dni, setDni] = useState('');
   const [nombre, setNombre] = useState('');
@@ -34,32 +34,9 @@ const FormCrearUsuario = () => {
           <div className="col-md-6">
 
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="nickname"><h4>Nickname</h4></label>
-                <input
-                  type="Nickname"
-                  id="Nickname"
-                  className="form-control"
-                  value={Nickname}
-                  onChange={(e) => setNickname(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
+              
 
-              <div className="form-group">
-                <label htmlFor="password"><h4>Password</h4></label>
-                <input
-                 
-                  type="password"
-                  id="password"
-                  className="form-control"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
+              
 
               <div className="form-group">
                 <label htmlFor="nombre"><h4>Nombre</h4></label>
@@ -125,6 +102,20 @@ const FormCrearUsuario = () => {
                   className="form-control"
                   value={mail}
                   onChange={(e) => setMail(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="password"><h4>Password</h4></label>
+                <input
+                 
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>

@@ -6,7 +6,7 @@ import React, { useState, } from 'react';
 const FormCrearMateria = () => {
 
    
-    const [Nombre, setNombre] = useState('');
+    const [nombre, setNombre] = useState('');
     const [Profesor, setProfesor] = useState('');
     const [Curso, setCurso] = useState('');
 
@@ -30,12 +30,12 @@ const FormCrearMateria = () => {
 
   
                               <div className="form-group">
-                                <label htmlFor="Nombre"><h4>Nombre</h4></label>
+                                <label htmlFor="nombre"><h4>Nombre</h4></label>
                                 <input
                                     type="text"
-                                    id="Nombre"
+                                    id="nombre"
                                     className="form-control"
-                                    value={Nombre}
+                                    value={nombre}
                                     onChange={(e) => setNombre(e.target.value)}
                                     required
                                 />

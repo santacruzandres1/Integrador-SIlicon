@@ -5,7 +5,7 @@ import React, { useState,  } from 'react';
 
 const FormEditarUsuario = () => {
 
-  const [Nickname, setNickname] = useState('');
+
   const [password, setPassword] = useState('');
   const [dni, setDni] = useState('');
   const [nombre, setNombre] = useState('');
@@ -34,32 +34,8 @@ const FormEditarUsuario = () => {
           <div className="col-md-6">
 
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="nickname"><h4>Nickname</h4></label>
-                <input
-                  type="Nickname"
-                  id="Nickname"
-                  className="form-control"
-                  value={Nickname}
-                  onChange={(e) => setNickname(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
-
-              <div className="form-group">
-                <label htmlFor="password"><h4>Password</h4></label>
-                <input
-                 
-                  type="password"
-                  id="password"
-                  className="form-control"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
+             
+           
 
               <div className="form-group">
                 <label htmlFor="nombre"><h4>Nombre</h4></label>
@@ -78,7 +54,7 @@ const FormEditarUsuario = () => {
               <div className="form-group">
                 <label htmlFor="apellido"><h4>Apellido</h4></label>
                 <input
-                  type="apellido"
+                  type="text"
                   id="apellido"
                   name='apellido'
                   className="form-control"
@@ -92,7 +68,7 @@ const FormEditarUsuario = () => {
               <div className="form-group">
                 <label htmlFor="dni"><h4>Dni</h4></label>
                 <input
-                  type="dni"
+                  type="number"
                   id="dni"
                   name='dni'
                   className="form-control"
@@ -105,7 +81,7 @@ const FormEditarUsuario = () => {
               <div className="form-group">
                 <label htmlFor="rol"><h4>Rol</h4></label>
                 <input
-                  type="rol"
+                  type="number"
                   id="rol"
                   name='rol'
                   className="form-control"
@@ -125,6 +101,20 @@ const FormEditarUsuario = () => {
                   className="form-control"
                   value={mail}
                   onChange={(e) => setMail(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="password"><h4>Password</h4></label>
+                <input
+                 
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>

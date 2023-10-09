@@ -5,7 +5,8 @@ import React, { useState,  } from 'react';
 
 const FormEditarUsuarioAlumno = () => {
 
-  const [Nickname, setNickname] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApeliido] = useState('');
   const [password, setPassword] = useState('');
   const [mail, setMail] = useState('');
   
@@ -32,17 +33,31 @@ const FormEditarUsuarioAlumno = () => {
 
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="nickname"><h4>Nickname</h4></label>
+                <label htmlFor="nombre"><h4>Nombre</h4></label>
                 <input
-                  type="Nickname"
-                  id="Nickname"
+                  type="text"
+                  id="nombre"
                   className="form-control"
-                  value={Nickname}
-                  onChange={(e) => setNickname(e.target.value)}
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
                   required
                 />
               </div>
               <br></br>
+
+              <div className="form-group">
+                <label htmlFor="apellido"><h4>Apellido</h4></label>
+                <input
+                  type="text"
+                  id="apellido"
+                  className="form-control"
+                  value={apellido}
+                  onChange={(e) => setApeliido(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+
 
               <div className="form-group">
                 <label htmlFor="password"><h4>Password</h4></label>
