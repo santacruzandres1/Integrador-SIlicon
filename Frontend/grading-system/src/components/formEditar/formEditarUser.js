@@ -11,7 +11,7 @@ const FormEditarUsuario = () => {
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [mail, setMail] = useState('');
-  const [rol, setRol] = useState('');
+  const [id_rol, setid_rol] = useState('');
 
 
 
@@ -79,14 +79,14 @@ const FormEditarUsuario = () => {
               </div>
               <br></br>
               <div className="form-group">
-                <label htmlFor="rol"><h4>Rol</h4></label>
+                <label htmlFor="id_rol"><h4>ID Rol</h4></label>
                 <input
                   type="number"
-                  id="rol"
-                  name='rol'
+                  id="id_rol"
+                  name='id_rol'
                   className="form-control"
-                  value={rol}
-                  onChange={(e) => setRol(e.target.value)}
+                  value={id_rol}
+                  onChange={(e) => setid_rol(e.target.value)}
                   required
                 />
               </div>

@@ -22,7 +22,7 @@ let datos = [
 ]
 
 let materias = [
-  { id_materia: 1, nombre: "lengua", profesor: "carlos", curso: "primero" }
+  { id_materia: 1, nombre: "lengua", apellido:"Pradier", nombreProfe: "carlos", curso: "primero" }
 ]
 let cursos = [
   { id_curso: 1, nombre: "primero" }
@@ -120,6 +120,7 @@ const DashboardUser = () => {
       <div className="container ">
         
       {/* FETCH FORMULARIO DE USUARIOS */}
+      <br></br>
       <TablaUsuarios></TablaUsuarios>
 
 
@@ -324,8 +325,8 @@ const DashboardUser = () => {
             <tbody>
               <tr >
                 <th scope="row">{mate.id_materia}</th>
-                <td>{mate.nombre}</td>
-                <td>{mate.profesor}</td>
+                <td>{mate.materia}</td>
+                <td>{mate.apellido} {mate.nombre}</td>
                 <td>{mate.curso}</td>
 
                 <div class="btn-group" role="group" aria-label="Basic example">

@@ -9,7 +9,7 @@ const FormCrearNota = () => {
   const [periodo_1, setPeriodo_1] = useState('');
   const [periodo_2, setPeriodo_2] = useState('');
   const [periodo_3, setPeriodo_3] = useState('');
-  const [id_materia, setmateria] = useState('');
+  const [id_materia, setIdMateria] = useState('');
 
 
   const handleSubmit = (e) => {
@@ -40,14 +40,14 @@ const FormCrearNota = () => {
               <br></br>
 
               <div className="form-group">
-                <label htmlFor="id_materia"><h4>Materia</h4></label>
+                <label htmlFor="id_materia"><h4>Id Materia</h4></label>
                 <input
-                  type="text"
+                  type="number"
                   id="id_materia"
                   name='id_materia'
                   className="form-control"
                   value={id_materia}
-                  onChange={(e) => setmateria(e.target.value)}
+                  onChange={(e) => setIdMateria(e.target.value)}
                   required
                 />
               </div>
@@ -62,7 +62,7 @@ const FormCrearNota = () => {
                   className="form-control"
                   value={periodo_1}
                   onChange={(e) => setPeriodo_1(e.target.value)}
-                  required
+                
                 />
               </div>
               <br></br> 
@@ -76,7 +76,7 @@ const FormCrearNota = () => {
                   className="form-control"
                   value={periodo_2}
                   onChange={(e) => setPeriodo_2(e.target.value)}
-                  required
+                 
                 />
               </div>
               <br></br>
@@ -90,7 +90,7 @@ const FormCrearNota = () => {
                   className="form-control"
                   value={periodo_3}
                   onChange={(e) => setPeriodo_3(e.target.value)}
-                  required
+                 
                 />
               </div>
               <br></br>

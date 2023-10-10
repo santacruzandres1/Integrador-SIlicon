@@ -1,12 +1,22 @@
 import { useFetch } from "../../useFetch";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import FormCrearUsuario from '../formCrear/formCrearUsuario';
 
 const TablaUsuarios = () => {
 
   //URL de la API de usuarios
-  const { data, loading } = useFetch("http://localhost:3001/api/usuarios") ;
+  //const { data, loading } = useFetch("http://localhost:3001/api/usuarios") ;
+  const [user, setUser] = useState([])
+
+  useEffect(() => {
+    // Realiza la solicitud fetch cuando el componente se monte
+    fetch("http://localhost:3000/api/usuarios")
+      .then((response) => response.json())
+      .then((data) => setUser(data))
+      .catch((error) => console.error("Error al cargar el usuario: ", error));
+  }, [user]);
+
 
   //Filtro de búsqueda
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,15 +25,15 @@ const TablaUsuarios = () => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = data.filter((item) => {
-    const apellido = item.apellido;
-    const searchTermLowerCase = searchTerm.toLowerCase();
-    const apellidoLowerCase = apellido.toLowerCase();
+   const filteredData = user.filter((item) => {
+     const apellido = item.apellido;
+     const searchTermLowerCase = searchTerm.toLowerCase();
+     const apellidoLowerCase = apellido.toLowerCase();
   
     // Esto divide el apellido en palabras separadas por espacios y verifica si alguna coincide con el término de búsqueda porque muchas veces las personas tienen dos apellidos
-    const apellidosSeparados = apellidoLowerCase.split(' ');
+     const apellidosSeparados = apellidoLowerCase.split(' ');
     return apellidosSeparados.some((part) => part.startsWith(searchTermLowerCase));
-  });
+   });
   
   //Modal Crear Usuario
   const [showModalCrear, setShowModalCrear] = useState(false);
@@ -49,28 +59,30 @@ const TablaUsuarios = () => {
       </div>
       </div>
       </div>
+
+      <br></br>
       <table className="table">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
-            <th scope="col">Nickname</th>
+            <th scope="col">Dni</th>
             <th scope="col">Email</th>
             <th scope="col">Rol</th>
-            <th scope="col">Acciones</th>
+          
           </tr>
         </thead>
         <tbody>
-          {loading && <div className="text-center">Cargando...</div>}
+          {/* {loading && <div className="text-center">Cargando...</div>} */}
           {filteredData.map((USUARIO, index) => (
             <tr key={index}>
               <th scope="row">{USUARIO.id_usuario}</th>
               <td>{USUARIO.nombre}</td>
               <td>{USUARIO.apellido}</td>
-              <td>{USUARIO.nickname}</td>
+              <td>{USUARIO.dni}</td>
               <td>{USUARIO.email}</td>
-              <td>{USUARIO.id_rol}</td>
+              <td>{USUARIO.rol}</td>
               <td>
                 <div className="btn-group" role="group" aria-label="Basic example">
                   <button type="button" className="btn btn-dark">Editar</button>

@@ -5,11 +5,11 @@ import React, { useState, } from 'react';
 
 const FormEditarNota = () => {
 
-  const [Alumno, setAlumno] = useState('');
-  const [etapa, setEtapa] = useState('');
-  const [Nota, setNota] = useState('');
-  const [materia, setmateria] = useState('');
-
+  
+    const [periodo_1, setperiodo_1] = useState('');
+  const [periodo_2, setPeriodo_2] = useState('');
+ 
+  const [periodo_3, setPeriodo_3] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,61 +25,45 @@ const FormEditarNota = () => {
           <div className="col-md-6">
 
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="Alumno"><h4>Alumno</h4></label>
-                <input
-                  type="text"
-                  id="Alumno"
-                  className="form-control"
-                  value={Alumno}
-                  onChange={(e) => setAlumno(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
-
-
-
-
+              
 
               <div className="form-group">
-                <label htmlFor="materia"><h4>Materia</h4></label>
+                <label htmlFor="Nota"><h4>Periodo 1</h4></label>
                 <input
-                  type="text"
-                  id="materia"
-                  name='materia'
+                  type="number"
+                  id="periodo_1"
+                  name='periodo_1'
                   className="form-control"
-                  value={materia}
-                  onChange={(e) => setmateria(e.target.value)}
-                  required
+                  value={periodo_1}
+                  onChange={(e) => setperiodo_1(e.target.value)}
+                  
                 />
               </div>
               <br></br>
 
               <div className="form-group">
-                <label htmlFor="Nota"><h4>Nota</h4></label>
+                <label htmlFor="periodo_2"><h4>Periodo 2</h4></label>
                 <input
-                  type="Nota"
-                  id="Nota"
-                  name='Nota'
+
+                  type="number"
+                  id="periodo_2"
                   className="form-control"
-                  value={Nota}
-                  onChange={(e) => setNota(e.target.value)}
-                  required
+                  value={periodo_2}
+                  onChange={(e) => setPeriodo_2(e.target.value)}
+                  
                 />
               </div>
               <br></br>
-
               <div className="form-group">
-                <label htmlFor="etapa"><h4>Etapa</h4></label>
+                <label htmlFor="periodo_3"><h4>Periodo 3</h4></label>
                 <input
 
-                  type="text"
-                  id="etapa"
+                  type="number"
+                  id="periodo_3"
                   className="form-control"
-                  value={etapa}
-                  onChange={(e) => setEtapa(e.target.value)}
-                  required
+                  value={periodo_3}
+                  onChange={(e) => setPeriodo_3(e.target.value)}
+                  
                 />
               </div>
               <br></br>

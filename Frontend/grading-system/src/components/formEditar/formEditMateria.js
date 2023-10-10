@@ -5,9 +5,9 @@ import React, { useState, } from 'react';
 
 const FormEditMateria = () => {
 
-    const [Nombre, setNombre] = useState('');
-    const [Profesor, setProfesor] = useState('');
-    const [Curso, setCurso] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [id_usuario, setid_usuario] = useState('');
+    const [id_curso, setid_curso] = useState('');
 
 
     const handleSubmit = (e) => {
@@ -25,16 +25,20 @@ const FormEditMateria = () => {
                     <div className="col-md-6">
 
                         <form onSubmit={handleSubmit}>
-                            
 
-  
-                              <div className="form-group">
-                                <label htmlFor="Nombre"><h4>Nombre</h4></label>
+
+
+
+
+
+
+                            <div className="form-group">
+                                <label htmlFor="nombre"><h4>Nombre</h4></label>
                                 <input
                                     type="text"
-                                    id="Nombre"
+                                    id="nombre"
                                     className="form-control"
-                                    value={Nombre}
+                                    value={nombre}
                                     onChange={(e) => setNombre(e.target.value)}
                                     required
                                 />
@@ -42,34 +46,33 @@ const FormEditMateria = () => {
                             <br></br>
 
                             <div className="form-group">
-                                <label htmlFor="Profesor"><h4>Profesor</h4></label>
+                                <label htmlFor="id_usuario"><h4>ID Profesor</h4></label>
                                 <input
-                                    type="text"
-                                    id="Profesor"
-                                    name='Profesor'
+                                    type="number"
+                                    id="id_usuario"
+                                    name='id_usuario'
                                     className="form-control"
-                                    value={Profesor}
-                                    onChange={(e) => setProfesor(e.target.value)}
+                                    value={id_usuario}
+                                    onChange={(e) => setid_usuario(e.target.value)}
                                     required
                                 />
                             </div>
                             <br></br>
 
                             <div className="form-group">
-                                <label htmlFor="Curso"><h4>Curso</h4></label>
+                                <label htmlFor="id_curso"><h4>ID Curso</h4></label>
                                 <input
-                                    type="text"
-                                    id="Curso"
-                                    name='Curso'
+                                    type="number"
+                                    id="id_curso"
+                                    name='id_curso'
                                     className="form-control"
-                                    value={Curso}
-                                    onChange={(e) => setCurso
+                                    value={id_curso}
+                                    onChange={(e) => setid_curso
                                         (e.target.value)}
                                     required
                                 />
                             </div>
                             <br></br>
-
 
 
                             <button type="submit" className="btn btn-primary">Editar</button>
