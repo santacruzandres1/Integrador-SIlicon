@@ -45,11 +45,11 @@ import Header from '../Header/header';
 
 
 //  const Login = () => {
-  const [Nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleNicknameChange = (e) => {
-     setNickname(e.target.value);
+  const handleEmailChange = (e) => {
+     setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -73,13 +73,13 @@ import Header from '../Header/header';
         
         <form onSubmit={handleSubmit}>
         <div className="form-group">
-        <label htmlFor="nickname"><h4>Nickname</h4></label>
+        <label htmlFor="email"><h4>Email</h4></label>
             <input
-              type="Nickname"
-             id="Nickname"
+              type="email"
+             id="email"
              className="form-control"
-              value={Nickname}
-              onChange={handleNicknameChange}
+              value={email}
+              onChange={handleEmailChange}
               required
             />
           </div>

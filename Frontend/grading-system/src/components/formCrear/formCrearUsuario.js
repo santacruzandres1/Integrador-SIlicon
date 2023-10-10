@@ -5,6 +5,7 @@ const FormCrearUsuario = () => {
 
   const [rol, setRol] = useState('');
   const [Nickname, setNickname] = useState('');
+ 
   const [password, setPassword] = useState('');
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -147,6 +148,103 @@ const FormCrearUsuario = () => {
                   required
                 />
                 <label htmlFor="floatingEmail"><h4>Email</h4></label>
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="password"><h4>Password</h4></label>
+                <input
+                 
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="nombre"><h4>Nombre</h4></label>
+                <input
+                  type="Nombre"
+                  id="Nombre"
+                  name='Nombre'
+                  className="form-control"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="apellido"><h4>Apellido</h4></label>
+                <input
+                  type="apellido"
+                  id="apellido"
+                  name='apellido'
+                  className="form-control"
+                  value={apellido}
+                  onChange={(e) => setApeliido(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="dni"><h4>Dni</h4></label>
+                <input
+                  type="dni"
+                  id="dni"
+                  name='dni'
+                  className="form-control"
+                  value={dni}
+                  onChange={(e) => setDni(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+              <div className="form-group">
+                <label htmlFor="rol"><h4>Rol</h4></label>
+                <input
+                  type="rol"
+                  id="rol"
+                  name='rol'
+                  className="form-control"
+                  value={rol}
+                  onChange={(e) => setRol(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="mail"><h4>Mail</h4></label>
+                <input
+                  type="mail"
+                  id="mail"
+                  name='mail'
+                  className="form-control"
+                  value={mail}
+                  onChange={(e) => setMail(e.target.value)}
+                  required
+                />
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="password"><h4>Password</h4></label>
+                <input
+                 
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
               </div>
               <br></br>
 
