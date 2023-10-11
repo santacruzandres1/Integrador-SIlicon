@@ -6,14 +6,12 @@ import DashProfesor from '../DashProfesor/DashProfesor';
 import { useState  } from 'react';
 import Header from '../Header/header';
 import FormEditarUsuario from '../formEditar/formEditarUser';
-//import FormCrearUsuario from '../formCrear/formCrearUsuario';
-import FormCrearMateria from '../formCrear/formCrearMateria';
-import FormEditMateria from '../formEditar/formEditMateria';
 import FormEditCurso from '../formEditar/formEditCurso';
 import FormCrearCurso from '../formCrear/formCrearCurso';
+import FormEditMateria from '../formEditar/formEditMateria';
 import TablaUsuarios from '../Tablas/TablaUsuarios';
-
 import Footer from '../footer/footer';
+import TablaMaterias from '../Tablas/TablaMaterias';
 
 let datos = [
   { id_usuario: 1, nombre: "Lucas", apellido: "Pradier", mail: "lucaspradier@gmail.com", rol: "alumno", dni: 33123 },
@@ -29,20 +27,15 @@ let cursos = [
 ]
 
 const DashboardUser = () => {
-//Modal Crear Usuario
-  // const [showModalCrear, setShowModalCrear] = useState(false);
-  // const handleCloseCrear = () => setShowModalCrear(false);
-  // const handleShowCrear = () => setShowModalCrear(true);
-
   //Modal Editar Usuario
   const [showModalEdit, setShowModalEdit] = useState(false);
   const handleCloseEdit = () => setShowModalEdit(false);
   const handleShowEdit = () => setShowModalEdit(true);
 
   //Modal Crear Materia
-  const [showModalCrearMateria, setShowModalCrearMateria] = useState(false);
+  /*const [showModalCrearMateria, setShowModalCrearMateria] = useState(false);
   const handleCloseCrearMateria = () => setShowModalCrearMateria(false);
-  const handleShowCrearMateria = () => setShowModalCrearMateria(true);
+  const handleShowCrearMateria = () => setShowModalCrearMateria(true);*/
 
   //Modal Editar Materia
   const [showModalEditMateria, setShowModalEditMateria] = useState(false);
@@ -122,26 +115,9 @@ const DashboardUser = () => {
       {/* FETCH FORMULARIO DE USUARIOS */}
       <br></br>
       <TablaUsuarios></TablaUsuarios>
-
-
-        {/* <Modal show={showModalCrear} onHide={handleCloseCrear}> */}
           
             <br></br>
-            {/* <Modal.Body> */}
-
-            {/* <FormCrearUsuario></FormCrearUsuario> */}
-
-          {/* </Modal.Body> */}
-            {/* <Modal.Footer> */}
-
-              {/* <Button variant="secondary"> */}
-                {/* Cerrar */}
-              {/* </Button> */}
-            {/* </Modal.Footer> */}
-            
-            
-
-        {/* </Modal> */}
+   
         <Modal show={showModalEdit} onHide={handleCloseEdit}>
 
           <Modal.Body>
@@ -159,6 +135,7 @@ const DashboardUser = () => {
         <Modal show={showModalDelUser} onHide={handleCloseDelUser}>
 
           <Modal.Body >
+     
 
             <div className='container  text-center '>
               <br></br>
@@ -180,9 +157,9 @@ const DashboardUser = () => {
         </Modal>
 
       </div>
+      
       <br></br> <br></br>
-
-
+      <br/>
       <div className="container item">
         <div className='container'>
           <table class="table table-striped-columns">
@@ -242,32 +219,17 @@ const DashboardUser = () => {
 
       </div>
       <br></br>
+      <TablaMaterias></TablaMaterias>
+      <br></br>
       <div className="container ">
 
 
         <div class="row justify-content-start">
           <div className="col-4 ">
-            <button onClick={handleShowCrearMateria} className="btn btn-dark  ">Agregar Materia</button>
+            <button  className="btn btn-dark  ">Agregar Materia</button>
           </div>
         </div>
 
-
-
-
-
-        <Modal show={showModalCrearMateria} onHide={handleCloseCrearMateria}>
-
-          <Modal.Body>
-
-            <FormCrearMateria></FormCrearMateria>
-          </Modal.Body>
-          <Modal.Footer>
-
-            <Button variant="secondary" onClick={handleCloseCrearMateria}>
-              Cerrar
-            </Button>
-          </Modal.Footer>
-        </Modal>
         <Modal show={showModalEditMateria} onHide={handleCloseEditMateria}>
 
           <Modal.Body>

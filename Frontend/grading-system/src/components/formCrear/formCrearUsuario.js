@@ -36,7 +36,15 @@ const FormCrearUsuario = () => {
       },
       body: JSON.stringify(user),
     })
-      .then((response) => response.json())
+      .then((response) => 
+        
+          {
+            debugger
+            response.json()
+          }
+          
+          )
+
       .then((data) => {
         console.log("Usuario creado:", data);
         alert('Usuario creado con exito');
@@ -73,7 +81,7 @@ const FormCrearUsuario = () => {
                   name='nombre'
                   required
                 />
-                <label htmlFor="Nickname"><h4>Nombre</h4></label>
+                <label htmlFor="nombre"><h4>Nombre</h4></label>
               </div>
               <br/>
               <div className="form-floating">

@@ -1,22 +1,12 @@
-
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import FormCrearUsuario from '../formCrear/formCrearUsuario';
+import { useFetch } from '../../useFetch';
+
 
 const TablaUsuarios = () => {
 
-  //URL de la API de usuarios
-  //const { data, loading } = useFetch("http://localhost:3001/api/usuarios") ;
-  const [user, setUser] = useState([])
-
-  useEffect(() => {
-    // Realiza la solicitud fetch cuando el componente se monte
-    fetch("http://localhost:3000/api/usuarios")
-      .then((response) => response.json())
-      .then((data) => setUser(data))
-      .catch((error) => console.error("Error al cargar el usuario: ", error));
-  }, [user]);
-
+  const { data } = useFetch("http://localhost:3000/api/usuarios");
 
   //Filtro de búsqueda
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,7 +15,7 @@ const TablaUsuarios = () => {
     setSearchTerm(e.target.value);
   };
 
-   const filteredData = user.filter((item) => {
+   const filteredData = data.filter((item) => {
      const apellido = item.apellido;
      const searchTermLowerCase = searchTerm.toLowerCase();
      const apellidoLowerCase = apellido.toLowerCase();
@@ -112,6 +102,7 @@ const TablaUsuarios = () => {
           
 
       </Modal>
+      
 
     </div>
   );
