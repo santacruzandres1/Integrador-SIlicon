@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 const FormCrearUsuario = () => {
 
+  
   const [user, setUser] = useState({
     nombre:"",
     apellido:"",
@@ -12,12 +13,7 @@ const FormCrearUsuario = () => {
     id_rol:null
 
   });
-  // const [password, setPassword] = useState('');
-  // const [dni, setDni] = useState('');
-  // const [nombre, setNombre] = useState('');
-  // const [apellido, setApeliido] = useState('');
-  // const [email, setMail] = useState('');
-  // const [id_rol, setid_rol] = useState('');
+ 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +28,8 @@ const FormCrearUsuario = () => {
 
   
 
-    fetch("http://localhost:3000/api/usuarios", {
+    fetch("http://localhost:3000/api/usuarios",
+     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,25 +61,7 @@ const FormCrearUsuario = () => {
           <div className="col-md-8">
 
             <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <select
-                 className="form-select"
-                 id="rol"
-                name="rol"
-                  value={user.id_rol}
-                  placeholder='Rol'
-                 aria-label="Default select example"
-                 onChange={handleInputChange}
-                 required
-                 >
-              <option selected value="" disabled><h4>Seleccionar Rol</h4></option>
-              <option value="1">Administrador</option>
-              <option value="2">Alumno</option>
-              <option value="3">Profesor</option>
-              
-            </select>
-              </div>
-           <br/>
+            
               <div className="form-floating">
                 <input
                   type="text"
@@ -129,19 +108,34 @@ const FormCrearUsuario = () => {
               <br></br>
 
               <div className="form-floating">
-                    <input
-                      type="number"
-                      id="floatingDni"
-                      className="form-control"
-                      name="dni"
-                      value={user.dni}
-                      placeholder='DNI'
-                      onChange={handleInputChange}
-                      required
-                    />
-                      <label htmlFor="floatingDni"><h4>DNI</h4></label>
-                </div>
-
+               
+                <input
+                  type="number"
+                  id="floatingdni"
+                  name='dni'
+                  className="form-control"
+                  value={user.dni}
+                  onChange={handleInputChange}
+                  placeholder='Dni'
+                  required
+                />
+                 <label htmlFor="floatingdni"><h4>Dni</h4></label>
+              </div>
+              <br></br>
+              <div className="form-floating">
+              
+                <input
+                  type="number"
+                  id="id_rol"
+                  name='id_rol'
+                  className="form-control"
+                  value={user.id_rol}
+                  onChange={handleInputChange}
+                  placeholder='ID Rol'
+                  required
+                />
+                 <label htmlFor="id_rol"><h4>ID Rol</h4></label>
+              </div>
               <br></br>
 
               <div className="form-floating">
