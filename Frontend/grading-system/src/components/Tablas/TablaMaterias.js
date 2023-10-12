@@ -13,6 +13,7 @@ const TablaMaterias = () => {
   const handleCloseDel = () => setShowModalDel(false);
   const handleShowDel = (id) => {
     setEliminar(id);
+
     setShowModalDel(true);
 
   };
@@ -110,11 +111,6 @@ const TablaMaterias = () => {
                 <Modal.Body>
                     <FormCrearMateria />
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseCrear}>
-                        Cerrar
-                    </Button>
-                </Modal.Footer>
             </Modal>
 
             <Modal show={showModalDel} onHide={handleCloseDel}>

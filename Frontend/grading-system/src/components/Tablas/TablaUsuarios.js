@@ -83,7 +83,7 @@ const handleSubmit = () => {
       </div>
 
       <br></br>
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
