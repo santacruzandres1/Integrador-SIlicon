@@ -1,33 +1,61 @@
-import React, { useState,  } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 
 
+function EditItem() {
 
-const FormEditarUsuario = () => {
+  const navigate = useNavigate();
+  const p = useParams();
 
+  const [item, setItem] = useState({
+    nombre:"",
+    apellido:"",
+    email:"",
+    password:"",
+    dni:null,
+    id_rol:null
+  }); 
 
-  const [password, setPassword] = useState('');
-  const [dni, setDni] = useState('');
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
-  const [mail, setMail] = useState('');
-  const [id_rol, setid_rol] = useState('');
+ 
 
-
-
-
-
+  // Manejar cambios en los campos del formulario
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setItem({ ...item, [name]: value });
+  };
+  console.log(p.id_usuario)
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Realiza una solicitud Fetch para actualizar el elemento en el servidor
+    fetch(`http://localhost:3000/api/usuarios/${p.id_usuario}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Elemento actualizado con éxito');
+          navigate("/dashboard")
 
-
+        } else {
+          console.error('Error al actualizar el elemento');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red:', error);
+      });
   };
-
 
   return (
     <>
+
+    
      <br></br>
+     
             <div className='container text-center'><h2>Editar Usuario</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
@@ -40,12 +68,13 @@ const FormEditarUsuario = () => {
               <div className="form-group">
                 <label htmlFor="nombre"><h4>Nombre</h4></label>
                 <input
-                  type="Nombre"
-                  id="Nombre"
-                  name='Nombre'
+                placeholder='nombre'
+                  type="text"
+                  id="nombre"
+                  name='nombre'
                   className="form-control"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
+                  value={item.nombre}
+            onChange={handleInputChange}
                   required
                 />
               </div>
@@ -58,8 +87,8 @@ const FormEditarUsuario = () => {
                   id="apellido"
                   name='apellido'
                   className="form-control"
-                  value={apellido}
-                  onChange={(e) => setApellido(e.target.value)}
+                  value={item.apellido}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -72,8 +101,8 @@ const FormEditarUsuario = () => {
                   id="dni"
                   name='dni'
                   className="form-control"
-                  value={dni}
-                  onChange={(e) => setDni(e.target.value)}
+                  value={item.dni}
+            onChange={handleInputChange}
                   required
                 />
               </div>
@@ -85,22 +114,22 @@ const FormEditarUsuario = () => {
                   id="id_rol"
                   name='id_rol'
                   className="form-control"
-                  value={id_rol}
-                  onChange={(e) => setid_rol(e.target.value)}
+                  value={item.id_rol}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
               <br></br>
 
               <div className="form-group">
-                <label htmlFor="mail"><h4>Mail</h4></label>
+                <label htmlFor="email"><h4>Email</h4></label>
                 <input
-                  type="mail"
-                  id="mail"
-                  name='mail'
+                  type="email"
+                  id="email"
+                  name='email'
                   className="form-control"
-                  value={mail}
-                  onChange={(e) => setMail(e.target.value)}
+                  value={item.email}
+            onChange={handleInputChange}
                   required
                 />
               </div>
@@ -109,12 +138,12 @@ const FormEditarUsuario = () => {
               <div className="form-group">
                 <label htmlFor="password"><h4>Password</h4></label>
                 <input
-                 
+                 name='password'
                   type="password"
                   id="password"
                   className="form-control"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={item.password}
+            onChange={handleInputChange}
                   required
                 />
               </div>
@@ -128,4 +157,38 @@ const FormEditarUsuario = () => {
   );
 };
 
-export default FormEditarUsuario       
+export default EditItem;     
+
+
+
+//   return (
+//     <div>
+//       <h1>Editar Elemento</h1>
+//       <form onSubmit={handleSubmit}>
+//         <div>
+//           <label htmlFor="name">Nombre:</label>
+//           <input
+//             type="text"
+//             id="name"
+//             name="name"
+//             value={formValues.name || item.name || ''}
+//             onChange={handleInputChange}
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="description">Descripción:</label>
+//           <textarea
+//             id="description"
+//             name="description"
+//             value={formValues.description || item.description || ''}
+//             onChange={handleInputChange}
+//           />
+//         </div>
+//         {/* Agrega más campos de entrada según sea necesario */}
+//         <button type="submit">Editar</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+

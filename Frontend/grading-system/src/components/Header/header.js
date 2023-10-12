@@ -23,7 +23,7 @@ function Header() {
 
                         <ul className="nav nav-underline ul ">
                             <li className="nav-item"><NavLink className="nav-link " to="/">Inicio</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link " to="/Administracion/dashboard">DASHBOARD</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link " to="/dashboard">DASHBOARD</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link " to="/About">Sobre Nosotros</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link " to="/Contact">Contacto</NavLink></li>
                             <NavDropdown title="Usuario" id="basic-nav-dropdown">

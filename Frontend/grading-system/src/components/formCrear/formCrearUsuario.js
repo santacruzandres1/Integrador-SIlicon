@@ -39,7 +39,7 @@ const FormCrearUsuario = () => {
       .then((response) => 
         
           {
-            debugger
+        
             response.json()
           }
           
