@@ -1,9 +1,21 @@
+import { useParams, useNavigate } from 'react-router-dom';
 import React, { useState, } from 'react';
 
 
 
 
 const FormEditMateria = () => {
+
+    const navigate = useNavigate();
+    const p = useParams();
+
+    const [item, setItem] = useState({
+        nombre: "",
+        id_usuario: null,
+        id_curso: null
+    });
+
+    
 
     const [nombre, setNombre] = useState('');
     const [id_usuario, setid_usuario] = useState('');
@@ -25,12 +37,6 @@ const FormEditMateria = () => {
                     <div className="col-md-6">
 
                         <form onSubmit={handleSubmit}>
-
-
-
-
-
-
 
                             <div className="form-group">
                                 <label htmlFor="nombre"><h4>Nombre</h4></label>
@@ -83,4 +89,4 @@ const FormEditMateria = () => {
     );
 };
 
-export default FormEditMateria
+export default FormEditMateria;

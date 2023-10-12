@@ -27,11 +27,7 @@ let cursos = [
 ]
 
 const DashboardUser = () => {
-  //Modal Editar Usuario
-  const [showModalEdit, setShowModalEdit] = useState(false);
-  const handleCloseEdit = () => setShowModalEdit(false);
-  const handleShowEdit = () => setShowModalEdit(true);
-
+  
   //Modal Crear Materia
   /*const [showModalCrearMateria, setShowModalCrearMateria] = useState(false);
   const handleCloseCrearMateria = () => setShowModalCrearMateria(false);
@@ -79,18 +75,9 @@ const DashboardUser = () => {
 
   return (
     <>
-
       <Header></Header>
-      <div>
-        <h1>DASHBOARD ADMINISTRACIÓN </h1>
-
-      </div>
-
-      <br></br>
-      <hr></hr>
-      <br></br>
       <div class="container ">
-        <h3>Seleccione que desea administrar</h3><br></br><br></br>
+        <h3>Seleccione que desea administrar</h3>
         <div class="row justify-content-center align-items-center g-2">
           <div class="col">
             <a href="#usuario" class="btn btn-dark">Usuarios</a>
@@ -101,208 +88,22 @@ const DashboardUser = () => {
         </div>
         <div id='usuario'></div>
       </div>
-      <br></br>
-      <hr ></hr>
-      <br></br><br></br>
-      <br></br>
       <div className='titulo'>
-        <h2> ADMINISTRACION USUARIOS </h2>
-
       </div>
-      <br></br>
+
       <div className="container ">
         
       {/* FETCH FORMULARIO DE USUARIOS */}
-      <br></br>
-      <TablaUsuarios></TablaUsuarios>
-          
-            <br></br>
-   
-        <Modal show={showModalEdit} onHide={handleCloseEdit}>
-
-          <Modal.Body>
-
-            <FormEditarUsuario></FormEditarUsuario>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseEdit}>
-              Cerrar
-            </Button>
-
-          </Modal.Footer>
-        </Modal>
-
-        <Modal show={showModalDelUser} onHide={handleCloseDelUser}>
-
-          <Modal.Body >
-     
-
-            <div className='container  text-center '>
-              <br></br>
-              <strong>¿Está seguro que desea eliminar este usuario?</strong><br></br><br></br>
-              <div className='row  '>
-                <div className='col'> <button className="btn btn-danger">Eliminar</button></div>
-                <div className='col offset-1'> <Button className="btn btn-dark" variant="secondary" onClick={handleCloseDelUser}>
-                  Cancelar
-                </Button></div>
-              </div>
-
-
-
-
-            </div>
-
-          </Modal.Body>
-
-        </Modal>
-
+  
+      <div className="container">
+      <TablaUsuarios/>
+      </div>
+     <div className='container'>
+     <TablaMaterias/>
+     </div>
       </div>
       
-      <br></br> <br></br>
-      <br/>
-      <div className="container item">
-        <div className='container'>
-          <table class="table table-striped-columns">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Mail</th>
-                <th scope="col">Rol</th>
-                <th scope="col">DNI</th>
-
-              </tr>
-            </thead>
-            <div id='materia'></div>
-            
-
-            {filteredData.map(datos => (
-
-
-              <tbody id= 'data'>
-                <tr >
-                  <th scope="row">{datos.id_usuario}</th>
-                  <td>{datos.nombre}</td>
-                  <td>{datos.apellido}</td>
-                  <td>{datos.mail}</td>
-                  <td>{datos.rol}</td>
-                  <td>{datos.dni}</td>
-                  <div class="btn-group" role="group" aria-label="Basic example">
-                    <button onClick={handleShowEdit} type="button" class="btn btn-dark">Editar</button>
-
-                    <button onClick={handleShowDelUser} type="button" class="btn btn-dark">Borrar</button>
-                  </div>
-                </tr>
-
-              </tbody>))}
-
-
-
-
-
-          </table>
-        </div>
-        
-        <br></br>
-
-
-
-
-
-
-      </div>
-
-      <div>
-        <hr></hr><br></br>
-        <h2>ADMINISTRACIÓN MATERIAS </h2>
-
-      </div>
-      <br></br>
-      <TablaMaterias></TablaMaterias>
-      <br></br>
-      <div className="container ">
-
-
-        <div class="row justify-content-start">
-          <div className="col-4 ">
-            <button  className="btn btn-dark  ">Agregar Materia</button>
-          </div>
-        </div>
-
-        <Modal show={showModalEditMateria} onHide={handleCloseEditMateria}>
-
-          <Modal.Body>
-
-            <FormEditMateria></FormEditMateria>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseEditMateria}>
-              Cerrar
-            </Button>
-
-          </Modal.Footer>
-        </Modal>
-        <Modal show={showModalDelMateria} onHide={handleCloseDelMateria}>
-
-          <Modal.Body >
-
-            <div className='container  text-center '>
-              <br></br>
-              <strong>¿Está seguro que desea eliminar esta materia?</strong><br></br><br></br>
-              <div className='row  '>
-                <div className='col'> <button className="btn btn-danger">Eliminar</button></div>
-                <div className='col offset-1'> <Button className="btn btn-dark" variant="secondary" onClick={handleCloseDelMateria}>
-                  Cancelar
-                </Button></div>
-              </div>
-
-
-
-
-            </div>
-
-          </Modal.Body>
-        </Modal>
-
-      </div>
-      <br></br> <br></br>
-
-
-      <div className="container item">
-        <div id='curso'></div>
-        <table class="table table-striped-columns">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Profesor</th>
-              <th scope="col">Curso</th>
-
-
-            </tr>
-          </thead>
-
-          {materias.map(mate => (
-            <tbody>
-              <tr >
-                <th scope="row">{mate.id_materia}</th>
-                <td>{mate.materia}</td>
-                <td>{mate.apellido} {mate.nombre}</td>
-                <td>{mate.curso}</td>
-
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <button onClick={handleShowEditMateria} type="button" class="btn btn-dark">Editar</button>
-
-                  <button onClick={handleShowDelMateria} type="button" class="btn btn-dark">Borrar</button>
-                </div>
-              </tr>
-
-            </tbody>))}
-        </table>
-
-
-      </div>
+    
 
       <div>
         <hr></hr><br></br>

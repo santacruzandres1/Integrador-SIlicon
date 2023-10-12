@@ -63,13 +63,10 @@ const FormCrearUsuario = () => {
 
   return (
     <>
-      <div className='container text-center'><h2 >Crear Usuario</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-8">
-
             <form onSubmit={handleSubmit}>
-            
               <div className="form-floating">
                 <input
                   type="text"
@@ -83,7 +80,6 @@ const FormCrearUsuario = () => {
                 />
                 <label htmlFor="nombre"><h4>Nombre</h4></label>
               </div>
-              <br/>
               <div className="form-floating">
                 <input
                   type="password"
@@ -97,9 +93,6 @@ const FormCrearUsuario = () => {
                 />
                 <label htmlFor="floatingPassword"><h4>Password</h4></label>
               </div>
-              <br/>
-            
-
               <div className="form-floating">
                 <input
                   type="text"
@@ -113,8 +106,6 @@ const FormCrearUsuario = () => {
                 />
                 <label htmlFor="floatingLastName"><h4>Apellido</h4></label>
               </div>
-              <br></br>
-
               <div className="form-floating">
                
                 <input
@@ -129,9 +120,7 @@ const FormCrearUsuario = () => {
                 />
                  <label htmlFor="floatingdni"><h4>Dni</h4></label>
               </div>
-              <br></br>
               <div className="form-floating">
-              
                 <input
                   type="number"
                   id="id_rol"
@@ -144,8 +133,6 @@ const FormCrearUsuario = () => {
                 />
                  <label htmlFor="id_rol"><h4>ID Rol</h4></label>
               </div>
-              <br></br>
-
               <div className="form-floating">
                 <input
                   type="email"
@@ -159,16 +146,11 @@ const FormCrearUsuario = () => {
                 />
                 <label htmlFor="floatingEmail"><h4>Email</h4></label>
               </div>
-              <br></br>
-
-
               <button type="submit" className="btn btn-primary">Crear</button>
             </form>
           </div>
         </div>
       </div>
-      <br></br>
-
       </>
   );
 };

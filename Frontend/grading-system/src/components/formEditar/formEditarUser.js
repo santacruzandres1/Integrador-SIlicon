@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 
 
-function EditItem() {
+function EditUser() {
 
   const navigate = useNavigate();
   const p = useParams();
@@ -157,7 +157,7 @@ function EditItem() {
   );
 };
 
-export default EditItem;     
+export default EditUser;     
 
 
 

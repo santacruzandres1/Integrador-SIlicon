@@ -2,30 +2,61 @@ import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import FormCrearMateria from "../formCrear/formCrearMateria";
 import { useFetch } from "../../useFetch";
+import { Link } from "react-router-dom";
 
 const TablaMaterias = () => {
 
   const { data: materia } = useFetch("http://localhost:3000/api/materia");
     
+  const [Eliminar, setEliminar] = useState();
+  const [showModalDel, setShowModalDel] = useState(false);
+  const handleCloseDel = () => setShowModalDel(false);
+  const handleShowDel = (id) => {
+    setEliminar(id);
+    setShowModalDel(true);
+
+  };
+
+  const handleSubmit = () => {
+    // Realiza una solicitud Fetch para eliminar el usuario en el servidor
+    fetch(`http://localhost:3000/api/materia/${Eliminar}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Elemento eliminado con éxito');
+          setShowModalDel(false);
+          // Realizar cualquier otra acción después de eliminar el usuario si es necesario
+        } else {
+          console.error('Error al eliminar el usuario');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red:', error);
+      });
+  }
     //Filtro de búsqueda
     const [searchTerm, setSearchTerm] = useState('');
-
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
       };
       const filteredData = materia.filter((item) => {
-        const materia = item.nombre;
+        const materia = item.MATERIA;
         const searchTermLowerCase = searchTerm.toLowerCase();
         const materiaLowerCase = materia.toLowerCase();
         const materiaSeparados = materiaLowerCase.split(' ');
         return materiaSeparados.some((part) => part.startsWith(searchTermLowerCase));
       }); 
 
-    //Modal Crear Materia
+    //Modal Crear Materias
     const [showModalCrear, setShowModalCrear] = useState(false);
     const handleCloseCrear = () => setShowModalCrear(false);
     const handleShowCrear = () => setShowModalCrear(true);
+
 
     return(
         <div className="container">
@@ -36,7 +67,7 @@ const TablaMaterias = () => {
                         <input
                             className="form-control"
                             type="text"
-                            placeholder="Buscar por Nombre"
+                            placeholder="Buscar por Materia"
                             onChange={handleSearch}
                             value={searchTerm}
                         />
@@ -62,8 +93,11 @@ const TablaMaterias = () => {
                             <td>`{materia.nombre}, {materia.apellido}`</td>
                             <td>{materia.CURSO}</td>
                             <td>
-                                <button className="btn btn-dark">Editar</button>
-                                <button className="btn btn-dark">Eliminar</button>
+                              <div className="btn-group" role="group" aria-label="Basic example">
+                                            <Link to={`/dashboard/editMateria/${materia.id_materia}`} className="btn btn-dark">Editar</Link>
+                                        
+                                          <button onClick={() => handleShowDel(materia.id_materia)} type="button" className="btn btn-dark">Borrar</button>
+                                          </div>
                             </td>
                         </tr>
                     ))}
@@ -82,6 +116,30 @@ const TablaMaterias = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+            <Modal show={showModalDel} onHide={handleCloseDel}>
+
+          <Modal.Body >
+     
+
+            <div className='container  text-center '>
+              <strong>¿Está seguro que desea eliminar este usuario?</strong>
+              <div className='row  '>
+                <div className='col'> <button onClick={handleSubmit} className="btn btn-danger">Eliminar</button></div>
+                <div className='col offset-1'> <button className="btn btn-dark" variant="secondary" onClick={handleCloseDel}>
+                  Cancelar
+                </button></div>
+              </div>
+
+
+
+
+            </div>
+
+          </Modal.Body>
+
+        </Modal>
+
         </div>
     )
 

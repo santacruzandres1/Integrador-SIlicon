@@ -9,7 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from './pages/Contact/contact';
 
 import FormCrearUsuario from './components/formCrear/formCrearUsuario';
-import EditItem from './components/formEditar/formEditarUser';
+import EditUser from './components/formEditar/formEditarUser';
+import FormEditMateria from './components/formEditar/formEditMateria';
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/not-found" element={<h1>Not Found</h1>} />
         <Route path="/crearUsuario" element={<FormCrearUsuario />} />
-        <Route path={`/dashboard/:id_usuario`} element={<EditItem />} />
+        <Route path={`/dashboard/editUser/:id_usuario`} element={<EditUser />} />
+        <Route path={`/dashboard/editMateria/:id_materia`} element={<FormEditMateria />} />
       </Routes>
     </div>
   );

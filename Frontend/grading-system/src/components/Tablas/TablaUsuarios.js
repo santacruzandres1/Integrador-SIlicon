@@ -1,35 +1,23 @@
 import { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import FormCrearUsuario from '../formCrear/formCrearUsuario';
 import { useFetch } from '../../useFetch';
 import { Link } from 'react-router-dom';
 
 const TablaUsuarios = () => {
 
-  
-
-
   const { data } = useFetch("http://localhost:3000/api/usuarios");
   
 
-  const [usuarioAEliminar, setUsuarioAEliminar] = useState();
+const [usuarioAEliminar, setUsuarioAEliminar] = useState();
 const [showModalDelUser, setShowModalDelUser] = useState(false);
 const handleCloseDelUser = () => setShowModalDelUser(false);
 const handleShowDelUser = (id) => {
   setUsuarioAEliminar(id);
   setShowModalDelUser(true);
-
-
 };
 
-
-
-
-
 const handleSubmit = () => {
-
-  
-  
     // Realiza una solicitud Fetch para eliminar el usuario en el servidor
     fetch(`http://localhost:3000/api/usuarios/${usuarioAEliminar}`, {
       method: 'DELETE',
@@ -50,7 +38,6 @@ const handleSubmit = () => {
         console.error('Error de red:', error);
       });
   }
-
 
   //Filtro de búsqueda
   const [searchTerm, setSearchTerm] = useState('');
@@ -79,7 +66,7 @@ const handleSubmit = () => {
     <>
     <div className="container">
         <div class="row justify-content-center align-items-center g-2">
-      
+        <h3>Administracion de usuarios</h3>
       <div className="col-2 ">  <button onClick={handleShowCrear} className="btn btn-dark"  >Agregar Usuario</button></div>
       <div className="col-4 offset-4">
       <div className="input-group mb-3">
@@ -120,7 +107,7 @@ const handleSubmit = () => {
               <td>{USUARIO.rol}</td>
               <td>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                <Link to={`/dashboard/${USUARIO.id_usuario}`} className="btn btn-dark">Editar</Link>
+                  <Link to={`/dashboard/editUser/${USUARIO.id_usuario}`} className="btn btn-dark">Editar</Link>
                
                 <button onClick={() => handleShowDelUser(USUARIO.id_usuario)} type="button" className="btn btn-dark">Borrar</button>
                 </div>
@@ -131,19 +118,13 @@ const handleSubmit = () => {
       </table>
 
       <Modal show={showModalCrear} onHide={handleCloseCrear}>
-          
-          <br></br>
+          <Modal.Header closeButton>
+            <Modal.Title>Crear Usuarios</Modal.Title>
+          </Modal.Header>
           <Modal.Body>
-
-          <FormCrearUsuario></FormCrearUsuario>
+          <FormCrearUsuario/>
 
         </Modal.Body>
-          <Modal.Footer>
-
-            <Button variant="secondary" onClick={handleCloseCrear}>
-              Cerrar
-            </Button>
-          </Modal.Footer>
           
           
 
