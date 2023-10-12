@@ -5,38 +5,19 @@ import DashboardAlumno from '../DashboardAlumno/DashboardAlumno';
 import DashProfesor from '../DashProfesor/DashProfesor';
 import { useState  } from 'react';
 import Header from '../Header/header';
-import FormEditarUsuario from '../formEditar/formEditarUser';
 import FormEditCurso from '../formEditar/formEditCurso';
 import FormCrearCurso from '../formCrear/formCrearCurso';
-import FormEditMateria from '../formEditar/formEditMateria';
 import TablaUsuarios from '../Tablas/TablaUsuarios';
 import Footer from '../footer/footer';
 import TablaMaterias from '../Tablas/TablaMaterias';
 
-let datos = [
-  { id_usuario: 1, nombre: "Lucas", apellido: "Pradier", mail: "lucaspradier@gmail.com", rol: "alumno", dni: 33123 },
-  { id_usuario: 2, nombre: "Andres", apellido: "SantaCruz", mail: "santacruzandres@gmail.com", rol: "docente", dni: 5234251 },
-  { id_usuario: 3, nombre: "Matias", apellido: "Benegas", mail: "matiasbenegas@gmail.com", rol: "admin", dni: 41214 }
-]
 
-let materias = [
-  { id_materia: 1, nombre: "lengua", apellido:"Pradier", nombreProfe: "carlos", curso: "primero" }
-]
 let cursos = [
   { id_curso: 1, nombre: "primero" }
 ]
 
 const DashboardUser = () => {
-  
-  //Modal Crear Materia
-  /*const [showModalCrearMateria, setShowModalCrearMateria] = useState(false);
-  const handleCloseCrearMateria = () => setShowModalCrearMateria(false);
-  const handleShowCrearMateria = () => setShowModalCrearMateria(true);*/
 
-  //Modal Editar Materia
-  const [showModalEditMateria, setShowModalEditMateria] = useState(false);
-  const handleCloseEditMateria = () => setShowModalEditMateria(false);
-  const handleShowEditMateria = () => setShowModalEditMateria(true);
 
   const [showModalCrearCurso, setShowModalCrearCurso] = useState(false);
   const handleCloseCrearCurso = () => setShowModalCrearCurso(false);
@@ -46,31 +27,11 @@ const DashboardUser = () => {
   const handleCloseEditCurso = () => setShowModalEditCurso(false);
   const handleShowEditCurso = () => setShowModalEditCurso(true);
 
-  const [showModalDelUser, setShowModalDelUser] = useState(false);
-  const handleCloseDelUser = () => setShowModalDelUser(false);
-  const handleShowDelUser = () => setShowModalDelUser(true);
-
-  const [showModalDelMateria, setShowModalDelMateria] = useState(false);
-  const handleCloseDelMateria = () => setShowModalDelMateria(false);
-  const handleShowDelMateria = () => setShowModalDelMateria(true);
 
   const [showModalDelCurso, setShowModalDelCurso] = useState(false);
   const handleCloseDelCurso = () => setShowModalDelCurso(false);
   const handleShowDelCurso = () => setShowModalDelCurso(true);
 
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const filteredData = datos.filter((item) => {
-    const apellido = item.apellido;
-        const searchTermLowerCase = searchTerm.toLowerCase();
-    const apellidoLowerCase = apellido.toLowerCase();
-    const regex = new RegExp(`^${searchTermLowerCase}[a-z]*$`);
-    return regex.test(apellidoLowerCase);
-  });
 
 
   return (
