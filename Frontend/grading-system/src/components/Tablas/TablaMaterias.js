@@ -60,6 +60,7 @@ const TablaMaterias = () => {
 
 
     return(
+        <>
         <div className="container">
             <div class="row justify-content-center align-items-center g-2">
                 <div className="col-2 ">  <button onClick={handleShowCrear} className="btn btn-dark"  >Agregar Materia</button></div>
@@ -137,6 +138,7 @@ const TablaMaterias = () => {
         </Modal>
 
         </div>
+        </>
     )
 
 
