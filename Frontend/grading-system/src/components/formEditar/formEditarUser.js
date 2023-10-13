@@ -52,10 +52,6 @@ function EditUser() {
 
   return (
     <>
-
-    
-     <br></br>
-     
             <div className='container text-center'><h2>Editar Usuario</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
