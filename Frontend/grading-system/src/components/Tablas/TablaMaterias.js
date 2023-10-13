@@ -63,7 +63,11 @@ const TablaMaterias = () => {
         <>
         <div className="container">
             <div class="row justify-content-center align-items-center g-2">
-                <div className="col-2 ">  <button onClick={handleShowCrear} className="btn btn-dark"  >Agregar Materia</button></div>
+            <h3>Administracion de Mateiras</h3>
+                <div className="col-2 ">  
+                  <button onClick={handleShowCrear} className="btn btn-dark"  >Agregar Materia
+                  </button>
+                </div>
                 <div className="col-4 offset-4">
                     <div className="input-group mb-3">
                         <input
@@ -77,14 +81,13 @@ const TablaMaterias = () => {
                     </div>
                 </div>
             </div>
-            <br></br>
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Materia</th>
-                        <th scope="col">Profesor</th>
-                        <th scope="col">Curso</th>
+                        <th scope="col-2">ID</th>
+                        <th scope="col-2">Materia</th>
+                        <th scope="col-2">Profesor</th>
+                        <th scope="col-2">Curso</th>
                     </tr>
                 </thead>
                 <tbody>

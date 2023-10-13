@@ -1,8 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-
-
 function EditUser() {
 
   const navigate = useNavigate();
@@ -17,9 +15,6 @@ function EditUser() {
     id_rol:null
   }); 
 
- 
-
-  // Manejar cambios en los campos del formulario
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setItem({ ...item, [name]: value });
@@ -28,7 +23,6 @@ function EditUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Realiza una solicitud Fetch para actualizar el elemento en el servidor
     fetch(`http://localhost:3000/api/usuarios/${p.id_usuario}`, {
       method: 'PUT',
       headers: {
@@ -39,7 +33,7 @@ function EditUser() {
       .then((response) => {
         if (response.ok) {
           console.log('Elemento actualizado con éxito');
-          navigate("/dashboard")
+          navigate("/dashboard#usuarios")
 
         } else {
           console.error('Error al actualizar el elemento');
@@ -59,10 +53,7 @@ function EditUser() {
 
             <form onSubmit={handleSubmit}>
              
-           
-
               <div className="form-group">
-                <label htmlFor="nombre"><h4>Nombre</h4></label>
                 <input
                 placeholder='nombre'
                   type="text"
@@ -73,6 +64,7 @@ function EditUser() {
             onChange={handleInputChange}
                   required
                 />
+                <label htmlFor="nombre"><h4>Nombre</h4></label>
               </div>
               <br></br>
 

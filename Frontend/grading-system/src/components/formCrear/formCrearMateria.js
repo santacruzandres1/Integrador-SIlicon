@@ -40,6 +40,7 @@ const handleInputChange = (e) => {
       .then((data) => {
         console.log("Usuario creado:", data);
         alert('Usuario creado con exito');
+        window.location.reload();
      
         
       })

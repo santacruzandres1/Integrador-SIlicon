@@ -15,7 +15,7 @@ function Header() {
 
         <>
 
-            <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand > <h1 className="nav">Sistema de Calificaciones</h1></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className="justify-content-center" id="responsive-navbar-nav">

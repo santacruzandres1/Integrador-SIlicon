@@ -33,7 +33,7 @@ const FormEditMateria = () => {
             .then((response) => {
                 if (response.ok) {
                     console.log('Elemento actualizado con éxito');
-                    navigate("/dashboard")
+                    navigate("/dashboard#materias")
 
                 } else {
                     console.error('Error al actualizar el elemento');
@@ -48,8 +48,7 @@ const FormEditMateria = () => {
     return (
         <>
             <div className='container text-center'>
-                <h2>Editar Materia
-            </h2>
+                <h4>Editar Materia</h4>
             </div>
             <div className="container mt-5">
                 <div className="row justify-content-center">

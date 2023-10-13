@@ -4,10 +4,10 @@ import FormCrearUsuario from '../formCrear/formCrearUsuario';
 import { useFetch } from '../../useFetch';
 import { Link } from 'react-router-dom';
 
-const TablaUsuarios = () => {
 
-  const { data } = useFetch("http://localhost:3000/api/usuarios");
+const TablaUsuarios = () => {
   
+  const { data } = useFetch("http://localhost:3000/api/usuarios");
 
 const [usuarioAEliminar, setUsuarioAEliminar] = useState();
 const [showModalDelUser, setShowModalDelUser] = useState(false);
@@ -66,7 +66,7 @@ const handleSubmit = () => {
     <>
     <div className="container">
         <div class="row justify-content-center align-items-center g-2">
-        <h3>Administracion de usuarios</h3>
+        <h3>Administracion de Usuarios</h3>
       <div className="col-2 ">  <button onClick={handleShowCrear} className="btn btn-dark"  >Agregar Usuario</button></div>
       <div className="col-4 offset-4">
       <div className="input-group mb-3">
@@ -86,7 +86,7 @@ const handleSubmit = () => {
       <table className="table table-striped table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Dni</th>
