@@ -7,7 +7,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from './pages/Contact/contact';
-
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormCrearUsuario from './components/formCrear/formCrearUsuario';
 import EditUser from './components/formEditar/formEditarUser';
 import FormEditMateria from './components/formEditar/formEditMateria';
@@ -20,7 +21,7 @@ function App() {
   return (
     <div className="App">
      
-    
+    <ToastContainer></ToastContainer>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={`/login/:rol`} element={<Login />} />
