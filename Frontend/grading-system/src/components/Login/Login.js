@@ -53,8 +53,8 @@ import Header from '../Header/header';
   }).then(
       (result) => {
         if (result.ok) {
-          sessionStorage.setItem('token', result.body.token);
-          console.log("token creado ");
+          sessionStorage.setItem('token', result.body.accessToken);
+          
        navigate('/dashboard')
           toast.success("Bienvenido", {
               position: "bottom-center",

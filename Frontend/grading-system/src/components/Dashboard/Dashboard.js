@@ -10,8 +10,34 @@ import TablaMaterias from '../Tablas/TablaMaterias';
 import TablaCursos from '../Tablas/TablaCursos';
 
 
+import jwtDecode from 'jwt-decode';
+
+
+
+
+
+
+
 const DashboardUser = () => {
 
+ 
+ const token = sessionStorage.getItem('token')
+
+console.log(token)
+
+
+
+
+  const decodedToken = jwtDecode(token);
+
+
+
+
+
+ const rol =decodedToken.id_rol
+  
+ if(rol===1){
+     
   return (
     <>
       <Header></Header>
@@ -31,7 +57,7 @@ const DashboardUser = () => {
 
       <div className="container ">
         
-      {/* FETCH FORMULARIO DE USUARIOS */}
+
   
       <div className="container" id="usuarios">
       <TablaUsuarios/>
@@ -46,8 +72,7 @@ const DashboardUser = () => {
       
 
 
-      <DashboardAlumno></DashboardAlumno>
-      <DashProfesor></DashProfesor>
+
 
 
 
@@ -56,7 +81,46 @@ const DashboardUser = () => {
 
 
     </>
-  );
+  );}
+ else if(rol ===2){
+     return (
+      <>
+        <Header></Header>
+       
+  
+  
+       <DashboardAlumno></DashboardAlumno>
+    
+  
+  
+  
+     <Footer></Footer>
+  
+  
+  
+    </>
+   );
+
+}
+  else if(rol===3){
+    return (
+      <>
+       <Header></Header>
+       
+        
+  
+  
+       
+        <DashProfesor></DashProfesor>
+  
+  
+  
+         <Footer></Footer>
+  
+  
+     </>
+     );
+  }else {return("Usuario incorrecto")}
 }
 
 
