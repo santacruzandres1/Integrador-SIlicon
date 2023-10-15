@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 
-const FormCrearUsuario = () => {
 
-  
+function FormCrearUsuario({ handleClose }) {
   const [user, setUser] = useState({
-    nombre:"",
-    apellido:"",
-    email:"",
-    password:"",
-    dni:null,
-    id_rol:null
-
+    nombre: "",
+    apellido: "",
+    email: "",
+    password: "",
+    dni: null,
+    id_rol: null,
   });
- 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,44 +21,29 @@ const FormCrearUsuario = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-  
-
-    fetch("http://localhost:3000/api/usuarios",
-     {
+    fetch("http://localhost:3000/api/usuarios", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
     })
-      .then((response) => 
-        
-          {
-        
-            response.json()
-          }
-          
-          )
-
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Error al crear el usuario");
+        }
+      })
       .then((data) => {
         console.log("Usuario creado:", data);
-        alert('Usuario creado con exito');
-        
-     
-        
+        handleClose();
+       
       })
       .catch((error) => console.error("Error al crear el usuario: ", error));
-  }
-  
-
-
-
-
- 
-
-
+  };
   return (
     <>
       <div className="container mt-5">
@@ -156,4 +138,4 @@ const FormCrearUsuario = () => {
   );
 };
 
-export default FormCrearUsuario       
+export default FormCrearUsuario;

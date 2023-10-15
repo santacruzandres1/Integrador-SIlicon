@@ -1,24 +1,23 @@
 import { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import FormCrearUsuario from '../formCrear/formCrearUsuario';
+import FormEditarUsuario from '../formEditar/formEditarUser';
 import { useFetch } from '../../useFetch';
-import { Link } from 'react-router-dom';
 
 
 const TablaUsuarios = () => {
   
-  const { data } = useFetch("http://localhost:3000/api/usuarios");
+  const { data} = useFetch("http://localhost:3000/api/usuarios");
+ 
+  const [usuarioAEliminar, setUsuarioAEliminar] = useState();
+  const [showModalDelUser, setShowModalDelUser] = useState(false);
+  const handleCloseDelUser = () => setShowModalDelUser(false);
+  const handleShowDelUser = (id) => {
+    setUsuarioAEliminar(id);
+    setShowModalDelUser(true);
+  };
 
-const [usuarioAEliminar, setUsuarioAEliminar] = useState();
-const [showModalDelUser, setShowModalDelUser] = useState(false);
-const handleCloseDelUser = () => setShowModalDelUser(false);
-const handleShowDelUser = (id) => {
-  setUsuarioAEliminar(id);
-  setShowModalDelUser(true);
-};
-
-const handleSubmit = () => {
-    // Realiza una solicitud Fetch para eliminar el usuario en el servidor
+  const handleSubmit = () => {
     fetch(`http://localhost:3000/api/usuarios/${usuarioAEliminar}`, {
       method: 'DELETE',
       headers: {
@@ -29,7 +28,7 @@ const handleSubmit = () => {
         if (response.ok) {
           console.log('Elemento eliminado con éxito');
           setShowModalDelUser(false);
-          // Realizar cualquier otra acción después de eliminar el usuario si es necesario
+         
         } else {
           console.error('Error al eliminar el usuario');
         }
@@ -37,6 +36,7 @@ const handleSubmit = () => {
       .catch((error) => {
         console.error('Error de red:', error);
       });
+   
   }
 
   //Filtro de búsqueda
@@ -46,28 +46,44 @@ const handleSubmit = () => {
     setSearchTerm(e.target.value);
   };
 
-   const filteredData = data.filter((item) => {
-     const apellido = item.apellido;
+  const filteredData = data.filter((item) => {
+    const apellido = item.apellido;
      const searchTermLowerCase = searchTerm.toLowerCase();
-     const apellidoLowerCase = apellido.toLowerCase();
-  
-    // Esto divide el apellido en palabras separadas por espacios y verifica si alguna coincide con el término de búsqueda porque muchas veces las personas tienen dos apellidos
+    const apellidoLowerCase = apellido.toLowerCase();
      const apellidosSeparados = apellidoLowerCase.split(' ');
     return apellidosSeparados.some((part) => part.startsWith(searchTermLowerCase));
-   });
-  
-  //Modal Crear Usuario
-  const [showModalCrear, setShowModalCrear] = useState(false);
-  const handleCloseCrear = () => setShowModalCrear(false);
-  const handleShowCrear = () => setShowModalCrear(true);
+  });
 
- 
+  //Modal Crear Usuario
+  const [showModalCreate, setShowModalCreate] = useState(false);
+  const handleShowCreate = () => setShowModalCreate(true);
+
+  //Modal Editar Usuario
+  const [usuarioAEditar, setUsuarioAEditar] = useState(null); // Nuevo estado
+  const [showModalEdit, setShowModalEdit] = useState(false);
+
+  const handleShowEdit = (id) => {
+    const usuarioParaEditar = data.find((usuario) => usuario.id_usuario === id);
+    if (usuarioParaEditar) {
+      setUsuarioAEditar(usuarioParaEditar);
+      setShowModalEdit(true);
+    }
+  };
+
+  const handleClose = () => {
+    setShowModalCreate(false);
+    setShowModalEdit(false);
+  };
+
+
   return (
     <>
     <div className="container">
         <div class="row justify-content-center align-items-center g-2">
         <h3>Administracion de Usuarios</h3>
-      <div className="col-2 ">  <button onClick={handleShowCrear} className="btn btn-dark"  >Agregar Usuario</button></div>
+          <div className="col-2 ">  <button onClick={handleShowCreate} className="btn btn-dark">
+            Agregar Usuario
+          </button></div>
       <div className="col-4 offset-4">
       <div className="input-group mb-3">
         <input
@@ -95,8 +111,7 @@ const handleSubmit = () => {
           
           </tr>
         </thead>
-        <tbody>
-          {/* {loading && <div className="text-center">Cargando...</div>} */}
+          <tbody>
           {filteredData.map((USUARIO, index) => (
             <tr key={index}>
               <th scope="row">{USUARIO.id_usuario}</th>
@@ -107,7 +122,8 @@ const handleSubmit = () => {
               <td>{USUARIO.rol}</td>
               <td>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                  <Link to={`/dashboard/editUser/${USUARIO.id_usuario}`} className="btn btn-dark">Editar</Link>
+                  <button type="button" onClick={() => handleShowEdit(USUARIO.id_usuario)} className="btn btn-dark">Editar</button>
+
                
                 <button onClick={() => handleShowDelUser(USUARIO.id_usuario)} type="button" className="btn btn-dark">Borrar</button>
                 </div>
@@ -117,18 +133,15 @@ const handleSubmit = () => {
         </tbody>
       </table>
 
-      <Modal show={showModalCrear} onHide={handleCloseCrear}>
+        <Modal show={showModalEdit || showModalCreate} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Crear Usuarios</Modal.Title>
+            <Modal.Title>{showModalEdit ? 'Editar Usuario' : 'Crear Usuario'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <FormCrearUsuario/>
+            {showModalEdit ? <FormEditarUsuario user={usuarioAEditar} handleClose={handleClose} /> : <FormCrearUsuario handleClose={handleClose} />}
+          </Modal.Body>
+        </Modal>
 
-        </Modal.Body>
-          
-          
-
-      </Modal>
         <Modal show={showModalDelUser} onHide={handleCloseDelUser}>
 
           <Modal.Body >
@@ -143,12 +156,7 @@ const handleSubmit = () => {
                   Cancelar
                 </button></div>
               </div>
-
-
-
-
             </div>
-
           </Modal.Body>
 
         </Modal>

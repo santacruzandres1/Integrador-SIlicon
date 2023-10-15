@@ -38,6 +38,5 @@ export function useFetch(url) {
     }
     
    }
-
   return { data, loading, error };
 }

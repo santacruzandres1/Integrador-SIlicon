@@ -1,29 +1,31 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function EditUser() {
+function EditUser({ user, handleClose }) {
+  const [item, setItem] = useState({});
 
-  const navigate = useNavigate();
-  const p = useParams();
+  useEffect(() => {
+    if (user) {
+      setItem({
+        nombre: user.nombre || '',
+        apellido: user.apellido || '',
+        email: user.email || '',
+        password: user.password || '',
+        dni: user.dni || null,
+        id_rol: user.id_rol || null,
+      });
+    }
+  }, [user]);
 
-  const [item, setItem] = useState({
-    nombre:"",
-    apellido:"",
-    email:"",
-    password:"",
-    dni:null,
-    id_rol:null
-  }); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setItem({ ...item, [name]: value });
   };
-  console.log(p.id_usuario)
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/api/usuarios/${p.id_usuario}`, {
+    fetch(`http://localhost:3000/api/usuarios/${user.id_usuario}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -33,16 +35,19 @@ function EditUser() {
       .then((response) => {
         if (response.ok) {
           console.log('Elemento actualizado con éxito');
-          navigate("/dashboard#usuarios")
-
+          handleClose();
+          
         } else {
           console.error('Error al actualizar el elemento');
+          alert('Error al actualizar el elemento, Intente nuevamente');
         }
       })
       .catch((error) => {
         console.error('Error de red:', error);
+        error('Error de red:', error);
       });
   };
+
 
   return (
     <>
@@ -146,37 +151,5 @@ function EditUser() {
 };
 
 export default EditUser;     
-
-
-
-//   return (
-//     <div>
-//       <h1>Editar Elemento</h1>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label htmlFor="name">Nombre:</label>
-//           <input
-//             type="text"
-//             id="name"
-//             name="name"
-//             value={formValues.name || item.name || ''}
-//             onChange={handleInputChange}
-//           />
-//         </div>
-//         <div>
-//           <label htmlFor="description">Descripción:</label>
-//           <textarea
-//             id="description"
-//             name="description"
-//             value={formValues.description || item.description || ''}
-//             onChange={handleInputChange}
-//           />
-//         </div>
-//         {/* Agrega más campos de entrada según sea necesario */}
-//         <button type="submit">Editar</button>
-//       </form>
-//     </div>
-//   );
-// }
 
 
