@@ -29,6 +29,7 @@ function EditUser({ user, handleClose }) {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
       },
       body: JSON.stringify(item),
     })
@@ -36,6 +37,7 @@ function EditUser({ user, handleClose }) {
         if (response.ok) {
           console.log('Elemento actualizado con éxito');
           handleClose();
+          window.location.reload();
           
         } else {
           console.error('Error al actualizar el elemento');

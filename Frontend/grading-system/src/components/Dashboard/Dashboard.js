@@ -9,8 +9,9 @@ import Footer from '../footer/footer';
 import TablaMaterias from '../Tablas/TablaMaterias';
 import TablaCursos from '../Tablas/TablaCursos';
 
-
 import jwtDecode from 'jwt-decode';
+
+
 
 
 
@@ -20,22 +21,21 @@ import jwtDecode from 'jwt-decode';
 
 const DashboardUser = () => {
 
- 
- const token = sessionStorage.getItem('token')
-
-console.log(token)
-
-
-
+  const token = sessionStorage.getItem('token');
+  console.log('Token:', token); // Agrega esta línea para verificar el token
 
   const decodedToken = jwtDecode(token);
+  console.log('Decoded Token:', decodedToken); // Agrega esta línea para verificar el token decodificado
 
+  const rol = decodedToken.id_rol;
+  console.log('Rol:', rol);
 
+  const userId = decodedToken.id_usuario;
+const userEmail = decodedToken.email;
 
+console.log(`User ID: ${userId}`);
+console.log(`User Email: ${userEmail}`);
 
-
- const rol =decodedToken.id_rol
-  
  if(rol===1){
      
   return (
