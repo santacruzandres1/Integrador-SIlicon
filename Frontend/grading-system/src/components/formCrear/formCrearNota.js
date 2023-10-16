@@ -1,26 +1,68 @@
 import React, { useState, } from 'react';
+import { toast} from 'react-toastify';
 
 
 
 
 const FormCrearNota = () => {
 
-  const [id_usuario, setId_user] = useState('');
-  const [periodo_1, setPeriodo_1] = useState('');
-  const [periodo_2, setPeriodo_2] = useState('');
-  const [periodo_3, setPeriodo_3] = useState('');
-  const [id_materia, setIdMateria] = useState('');
+  const [data , setData] = useState({
+    id_usuario: "",
+    id_materia: "",
+    periodo_1: "",
+    periodo_2: "",
+    periodo_3: ""
+  });
+
+const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
+    fetch("http://localhost:8080/api/nota",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'authorization': sessionStorage.getItem('token')
+    },
+    body: JSON.stringify(data),
+  })
+  .then((response) => {
+    if (response.ok) {
+      console.log('Nota creado con éxito');
+      toast.success("Nota Creada", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
+      window.location.reload();
+    
+    } else {
+      console.error('Error al crear el usuario');
+    }
+
+  })
+  .catch((error) => console.error("Error al crear el usuario: ", error));
+}
+
 
 
   return (
     <>
-      <br></br>
-            <div className='container text-center'><h2>Crear Nota</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
@@ -32,12 +74,11 @@ const FormCrearNota = () => {
                   type="number"
                   id="id_usuario"
                   className="form-control"
-                  value={id_usuario}
-                  onChange={(e) => setId_user(e.target.value)}
+                  value={data.id_usuario}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
-              <br></br>
 
               <div className="form-group">
                 <label htmlFor="id_materia"><h4>Id Materia</h4></label>
@@ -46,9 +87,8 @@ const FormCrearNota = () => {
                   id="id_materia"
                   name='id_materia'
                   className="form-control"
-                  value={id_materia}
-                  onChange={(e) => setIdMateria(e.target.value)}
-                  required
+                  value={data.id_materia}
+                  onChange={handleInputChange}
                 />
               </div>
               <br></br>
@@ -60,13 +100,11 @@ const FormCrearNota = () => {
                   id="periodo_1"
                   name='califiperiodo_1'
                   className="form-control"
-                  value={periodo_1}
-                  onChange={(e) => setPeriodo_1(e.target.value)}
+                  value={data.periodo_1}
+                  onChange={handleInputChange}
                 
                 />
               </div>
-              <br></br> 
-
               <div className="form-group">
                 <label htmlFor="periodo_2"><h4>Periodo 2</h4></label>
                 <input
@@ -74,13 +112,11 @@ const FormCrearNota = () => {
                   type="number"
                   id="periodo_2"
                   className="form-control"
-                  value={periodo_2}
-                  onChange={(e) => setPeriodo_2(e.target.value)}
+                  value={data.periodo_2}
+                  onChange={handleInputChange}
                  
                 />
               </div>
-              <br></br>
-
               <div className="form-group">
                 <label htmlFor="periodo_3"><h4>Periodo 3</h4></label>
                 <input
@@ -88,13 +124,11 @@ const FormCrearNota = () => {
                   type="number"
                   id="periodo_3"
                   className="form-control"
-                  value={periodo_3}
-                  onChange={(e) => setPeriodo_3(e.target.value)}
+                  value={data.periodo_3}
+                  onChange={handleInputChange}
                  
                 />
               </div>
-              <br></br>
-
               <button type="submit" className="btn btn-primary">Crear</button>
             </form>
           </div>
