@@ -81,7 +81,7 @@ const TablaMaterias = () => {
         <>
         <div className="container">
             <div class="row justify-content-center align-items-center g-2">
-            <h3>Administracion de Mateiras</h3>
+            <h3>Administracion de Materias</h3>
                 <div className="col-2 ">  
                   <button onClick={handleShowCreate} className="btn btn-dark"  >Agregar Materia
                   </button>
