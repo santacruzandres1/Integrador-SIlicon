@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 import { useFetch } from "../../useFetch";
 import { Modal } from 'react-bootstrap';
 import FormCrearCurso from '../formCrear/formCrearCurso';
-import { Link } from 'react-router-dom';
-
-
+import FormEditCurso from '../formEditar/formEditCurso';
 
 
 const TablaCursos = () => {
@@ -22,18 +20,20 @@ const TablaCursos = () => {
     };
 
     const handleSubmit = () => {
-        // Realiza una solicitud Fetch para eliminar el usuario en el servidor
+
         fetch(`http://localhost:8080/api/curso/${Eliminar}`, {
             method: 'DELETE',
             headers: {
             'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
+
             },
         })
             .then((response) => {
             if (response.ok) {
                 console.log('Elemento eliminado con éxito');
                 setShowModalDel(false);
-                // Realizar cualquier otra acción después de eliminar el usuario si es necesario
+                window.location.reload();
             } else {
                 console.error('Error al eliminar el usuario');
             }
@@ -59,17 +59,33 @@ const TablaCursos = () => {
       });
 
     //Modal Crear Cursos
-    const [showModalCrear, setShowModalCrear] = useState(false);
-    const handleCloseCrear = () => setShowModalCrear(false);
-    const handleShowCrear = () => setShowModalCrear(true);
+    const [showModalCreate, setShowModalCreate] = useState(false);
+    const handleShowCreate = () => setShowModalCreate(true);
+
+    //Modal Editar Cursos
+    const [cursoEditar, setCursoEditar] = useState();
+    const [showModalEdit, setShowModalEdit] = useState(false);
+
+    const handleShowEdit = (id) => {
+        const cursoParaEditar = curso.find((curso) => curso.id_curso === id);
+        if (cursoParaEditar) {
+          setCursoEditar(cursoParaEditar);
+          setShowModalEdit(true);
+        }
+      }
+
+    const handleClose = () => {
+        setShowModalCreate(false);
+        setShowModalEdit(false);
+    }
+
 
     return(
         <>
         <div className="container">
         <div class="row justify-content-center align-items-center g-2">
-        <h3>Administracion de Cursos</h3>
                 <div className="col-2">
-                    <button onClick={handleShowCrear} className="btn btn-dark">Agregar Curso</button>
+                    <button onClick={handleShowCreate} className="btn btn-dark">Agregar Curso</button>
                 </div>
 
                 <div className="col-4 offset-4">
@@ -100,7 +116,7 @@ const TablaCursos = () => {
                         <td>{curso.id_curso}</td>
                         <td>{curso.nombre}</td>
                         <td>  <div className="btn-group" role="group" aria-label="Basic example">
-                                            <Link to={`/dashboard/editCurso/${curso.id_curso}`} className="btn btn-dark">Editar</Link>
+                                            <button type="button" onClick={() => handleShowEdit(curso.id_curso)} className="btn btn-dark">Editar</button>
                                         
                                             <button className="btn btn-dark" onClick={() => handleShowDel(curso.id_curso)}>Borrar</button>
                                           </div>
@@ -110,14 +126,13 @@ const TablaCursos = () => {
             </tbody>
         </table>
             
-            <Modal show={showModalCrear} onHide={handleCloseCrear}>
+       <Modal show= {showModalCreate || showModalEdit} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Crear Curso</Modal.Title>
+                    <Modal.Title>{showModalCreate ? 'Crear Curso' : 'Editar Curso'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <FormCrearCurso />
+                    {showModalCreate ? <FormCrearCurso handleClose={handleClose} /> : <FormEditCurso curso={cursoEditar} handleClose={handleClose} />}
                 </Modal.Body>
-              
             </Modal>
                 
                 {/* Modal Eliminar Curso */}

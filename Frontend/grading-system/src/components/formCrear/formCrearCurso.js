@@ -25,6 +25,8 @@ const FormCrearCurso = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+        'authorization': sessionStorage.getItem('token')
+
             },
             body: JSON.stringify(curso),
           })

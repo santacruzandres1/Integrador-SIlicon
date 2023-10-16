@@ -1,19 +1,19 @@
+import React, { useState, useEffect} from 'react';
 
+const FormEditCurso = ({curso, handleClose }) => {
+    const [item, setItem] = useState({});
+    const id_curso = curso.id_curso;
 
-import React, { useState, } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+    useEffect(() => {
+        if (curso) {
+            setItem({
+                id_curso: curso.id_curso || '',
+                nombre: curso.nombre || '',
+            });
+        }
+    }
+    , [curso]);
 
-
-
-const FormEditCurso = () => {
-
-    const navigate = useNavigate();
-    const p = useParams();
-
-    const [item, setItem] = useState({
-        nombre: ""
-        
-    });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -24,17 +24,19 @@ const FormEditCurso = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:8080/api/curso/${p.id_curso}`, {
+        fetch(`http://localhost:8080/api/curso/${id_curso}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem('token')
             },
             body: JSON.stringify(item),
         })
             .then((response) => {
                 if (response.ok) {
                     console.log('Elemento actualizado con éxito');
-                    navigate("/dashboard")
+                    handleClose();
+                    window.location.reload();
                     
 
                 } else {
@@ -49,17 +51,13 @@ const FormEditCurso = () => {
 
     return (
         <>
-            <div className='container text-center'>
-                <h4>Editar Curso</h4>
-                </div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
 
                         <form onSubmit={handleSubmit}>
-                           
+             
 
-  
                               <div className="form-group">
                                 <label htmlFor="Nombre"><h4>Nombre</h4></label>
                                 <input
