@@ -42,10 +42,11 @@ function FormCrearUsuario({ handleClose }) {
       .then((data) => {
         console.log("Usuario creado:", data);
         handleClose();
-        window.location.reload();
+        window.location.reaload();
        
       })
       .catch((error) => console.error("Error al crear el usuario: ", error));
+    
   };
   return (
     <>
