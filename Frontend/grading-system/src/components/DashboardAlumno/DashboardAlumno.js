@@ -1,99 +1,145 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
+import jwtDecode from 'jwt-decode';
 
 
 
-let datos = [
-  { materia:"SQL", periodo_1: 5, periodo_2: 8, periodo_3:5},
-  { materia:"Programacion", periodo_1: 5, periodo_2: 8, periodo_3:5},
-  { materia:"Matematicas", periodo_1: 5, periodo_2: 8, periodo_3:5}
-]
 const DashboardAlumno = () => {
+
+
+
+
+  const token = sessionStorage.getItem('token');
+
+  const decodedToken = jwtDecode(token);
+
+
+  const id_user = decodedToken.id_usuario;
+
+  const [nota, setNota] = useState([]);
+
+  useEffect(function () {
+
+    let parametros = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
+      }
+    }
+
+
+
+    fetch(`http://localhost:8080/api/nota/${id_user}`, parametros)
+      .then(res => {
+        return res.json()
+          .then(body => {
+            setNota(body)
+
+          })
+      }).catch(
+        (error) => { console.log(error) }
+      );
+
+
+
+  })
+
 
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {
-      setSearchTerm(e.target.value);
+    setSearchTerm(e.target.value);
   };
 
-  const filteredData = datos.filter((item) =>
-      item.materia[0].toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredData = nota.filter((item) =>
+    item.nombre[0].toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const promedioColumna = filteredData.map(datos => ({
+    nombre: datos.nombre,
+    nota1: (datos.nota1),
+    nota2: (datos.nota2),
+    nota3:(datos.nota3),
+    promedio: ((datos.nota1 + datos.nota2 + datos.nota3) / 3).toFixed(2),
+
+  }));
+
 
 
 
   return (
     <>
-    <hr></hr>
-     <div>
-      <h2>DASHBOARD ALUMNO</h2>
-      
-    </div>
+      <hr></hr>
+      <div>
+        <h2>DASHBOARD ALUMNO</h2>
+
+      </div>
       <br></br>
-      
+
       <br></br> <br></br>
 
       <p>Escriba el nombre de la materia que desea informarse</p>
       <div className="container col-6">
-                        <form className="d-flex" role="search">
-                      
-                            <input className="form-control me-2"
-                                type="text"
-                                placeholder="Materia"
+        <form className="d-flex" role="search">
 
-                                onChange={handleSearch}
-                                value={searchTerm}
-                            />
-                            <span className="btn btn-dark" >Buscar</span>
-                        </form>
-                    </div>
-<br></br>
+          <input className="form-control me-2"
+            type="text"
+            placeholder="Materia"
+
+            onChange={handleSearch}
+            value={searchTerm}
+          />
+          <span className="btn btn-dark" >Buscar</span>
+        </form>
+      </div>
+      <br></br>
       <div className="container item">
 
         <table class="table table-striped">
           <thead>
-            <tr>
-             
-              <th scope="col">Materia</th>
-             
-              <th scope="col">Periodo 1</th>
-              <th scope="col">Periodo 2</th>
-              <th scope="col">Periodo 3</th>
 
+            <tr>
+              <th scope="col">Materia</th>
+              <th scope="col">1° Trimetre</th>
+              <th scope="col">2° Trimestre</th>
+              <th scope="col">3° Trimestre</th>
+              <th scope="col">Promedio</th>
             </tr>
+
           </thead>
-          {filteredData.map(datos => (
+
+          {promedioColumna.map(datos => (
             <tbody>
               <tr >
-               
-                <td>{datos.materia}</td>
-                
-                <td>{datos.periodo_1}</td>
-                <td>{datos.periodo_2}</td>
-                <td>{datos.periodo_3}</td>
-            
-               
+
+                <td>{datos.nombre}</td>
+                <td>{datos.nota1}</td>
+                <td>{datos.nota2}</td>
+                <td>{datos.nota3}</td>
+                <td>{datos.promedio}</td>
+
+
               </tr>
 
             </tbody>))}
         </table>
-        
+
 
       </div>
 
 
-<br></br>
+      <br></br>
 
 
 
 
 
-</>
-);
+    </>
+  );
 }
 
 
 
 export default DashboardAlumno;
-        
