@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const TablaMaterias = () => {
 
-  const { data: materia } = useFetch("http://localhost:3000/api/materia");
+  const { data: materia } = useFetch("http://localhost:8080/api/materia");
     
   const [Eliminar, setEliminar] = useState();
   const [showModalDel, setShowModalDel] = useState(false);
@@ -20,7 +20,7 @@ const TablaMaterias = () => {
 
   const handleSubmit = () => {
     // Realiza una solicitud Fetch para eliminar el usuario en el servidor
-    fetch(`http://localhost:3000/api/materia/${Eliminar}`, {
+    fetch(`http://localhost:8080/api/materia/${Eliminar}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

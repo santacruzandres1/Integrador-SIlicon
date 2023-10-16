@@ -7,7 +7,7 @@ import { useFetch } from '../../useFetch';
 
 const TablaUsuarios = () => {
   
-  const { data} = useFetch("http://localhost:3000/api/usuarios");
+  const { data} = useFetch("http://localhost:8080/api/usuarios");
  
   const [usuarioAEliminar, setUsuarioAEliminar] = useState();
   const [showModalDelUser, setShowModalDelUser] = useState(false);
@@ -18,7 +18,7 @@ const TablaUsuarios = () => {
   };
 
   const handleSubmit = () => {
-    fetch(`http://localhost:3000/api/usuarios/${usuarioAEliminar}`, {
+    fetch(`http://localhost:8080/api/usuarios/${usuarioAEliminar}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

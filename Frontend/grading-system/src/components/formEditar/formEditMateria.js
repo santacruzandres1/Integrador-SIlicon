@@ -23,7 +23,7 @@ const FormEditMateria = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:3000/api/materia/${p.id_materia}`, {
+        fetch(`http://localhost:8080/api/materia/${p.id_materia}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

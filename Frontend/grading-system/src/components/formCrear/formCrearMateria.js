@@ -20,7 +20,7 @@ const handleInputChange = (e) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:3000/api/materia",
+        fetch("http://localhost:8080/api/materia",
      {
       method: "POST",
       headers: {

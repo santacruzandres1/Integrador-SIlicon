@@ -2,7 +2,7 @@ import { useFetch } from "../../useFetch";
 
 const TablaPrueba = () => {
 
-  const { data } = useFetch("http://localhost:3000/api/materia");
+  const { data } = useFetch("http://localhost:8080/api/materia");
 
 
   return (

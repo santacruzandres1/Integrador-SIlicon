@@ -20,7 +20,7 @@ const FormCrearCurso = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:3000/api/curso",
+        fetch("http://localhost:8080/api/curso",
         {
             method: "POST",
             headers: {

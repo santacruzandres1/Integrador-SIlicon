@@ -24,7 +24,7 @@ const FormEditCurso = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:3000/api/curso/${p.id_curso}`, {
+        fetch(`http://localhost:8080/api/curso/${p.id_curso}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

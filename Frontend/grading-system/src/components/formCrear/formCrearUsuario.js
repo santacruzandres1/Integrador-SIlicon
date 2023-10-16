@@ -23,7 +23,7 @@ function FormCrearUsuario({ handleClose }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("http://localhost:3000/api/usuarios", {
+    fetch("http://localhost:8080/api/usuarios", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

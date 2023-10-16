@@ -25,7 +25,7 @@ function EditUser({ user, handleClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/api/usuarios/${user.id_usuario}`, {
+    fetch(`http://localhost:8080/api/usuarios/${user.id_usuario}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
