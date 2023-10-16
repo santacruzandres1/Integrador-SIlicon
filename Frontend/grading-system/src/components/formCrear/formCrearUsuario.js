@@ -67,19 +67,6 @@ function FormCrearUsuario({ handleClose }) {
               </div>
               <div className="form-floating">
                 <input
-                  type="password"
-                  className="form-control"
-                  id="floatingPassword"
-                  placeholder='Password'
-                  value={user.password}
-                  name='password'
-                  onChange={handleInputChange}
-                  required
-                />
-                <label htmlFor="floatingPassword"><h4>Password</h4></label>
-              </div>
-              <div className="form-floating">
-                <input
                   type="text"
                   id="floatingLastName"
                   className="form-control"
@@ -94,7 +81,7 @@ function FormCrearUsuario({ handleClose }) {
               <div className="form-floating">
                
                 <input
-                  type="number"
+                  type="tel"
                   id="floatingdni"
                   name='dni'
                   className="form-control"
@@ -103,20 +90,7 @@ function FormCrearUsuario({ handleClose }) {
                   placeholder='Dni'
                   required
                 />
-                 <label htmlFor="floatingdni"><h4>Dni</h4></label>
-              </div>
-              <div className="form-floating">
-                <input
-                  type="number"
-                  id="id_rol"
-                  name='id_rol'
-                  className="form-control"
-                  value={user.id_rol}
-                  onChange={handleInputChange}
-                  placeholder='ID Rol'
-                  required
-                />
-                 <label htmlFor="id_rol"><h4>ID Rol</h4></label>
+                 <label htmlFor="floatingdni"><h4>DNI</h4></label>
               </div>
               <div className="form-floating">
                 <input
@@ -130,6 +104,32 @@ function FormCrearUsuario({ handleClose }) {
                   required
                 />
                 <label htmlFor="floatingEmail"><h4>Email</h4></label>
+              </div>
+              <div className="form-floating password">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="floatingPassword"
+                  placeholder='Password'
+                  value={user.password}
+                  name='password'
+                  onChange={handleInputChange}
+                  required
+                />
+                <label htmlFor="floatingPassword"><h4>Password</h4></label>
+              </div>
+              <div className="form-floating">
+                <input
+                  type="number"
+                  id="id_rol"
+                  name='id_rol'
+                  className="form-control"
+                  value={user.id_rol}
+                  onChange={handleInputChange}
+                  placeholder='ID Rol'
+                  required
+                />
+                 <label htmlFor="id_rol"><h4>Rol</h4></label>
               </div>
               <button type="submit" className="btn btn-primary">Crear</button>
             </form>

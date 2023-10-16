@@ -3,6 +3,7 @@ import React, { useState, } from 'react';
 
 const FormCrearMateria = () => {
 
+
 const [data, setData] = useState({
     nombre: "",
     id_usuario: "",
@@ -25,6 +26,7 @@ const handleInputChange = (e) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'authorization': sessionStorage.getItem('token')
       },
       body: JSON.stringify(data),
     })
@@ -40,6 +42,7 @@ const handleInputChange = (e) => {
       .then((data) => {
         console.log("Usuario creado:", data);
         alert('Usuario creado con exito');
+        window.location.reload();
       
      
         
@@ -56,42 +59,44 @@ const handleInputChange = (e) => {
                     <div className="col-md-8">
                         <form onSubmit={handleSubmit}>
                               <div className="form-floating">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="floatingMateria"
-                                    value={data.MATERIA}
-                                    placeholder='Materia'
-                                    onChange={handleInputChange}
-                                    name='nombre'
-                                    required
-                                />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="floatingMateria"
+                    value={data.nombre}
+                    placeholder='Materia'
+                    onChange={handleInputChange}
+                    name='nombre'
+                    required
+                  />
                                 <label htmlFor="floatingMateria" ><h4>Materia</h4></label>
                             </div>
                             <div className="form-floating">
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    id="floatingId"
-                                    placeholder='id_usuario'
-                                    value={data.id_usuario}
-                                    name='id_usuario'
-                                    onChange={handleInputChange}
-                                    required
-                                />
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="floatingId"
+                    placeholder='ID Profesor'
+                    value={data.id_usuario}
+                    name='id_usuario'
+                    onChange={handleInputChange}
+                    required
+                  />
+
                                 <label htmlFor="floatingId"><h4>ID Profesor</h4></label>
                             </div>
                             <div className="form-floating">
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    id="floatingIdCurso"
-                                    placeholder='id_curso'
-                                    value={data.id_curso}
-                                    name='id_curso'
-                                    onChange={handleInputChange}
-                                    required
-                                />
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="floatingIdCurso"
+                    placeholder='ID Curso'
+                    value={data.id_curso}
+                    name='id_curso'
+                    onChange={handleInputChange}
+                    required
+                  />
+
                              <label htmlFor="floatingIdCurso"><h4>ID Curso</h4></label>
                             </div>
                             <button type="submit" className="btn btn-primary">Crear</button>

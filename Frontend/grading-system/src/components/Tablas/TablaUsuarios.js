@@ -41,7 +41,6 @@ const TablaUsuarios = () => {
    
   }
 
-  //Filtro de búsqueda
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {
@@ -126,7 +125,6 @@ const TablaUsuarios = () => {
                 <div className="btn-group" role="group" aria-label="Basic example">
                   <button type="button" onClick={() => handleShowEdit(USUARIO.id_usuario)} className="btn btn-dark">Editar</button>
 
-               
                 <button onClick={() => handleShowDelUser(USUARIO.id_usuario)} type="button" className="btn btn-dark">Borrar</button>
                 </div>
               </td>
@@ -150,8 +148,7 @@ const TablaUsuarios = () => {
      
 
             <div className='container  text-center '>
-              <br></br>
-              <strong>¿Está seguro que desea eliminar este usuario?</strong><br></br><br></br>
+              <strong>¿Está seguro que desea eliminar este usuario?</strong>
               <div className='row  '>
                 <div className='col'> <button onClick={handleSubmit} className="btn btn-danger">Eliminar</button></div>
                 <div className='col offset-1'> <button className="btn btn-dark" variant="secondary" onClick={handleCloseDelUser}>

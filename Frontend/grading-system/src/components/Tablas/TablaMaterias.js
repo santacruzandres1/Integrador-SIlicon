@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import FormCrearMateria from "../formCrear/formCrearMateria";
+import FormEditMateria from "../formEditar/formEditMateria";
 import { useFetch } from "../../useFetch";
-import { Link } from "react-router-dom";
+
 
 const TablaMaterias = () => {
 
@@ -19,18 +20,20 @@ const TablaMaterias = () => {
   };
 
   const handleSubmit = () => {
-    // Realiza una solicitud Fetch para eliminar el usuario en el servidor
+    
     fetch(`http://localhost:8080/api/materia/${Eliminar}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
       },
     })
       .then((response) => {
         if (response.ok) {
           console.log('Elemento eliminado con éxito');
           setShowModalDel(false);
-          // Realizar cualquier otra acción después de eliminar el usuario si es necesario
+          window.location.reload();
+        
         } else {
           console.error('Error al eliminar el usuario');
         }
@@ -39,7 +42,6 @@ const TablaMaterias = () => {
         console.error('Error de red:', error);
       });
   }
-    //Filtro de búsqueda
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearch = (e) => {
@@ -53,10 +55,26 @@ const TablaMaterias = () => {
         return materiaSeparados.some((part) => part.startsWith(searchTermLowerCase));
       }); 
 
-    //Modal Crear Materias
-    const [showModalCrear, setShowModalCrear] = useState(false);
-    const handleCloseCrear = () => setShowModalCrear(false);
-    const handleShowCrear = () => setShowModalCrear(true);
+  //Modal Crear Materia
+  const [showModalCreate, setShowModalCreate] = useState(false);
+  const handleShowCreate = () => setShowModalCreate(true);
+
+  //Modal Editar Materia
+  const [materiaAEditar, setMateriaAEditar] = useState(null); // Nuevo estado
+  const [showModalEdit, setShowModalEdit] = useState(false);
+
+  const handleShowEdit = (id) => {
+    const materiaParaEditar = materia.find((materia) => materia.id_materia === id);
+    if (materiaParaEditar) {
+      setMateriaAEditar(materiaParaEditar);
+      setShowModalEdit(true);
+    }
+  };
+
+  const handleClose = () => {
+    setShowModalCreate(false);
+    setShowModalEdit(false);
+  };
 
 
     return(
@@ -65,7 +83,7 @@ const TablaMaterias = () => {
             <div class="row justify-content-center align-items-center g-2">
             <h3>Administracion de Mateiras</h3>
                 <div className="col-2 ">  
-                  <button onClick={handleShowCrear} className="btn btn-dark"  >Agregar Materia
+                  <button onClick={handleShowCreate} className="btn btn-dark"  >Agregar Materia
                   </button>
                 </div>
                 <div className="col-4 offset-4">
@@ -95,12 +113,12 @@ const TablaMaterias = () => {
                         <tr key={index}>
                             <td>{materia.id_materia}</td>
                             <td>{materia.MATERIA}</td>
-                            <td>`{materia.nombre}, {materia.apellido}`</td>
+                            <td>{materia.nombre}, {materia.apellido}</td>
                             <td>{materia.CURSO}</td>
                             <td>
                               <div className="btn-group" role="group" aria-label="Basic example">
-                                            <Link to={`/dashboard/editMateria/${materia.id_materia}`} className="btn btn-dark">Editar</Link>
-                                        
+                              <button type="button" onClick={() => handleShowEdit(materia.id_materia)} className="btn btn-dark">Editar</button>
+       
                                           <button onClick={() => handleShowDel(materia.id_materia)} type="button" className="btn btn-dark">Borrar</button>
                                           </div>
                             </td>
@@ -108,12 +126,12 @@ const TablaMaterias = () => {
                     ))}
                 </tbody>
             </table>
-            <Modal show={showModalCrear} onHide={handleCloseCrear}>
+            <Modal show={showModalEdit || showModalCreate} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Crear Materia</Modal.Title>
+                    <Modal.Title>{showModalEdit ? 'Editar Materia' : 'Crear Materia' }</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <FormCrearMateria />
+                {showModalEdit ? <FormEditMateria data={materiaAEditar} handleClose={handleClose} /> : <FormCrearMateria handleClose={handleClose} />}
                 </Modal.Body>
             </Modal>
 

@@ -1,18 +1,21 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import React, { useState, } from 'react';
+import { useState, useEffect } from 'react';
 
-const FormEditMateria = () => {
+const FormEditMateria = ({ data, handleClose }) => {
+    const [item, setItem] = useState({});
+    const id_materia = data.id_materia;
 
-    const navigate = useNavigate();
-    const p = useParams();
-
-    const [item, setItem] = useState({
-        nombre: "",
-        id_usuario: "",
-        id_curso: ""
-        
-        
-    });
+    useEffect(() => {
+      if (data) {
+        setItem({
+            MATERIA : data.MATERIA || '',
+          id_materia: data.id_materia || '',
+          nombre: data.nombre || '',
+          id_usuario: data.id_usuario || '',
+          id_curso: data.id_curso || '',
+        });
+        }
+    }, [data]);
+    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -23,17 +26,19 @@ const FormEditMateria = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:8080/api/materia/${p.id_materia}`, {
+        fetch(`http://localhost:8080/api/materia/${id_materia}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem('token')
             },
             body: JSON.stringify(item),
         })
             .then((response) => {
                 if (response.ok) {
                     console.log('Elemento actualizado con éxito');
-                    navigate("/dashboard#materias")
+                    handleClose();
+                    window.location.reload();
 
                 } else {
                     console.error('Error al actualizar el elemento');
@@ -48,7 +53,6 @@ const FormEditMateria = () => {
     return (
         <>
             <div className='container text-center'>
-                <h4>Editar Materia</h4>
             </div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
@@ -57,13 +61,13 @@ const FormEditMateria = () => {
                         <form onSubmit={handleSubmit}>
 
                             <div className="form-group">
-                                <label htmlFor="materia"><h4>Materia</h4></label>
+                                <label htmlFor="nombre"><h4>Materia</h4></label>
                                 <input
                                     type="text"
                                     id="nombre"
-                                    name="nombre"
+                                    name="MATERIA"
                                     className="form-control"
-                                    value={item.nombre}
+                                    value={item.MATERIA}
                                     onChange={handleInputChange}
                                     required
                                 />

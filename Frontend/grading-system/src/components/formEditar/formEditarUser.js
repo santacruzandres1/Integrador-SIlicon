@@ -53,7 +53,6 @@ function EditUser({ user, handleClose }) {
 
   return (
     <>
-            <div className='container text-center'><h2>Editar Usuario</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
@@ -73,7 +72,6 @@ function EditUser({ user, handleClose }) {
                 />
                 <label htmlFor="nombre"><h4>Nombre</h4></label>
               </div>
-              <br></br>
 
               <div className="form-group">
                 <label htmlFor="apellido"><h4>Apellido</h4></label>
@@ -87,10 +85,9 @@ function EditUser({ user, handleClose }) {
                   required
                 />
               </div>
-              <br></br>
 
               <div className="form-group">
-                <label htmlFor="dni"><h4>Dni</h4></label>
+                <label htmlFor="dni"><h4>DNI</h4></label>
                 <input
                   type="number"
                   id="dni"
@@ -101,21 +98,6 @@ function EditUser({ user, handleClose }) {
                   required
                 />
               </div>
-              <br></br>
-              <div className="form-group">
-                <label htmlFor="id_rol"><h4>ID Rol</h4></label>
-                <input
-                  type="number"
-                  id="id_rol"
-                  name='id_rol'
-                  className="form-control"
-                  value={item.id_rol}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <br></br>
-
               <div className="form-group">
                 <label htmlFor="email"><h4>Email</h4></label>
                 <input
@@ -128,7 +110,6 @@ function EditUser({ user, handleClose }) {
                   required
                 />
               </div>
-              <br></br>
 
               <div className="form-group">
                 <label htmlFor="password"><h4>Password</h4></label>
@@ -142,13 +123,26 @@ function EditUser({ user, handleClose }) {
                   required
                 />
               </div>
-              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="id_rol"><h4>Rol</h4></label>
+                <input
+                  type="number"
+                  id="id_rol"
+                  name='id_rol'
+                  className="form-control"
+                  value={item.id_rol}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
 
               <button type="submit" className="btn btn-primary">Editar</button>
             </form>
           </div>
         </div>
-      </div></>
+      </div>
+      </>
   );
 };
 
