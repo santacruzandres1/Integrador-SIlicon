@@ -12,6 +12,7 @@ function EditUser({ user, handleClose }) {
         password: user.password || '',
         dni: user.dni || null,
         id_rol: user.id_rol || null,
+        id_curso: user.curso || null,
       });
     }
   }, [user]);
@@ -59,6 +60,7 @@ function EditUser({ user, handleClose }) {
 
             <form onSubmit={handleSubmit}>
              
+              <label htmlFor="nombre"><h4>Nombre</h4></label>
               <div className="form-group">
                 <input
                 placeholder='nombre'
@@ -70,7 +72,6 @@ function EditUser({ user, handleClose }) {
             onChange={handleInputChange}
                   required
                 />
-                <label htmlFor="nombre"><h4>Nombre</h4></label>
               </div>
 
               <div className="form-group">
@@ -132,6 +133,18 @@ function EditUser({ user, handleClose }) {
                   name='id_rol'
                   className="form-control"
                   value={item.id_rol}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="id_curso"><h4>Curso</h4></label>
+                <input
+                  type="number"
+                  id="id_curso"
+                  name='id_curso'
+                  className="form-control"
+                  value={item.id_curso}
                   onChange={handleInputChange}
                   required
                 />

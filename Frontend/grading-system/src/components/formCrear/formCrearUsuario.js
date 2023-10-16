@@ -10,6 +10,7 @@ function FormCrearUsuario({ handleClose }) {
     password: "",
     dni: null,
     id_rol: null,
+    id_curso: null,
   });
 
   const handleInputChange = (e) => {
@@ -131,6 +132,21 @@ function FormCrearUsuario({ handleClose }) {
                 />
                  <label htmlFor="id_rol"><h4>Rol</h4></label>
               </div>
+              <div className="form-floating">
+                <input
+                  type="number"
+                  id="id_curso"
+                  name='id_curso'
+                  className="form-control"
+                  value={user.id_curso}
+                  onChange={handleInputChange}
+                  placeholder='ID Curso'
+                  required
+                />
+                 <label htmlFor="id_curso"><h4>Curso</h4></label>
+              </div>
+              
+              
               <button type="submit" className="btn btn-primary">Crear</button>
             </form>
           </div>

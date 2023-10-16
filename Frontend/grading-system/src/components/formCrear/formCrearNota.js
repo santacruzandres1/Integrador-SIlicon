@@ -52,7 +52,7 @@ const handleInputChange = (e) => {
       window.location.reload();
     
     } else {
-      console.error('Error al crear el usuario');
+      console.error('Error al la nota');
     }
 
   })
@@ -73,6 +73,7 @@ const handleInputChange = (e) => {
                 <input
                   type="number"
                   id="id_usuario"
+                  name='id_usuario'
                   className="form-control"
                   value={data.id_usuario}
                   onChange={handleInputChange}
@@ -98,7 +99,7 @@ const handleInputChange = (e) => {
                 <input
                   type="number"
                   id="periodo_1"
-                  name='califiperiodo_1'
+                  name='periodo_1'
                   className="form-control"
                   value={data.periodo_1}
                   onChange={handleInputChange}
@@ -111,6 +112,7 @@ const handleInputChange = (e) => {
 
                   type="number"
                   id="periodo_2"
+                  name='periodo_2'
                   className="form-control"
                   value={data.periodo_2}
                   onChange={handleInputChange}
@@ -123,6 +125,7 @@ const handleInputChange = (e) => {
 
                   type="number"
                   id="periodo_3"
+                  name='periodo_3'
                   className="form-control"
                   value={data.periodo_3}
                   onChange={handleInputChange}

@@ -83,6 +83,7 @@ const TablaCursos = () => {
     return(
         <>
         <div className="container">
+        <h3>Administracion de Curso</h3>
         <div class="row justify-content-center align-items-center g-2">
                 <div className="col-2">
                     <button onClick={handleShowCreate} className="btn btn-dark">Agregar Curso</button>
