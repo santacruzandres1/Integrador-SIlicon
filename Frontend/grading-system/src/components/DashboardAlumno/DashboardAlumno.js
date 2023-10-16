@@ -54,15 +54,15 @@ const DashboardAlumno = () => {
   };
 
   const filteredData = nota.filter((item) =>
-    item.nombre[0].toLowerCase().includes(searchTerm.toLowerCase())
+    item.materia[0].toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const promedioColumna = filteredData.map(datos => ({
-    nombre: datos.nombre,
-    nota1: (datos.nota1),
-    nota2: (datos.nota2),
-    nota3:(datos.nota3),
-    promedio: ((datos.nota1 + datos.nota2 + datos.nota3) / 3).toFixed(2),
+    materia: datos.materia,
+    nota1: (datos.periodo_1),
+    nota2: (datos.periodo_2),
+    nota3:(datos.periodo_3),
+    promedio: ((datos.periodo_1 + datos.periodo_2 + datos.periodo_3) / 3).toFixed(2),
 
   }));
 
@@ -115,9 +115,9 @@ const DashboardAlumno = () => {
               <tr >
 
                 <td>{datos.nombre}</td>
-                <td>{datos.nota1}</td>
-                <td>{datos.nota2}</td>
-                <td>{datos.nota3}</td>
+                <td>{datos.periodo_1}</td>
+                <td>{datos.periodo_2}</td>
+                <td>{datos.periodo_3}</td>
                 <td>{datos.promedio}</td>
 
 
