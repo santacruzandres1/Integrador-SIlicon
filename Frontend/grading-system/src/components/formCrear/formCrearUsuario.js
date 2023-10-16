@@ -27,6 +27,7 @@ function FormCrearUsuario({ handleClose }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'authorization': sessionStorage.getItem('token')
       },
       body: JSON.stringify(user),
     })
@@ -40,6 +41,7 @@ function FormCrearUsuario({ handleClose }) {
       .then((data) => {
         console.log("Usuario creado:", data);
         handleClose();
+        window.location.reload();
        
       })
       .catch((error) => console.error("Error al crear el usuario: ", error));
