@@ -1,15 +1,14 @@
  import React, { useState } from 'react';
- import {  useNavigate } from 'react-router-dom';
-
-
+ import {  useNavigate, useParams } from 'react-router-dom';
 import { toast} from 'react-toastify';
 import Header from '../Header/header';
 
 
 
   const Login = () => {
+  
+    const {rol} = useParams();
 
-    
    const [user, setUser] = useState({
     email:"",
     password:""
@@ -103,7 +102,7 @@ import Header from '../Header/header';
     <>
 <Header></Header>
    <br></br>
-    <div className=' container text-center'><h2>Iniciar Sesión</h2></div>
+    <div className=' container text-center'><h2>Inicio Sesión {rol} </h2></div>
 
       <div className="container mt-5">
         <div className="row justify-content-center">
@@ -151,45 +150,3 @@ import Header from '../Header/header';
 
   export default Login;
 
-
-  // <div className='container'><h2>Login {rol}</h2></div>
-  //    <div className="container mt-5">
-  //    <div className="row justify-content-center">
-  //    <div className="col-md-6">
-        
-  //       <form onSubmit={handleSubmit}>
-  //       <div className="form-group">
-  //       <label htmlFor="email"><h4>Email</h4></label>
-  //           <input
-  //             type="email"
-  //            id="email"
-  //            className="form-control"
-  //             value={email}
-  //             onChange={handleEmailChange}
-  //             required
-  //           />
-  //         </div>
-  //         <br></br>
-          
-  //     <div className="form-group">
-  //           <label htmlFor="password"><h4>Password</h4></label>
-  //          <input
-  //            type="password"
-  //             id="password"
-  //             className="form-control"
-  //            value={password}
-  //            onChange={handlePasswordChange}
-  //          required
-  //           />
-  //          </div>
-  //      <br></br>
-  //      {user ? (
-  //          <button className="btn btn-primary" type="button" onClick={logOut}>Log Out</button>
-  //        ) : (
-  //         <button className="btn btn-primary" type="button"  onClick={login}>Log In</button>
-  //        )}
-        
-  //      </form>
-  //    </div>
-  //  </div>
-  //  </div>
