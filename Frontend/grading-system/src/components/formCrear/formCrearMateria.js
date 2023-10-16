@@ -1,78 +1,99 @@
 import React, { useState, } from 'react';
 
 
-
-
 const FormCrearMateria = () => {
 
-   
-    const [Nombre, setNombre] = useState('');
-    const [Profesor, setProfesor] = useState('');
-    const [Curso, setCurso] = useState('');
+const [data, setData] = useState({
+    nombre: "",
+    id_usuario: "",
+    id_curso: ""
+});
 
+
+const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    };
+        fetch("http://localhost:3000/api/materia",
+     {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => 
+        
+          {
+        
+            response.json()
+          }
+          
+          )
+
+      .then((data) => {
+        console.log("Usuario creado:", data);
+        alert('Usuario creado con exito');
+        window.location.reload();
+     
+        
+      })
+      .catch((error) => console.error("Error al crear el usuario: ", error));
+  }
+  
 
 
     return (
         <>
-          <br></br>
-            <div className='container text-center'><h2>Crear Materia
-            </h2></div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
-                    <div className="col-md-6">
-
+                    <div className="col-md-8">
                         <form onSubmit={handleSubmit}>
-                            
-
-  
-                              <div className="form-group">
-                                <label htmlFor="Nombre"><h4>Nombre</h4></label>
+                              <div className="form-floating">
                                 <input
                                     type="text"
-                                    id="Nombre"
                                     className="form-control"
-                                    value={Nombre}
-                                    onChange={(e) => setNombre(e.target.value)}
+                                    id="floatingMateria"
+                                    value={data.MATERIA}
+                                    placeholder='Materia'
+                                    onChange={handleInputChange}
+                                    name='nombre'
                                     required
                                 />
+                                <label htmlFor="floatingMateria" ><h4>Materia</h4></label>
                             </div>
-                            <br></br>
-
-                            <div className="form-group">
-                                <label htmlFor="Profesor"><h4>Profesor</h4></label>
+                            <div className="form-floating">
                                 <input
-                                    type="text"
-                                    id="Profesor"
-                                    name='Profesor'
+                                    type="number"
                                     className="form-control"
-                                    value={Profesor}
-                                    onChange={(e) => setProfesor(e.target.value)}
+                                    id="floatingId"
+                                    placeholder='id_usuario'
+                                    value={data.id_usuario}
+                                    name='id_usuario'
+                                    onChange={handleInputChange}
                                     required
                                 />
+                                <label htmlFor="floatingId"><h4>ID Profesor</h4></label>
                             </div>
-                            <br></br>
-
-                            <div className="form-group">
-                                <label htmlFor="Curso"><h4>Curso</h4></label>
+                            <div className="form-floating">
                                 <input
-                                    type="text"
-                                    id="Curso"
-                                    name='Curso'
+                                    type="number"
                                     className="form-control"
-                                    value={Curso}
-                                    onChange={(e) => setCurso
-                                        (e.target.value)}
+                                    id="floatingIdCurso"
+                                    placeholder='id_curso'
+                                    value={data.id_curso}
+                                    name='id_curso'
+                                    onChange={handleInputChange}
                                     required
                                 />
+                             <label htmlFor="floatingIdCurso"><h4>ID Curso</h4></label>
                             </div>
-                            <br></br>
-
-
-
                             <button type="submit" className="btn btn-primary">Crear</button>
                         </form>
                     </div>

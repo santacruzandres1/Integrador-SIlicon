@@ -7,8 +7,12 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Contact from './pages/Contact/contact';
-
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormCrearUsuario from './components/formCrear/formCrearUsuario';
+import EditUser from './components/formEditar/formEditarUser';
+import FormEditMateria from './components/formEditar/formEditMateria';
+import FormEditCurso from './components/formEditar/formEditCurso';
 
 
 function App() {
@@ -17,16 +21,18 @@ function App() {
   return (
     <div className="App">
      
-    
+    <ToastContainer></ToastContainer>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={`/login/:rol`} element={<Login />} />
-        <Route path="/:rol/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/About" element={<About />} />
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/not-found" element={<h1>Not Found</h1>} />
         <Route path="/crearUsuario" element={<FormCrearUsuario />} />
-
+        <Route path={`/dashboard/editUser/:id_usuario`} element={<EditUser />} />
+        <Route path={`/dashboard/editMateria/:id_materia`} element={<FormEditMateria />} />
+        <Route path={`/dashboard/editCurso/:id_curso`} element={<FormEditCurso />} />
       </Routes>
     </div>
   );

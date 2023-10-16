@@ -1,89 +1,89 @@
-import React, { useState,  } from 'react';
+import { useState, useEffect } from 'react';
+
+function EditUser({ user, handleClose }) {
+  const [item, setItem] = useState({});
+
+  useEffect(() => {
+    if (user) {
+      setItem({
+        nombre: user.nombre || '',
+        apellido: user.apellido || '',
+        email: user.email || '',
+        password: user.password || '',
+        dni: user.dni || null,
+        id_rol: user.id_rol || null,
+      });
+    }
+  }, [user]);
 
 
-
-
-const FormEditarUsuario = () => {
-
-  const [Nickname, setNickname] = useState('');
-  const [password, setPassword] = useState('');
-  const [dni, setDni] = useState('');
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApeliido] = useState('');
-  const [mail, setMail] = useState('');
-  const [rol, setRol] = useState('');
-
-
-
-
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setItem({ ...item, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
-
+    fetch(`http://localhost:3000/api/usuarios/${user.id_usuario}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
+      },
+      body: JSON.stringify(item),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Elemento actualizado con éxito');
+          handleClose();
+          window.location.reload();
+          
+        } else {
+          console.error('Error al actualizar el elemento');
+          alert('Error al actualizar el elemento, Intente nuevamente');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red:', error);
+        error('Error de red:', error);
+      });
   };
 
 
   return (
     <>
-     <br></br>
             <div className='container text-center'><h2>Editar Usuario</h2></div>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
 
             <form onSubmit={handleSubmit}>
+             
               <div className="form-group">
-                <label htmlFor="nickname"><h4>Nickname</h4></label>
                 <input
+                placeholder='nombre'
                   type="text"
-                  id="Nickname"
+                  id="nombre"
+                  name='nombre'
                   className="form-control"
-                  value={Nickname}
-                  onChange={(e) => setNickname(e.target.value)}
+                  value={item.nombre}
+            onChange={handleInputChange}
                   required
                 />
-              </div>
-              <br></br>
-
-              <div className="form-group">
-                <label htmlFor="password"><h4>Password</h4></label>
-                <input
-                 
-                  type="password"
-                  id="password"
-                  className="form-control"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <br></br>
-
-              <div className="form-group">
                 <label htmlFor="nombre"><h4>Nombre</h4></label>
-                <input
-                  type="Nombre"
-                  id="Nombre"
-                  name='Nombre'
-                  className="form-control"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  required
-                />
               </div>
               <br></br>
 
               <div className="form-group">
                 <label htmlFor="apellido"><h4>Apellido</h4></label>
                 <input
-                  type="apellido"
+                  type="text"
                   id="apellido"
                   name='apellido'
                   className="form-control"
-                  value={apellido}
-                  onChange={(e) => setApeliido(e.target.value)}
+                  value={item.apellido}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -92,39 +92,53 @@ const FormEditarUsuario = () => {
               <div className="form-group">
                 <label htmlFor="dni"><h4>Dni</h4></label>
                 <input
-                  type="dni"
+                  type="number"
                   id="dni"
                   name='dni'
                   className="form-control"
-                  value={dni}
-                  onChange={(e) => setDni(e.target.value)}
+                  value={item.dni}
+            onChange={handleInputChange}
                   required
                 />
               </div>
               <br></br>
               <div className="form-group">
-                <label htmlFor="rol"><h4>Rol</h4></label>
+                <label htmlFor="id_rol"><h4>ID Rol</h4></label>
                 <input
-                  type="rol"
-                  id="rol"
-                  name='rol'
+                  type="number"
+                  id="id_rol"
+                  name='id_rol'
                   className="form-control"
-                  value={rol}
-                  onChange={(e) => setRol(e.target.value)}
+                  value={item.id_rol}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
               <br></br>
 
               <div className="form-group">
-                <label htmlFor="mail"><h4>Mail</h4></label>
+                <label htmlFor="email"><h4>Email</h4></label>
                 <input
-                  type="mail"
-                  id="mail"
-                  name='mail'
+                  type="email"
+                  id="email"
+                  name='email'
                   className="form-control"
-                  value={mail}
-                  onChange={(e) => setMail(e.target.value)}
+                  value={item.email}
+            onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <br></br>
+
+              <div className="form-group">
+                <label htmlFor="password"><h4>Password</h4></label>
+                <input
+                 name='password'
+                  type="password"
+                  id="password"
+                  className="form-control"
+                  value={item.password}
+            onChange={handleInputChange}
                   required
                 />
               </div>
@@ -138,4 +152,6 @@ const FormEditarUsuario = () => {
   );
 };
 
-export default FormEditarUsuario       
+export default EditUser;     
+
+

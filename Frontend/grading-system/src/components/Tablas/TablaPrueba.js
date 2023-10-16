@@ -1,16 +1,17 @@
 import { useFetch } from "../../useFetch";
 
 const TablaPrueba = () => {
-  const { data } = useFetch("http://jsonplaceholder.typicode.com/users");
+
+  const { data } = useFetch("http://localhost:3000/api/materia");
 
 
   return (
     <>
       <h2>Tabla de prueba</h2>
       <ul>
-        {data?.map((user) => (
-          <li key={user.id}>
-            {user.name}
+        {data?.map((materia) => (
+          <li key={materia.id}>
+            {materia.nombre}
           </li>
         ))}
       </ul>

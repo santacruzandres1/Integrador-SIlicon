@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 
 let datos = [
-  { materia:"SQL", nota: 5, etapa: "Primer parcial"},
-  { materia:"Programacion", nota:8, etapa: "Primer parcial"},
-  { materia:"Matematicas", nota: 6, etapa: "Recuperatorio"}
+  { materia:"SQL", periodo_1: 5, periodo_2: 8, periodo_3:5},
+  { materia:"Programacion", periodo_1: 5, periodo_2: 8, periodo_3:5},
+  { materia:"Matematicas", periodo_1: 5, periodo_2: 8, periodo_3:5}
 ]
 const DashboardAlumno = () => {
 
@@ -18,7 +18,7 @@ const DashboardAlumno = () => {
   };
 
   const filteredData = datos.filter((item) =>
-      item.materia.toLowerCase().includes(searchTerm.toLowerCase())
+      item.materia[0].toLowerCase().includes(searchTerm.toLowerCase())
   );
 
 
@@ -56,9 +56,10 @@ const DashboardAlumno = () => {
             <tr>
              
               <th scope="col">Materia</th>
-              <th scope="col">Nota</th>
-              <th scope="col">Etapa</th>
              
+              <th scope="col">Periodo 1</th>
+              <th scope="col">Periodo 2</th>
+              <th scope="col">Periodo 3</th>
 
             </tr>
           </thead>
@@ -67,8 +68,10 @@ const DashboardAlumno = () => {
               <tr >
                
                 <td>{datos.materia}</td>
-                <td>{datos.nota}</td>
-                <td>{datos.etapa}</td>
+                
+                <td>{datos.periodo_1}</td>
+                <td>{datos.periodo_2}</td>
+                <td>{datos.periodo_3}</td>
             
                
               </tr>
