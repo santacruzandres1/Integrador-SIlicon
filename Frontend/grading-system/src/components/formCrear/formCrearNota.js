@@ -6,11 +6,11 @@ import { toast} from 'react-toastify';
 const FormCrearNota = () => {
 
   const [data , setData] = useState({
-    id_usuario: "",
-    id_materia: "",
-    periodo_1: "",
-    periodo_2: "",
-    periodo_3: ""
+    id_usuario: null,
+    id_materia: null,
+    periodo_1: null,
+    periodo_2: null,
+    periodo_3: null
   });
 
 const handleInputChange = (e) => {
@@ -34,28 +34,27 @@ const handleInputChange = (e) => {
       'authorization': sessionStorage.getItem('token')
     },
     body: JSON.stringify(data),
+   
   })
-  .then((response) => {
-    if (response.ok) {
-      console.log('Nota creado con éxito');
-      toast.success("Nota Creada", {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-    });
-      window.location.reload();
-    
-    } else {
-      console.error('Error al la nota');
-    }
 
-  })
-  .catch((error) => console.error("Error al crear el usuario: ", error));
+  .then((response) => 
+        
+  {
+
+    response.json()
+  }
+  
+  )
+
+.then((data) => {
+console.log("Usuario creado:", data);
+alert('Nota creado con exito');
+window.location.reload();
+
+
+
+})
+.catch((error) => console.error("Error al crear el usuario: ", error));
 }
 
 

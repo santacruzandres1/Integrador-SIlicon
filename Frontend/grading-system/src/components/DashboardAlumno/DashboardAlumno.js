@@ -57,14 +57,21 @@ const DashboardAlumno = () => {
     item.materia[0].toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const promedioColumna = filteredData.map(datos => ({
-    materia: datos.materia,
-    nota1: (datos.periodo_1),
-    nota2: (datos.periodo_2),
-    nota3:(datos.periodo_3),
-    promedio: ((datos.periodo_1 + datos.periodo_2 + datos.periodo_3) / 3).toFixed(2),
+  const promedioColumna = filteredData.map(datos => {
+    // Filtrar las notas no nulas ni 0
+    const notasValidas = [datos.periodo_1, datos.periodo_2, datos.periodo_3].filter(nota => nota !== 0 && nota !== null);
 
-  }));
+    // Calcular el promedio solo con las notas válidas
+    const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
+
+    return {
+        materia: datos.materia,
+        nota1: datos.periodo_1,
+        nota2: datos.periodo_2,
+        nota3: datos.periodo_3,
+        promedio: promedio
+    };
+});
 
 
 
@@ -114,10 +121,10 @@ const DashboardAlumno = () => {
             <tbody>
               <tr >
 
-                <td>{datos.nombre}</td>
-                <td>{datos.periodo_1}</td>
-                <td>{datos.periodo_2}</td>
-                <td>{datos.periodo_3}</td>
+                <td>{datos.materia}</td>
+                <td>{datos.nota1}</td>
+                <td>{datos.nota2}</td>
+                <td>{datos.nota3}</td>
                 <td>{datos.promedio}</td>
 
 

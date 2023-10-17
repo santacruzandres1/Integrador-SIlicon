@@ -94,9 +94,25 @@ const { data: nota } = useFetch("http://localhost:8080/api/nota");
       setShowModalCreate(false);
       setShowModalEdit(false);
     };
-  
+   
 
-    
+    const promedioColumna = filteredData.map(datos => {
+      // Filtrar las notas no nulas ni 0
+      const notasValidas = [datos.periodo_1, datos.periodo_2, datos.periodo_3].filter(nota => nota !== 0 && nota !== null);
+  
+      // Calcular el promedio solo con las notas válidas
+      const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
+  
+      return {
+        apellido:datos.apellido,
+        nombre:datos.nombre,
+        materia: datos.materia,
+          nota1: datos.periodo_1,
+          nota2: datos.periodo_2,
+          nota3: datos.periodo_3,
+          promedio: promedio
+      };
+  });
 
     return (
 
@@ -191,21 +207,21 @@ const { data: nota } = useFetch("http://localhost:8080/api/nota");
                             <th scope="col">Periodo 1</th>
                             <th scope="col">Periodo 2</th>
                             <th scope="col">Periodo 3</th>
-
+                            <th scope="col">Promedio</th>
 
                         </tr>
                     </thead>
-                    {filteredData.map(nota => (
+                    {promedioColumna.map(nota => (
                         <tbody>
                             <tr >
 
                                 <td>{nota.nombre}</td>
                                 <td>{nota.apellido}</td>
                                 <td>{nota.materia}</td>
-                                <td>{nota.periodo_1}</td>
-                                <td>{nota.periodo_2}</td>
-                                <td>{nota.periodo_3}</td>
-
+                                <td>{nota.nota1}</td>
+                                <td>{nota.nota2}</td>
+                                <td>{nota.nota3}</td>
+                                <td>{nota.promedio}</td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button onClick={() => handleShowEdit(nota.id_usuario,nota.id_materia)} type="button" class="btn btn-dark">Editar</button>
 
