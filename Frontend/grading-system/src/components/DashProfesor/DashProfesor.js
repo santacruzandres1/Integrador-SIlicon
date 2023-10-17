@@ -4,14 +4,19 @@ import { Button, Modal } from 'react-bootstrap';
 import FormCrearNota from '../formCrear/formCrearNota';
 import FormEditarNota from '../formEditar/formEditarNota';
 import { useFetch } from '../../useFetch';
-
+import jwtDecode from 'jwt-decode';
 
 
 
 const DashProfesor = () => {
+  const token = sessionStorage.getItem('token');
 
+  const decodedToken = jwtDecode(token);
+
+
+  const id_user = decodedToken.id_usuario;
     
-const { data: nota } = useFetch("http://localhost:8080/api/nota");
+const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
   const [Eliminar, setEliminar] = useState([]);
 
