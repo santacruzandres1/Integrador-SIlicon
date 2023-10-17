@@ -142,7 +142,7 @@ function FormCrearUsuario({ handleClose }) {
                   value={user.id_curso}
                   onChange={handleInputChange}
                   placeholder='ID Curso'
-                  required
+              
                 />
                  <label htmlFor="id_curso"><h4>Curso</h4></label>
               </div>

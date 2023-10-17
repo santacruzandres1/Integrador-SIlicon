@@ -18,6 +18,7 @@ const DashProfesor = () => {
     
 const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
+
   const [Eliminar, setEliminar] = useState([]);
 
   const [showModalDel, setShowModalDel] = useState(false);
@@ -42,7 +43,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
         if (response.ok) {
           console.log('Elemento eliminado con éxito');
           setShowModalDel(false);
-          window.location.reload();
+      
         
         } else {
           console.error('Error al eliminar el usuario');
@@ -51,13 +52,14 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
       .catch((error) => {
         console.error('Error de red:', error);
       });
-  }
- 
-  const [searchTerm, setSearchTermMateria] = useState('');
+  } 
+
+  
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchTermApellido, setSearchTermApellido] = useState('');
   
   const handleSearch = (e) => {
-    setSearchTermMateria(e.target.value);
+    setSearchTerm(e.target.value);
   };
   
   const handleApellidoSearch = (e) => {
@@ -84,11 +86,12 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
     const handleShowCreate = () => setShowModalCreate(true);
   
     //Modal Editar nota
-    const [notaAEditar, setnotaAEditar] = useState([]); // Nuevo estado
+    const [notaAEditar, setnotaAEditar] = useState(null); // Nuevo estado
     const [showModalEdit, setShowModalEdit] = useState(false);
   
     const handleShowEdit = (id_usuario,id_materia) => {
-      const notaParaEditar = nota.find((nota) => [nota.id_usuario = id_usuario, nota.id_materia=id_materia])
+      const notaParaEditar = nota.find((nota) => nota.id_usuario === id_usuario && nota.id_materia === id_materia);
+
       if (notaParaEditar) {
         setnotaAEditar(notaParaEditar);
         setShowModalEdit(true);
@@ -195,7 +198,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
   </div>
 
 </Modal.Body>
-</Modal>
+    </Modal>
 
             </div>
             <br></br> <br></br>
