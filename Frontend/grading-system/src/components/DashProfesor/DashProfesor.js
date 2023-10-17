@@ -18,12 +18,8 @@ const DashProfesor = () => {
     
 const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
-<<<<<<< HEAD
 
-  const [Eliminar, setEliminar] = useState([]);
-=======
   const [Eliminar, setEliminar] = useState({id_materia:null,id_usuario:null});
->>>>>>> 36c4ec10909b41ca8d2303de294a39003a40d3e5
 
   const [showModalDel, setShowModalDel] = useState(false);
   const handleCloseDel = () => setShowModalDel(false);
@@ -49,7 +45,7 @@ console.log(data)
         if (response.ok) {
           console.log('Elemento eliminado con éxito');
           setShowModalDel(false);
-      
+          window.location.reload();
         
         } else {
           console.error('Error al eliminar el usuario');
