@@ -18,20 +18,22 @@ const DashProfesor = () => {
     
 const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
-  const [Eliminar, setEliminar] = useState([]);
+  const [Eliminar, setEliminar] = useState({id_materia:null,id_usuario:null});
 
   const [showModalDel, setShowModalDel] = useState(false);
   const handleCloseDel = () => setShowModalDel(false);
   const handleShowDel = (id_usuario,id_materia) => {
-    setEliminar([id_materia,id_usuario]);
 
+    let data = {id_materia,id_usuario}
+    setEliminar(data);
+console.log(data)
     setShowModalDel(true);
 
   };
 
   const handleSubmit = () => {
     
-    fetch(`http://localhost:8080/api/nota/${Eliminar[0]}/${Eliminar[1]}`, {
+    fetch(`http://localhost:8080/api/nota/${Eliminar.id_materia}/${Eliminar.id_usuario}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -109,6 +111,8 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
       const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
   
       return {
+        id_materia:datos.id_mate,
+        id_usuario:datos.id_user,
         apellido:datos.apellido,
         nombre:datos.nombre,
         materia: datos.materia,
