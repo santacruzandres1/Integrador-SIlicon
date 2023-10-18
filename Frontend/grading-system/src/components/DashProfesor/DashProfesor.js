@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import FormCrearNota from '../formCrear/formCrearNota';
+import { Modal } from 'react-bootstrap';
 import FormEditarNota from '../formEditar/formEditarNota';
 import { useFetch } from '../../useFetch';
 import jwtDecode from 'jwt-decode';
@@ -19,45 +18,6 @@ const DashProfesor = () => {
     
 const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
-
-  const [Eliminar, setEliminar] = useState({id_materia:null,id_usuario:null});
-
-  const [showModalDel, setShowModalDel] = useState(false);
-  const handleCloseDel = () => setShowModalDel(false);
-  const handleShowDel = (id_usuario,id_materia) => {
-
-    let data = {id_materia,id_usuario}
-    setEliminar(data);
-console.log(data)
-    setShowModalDel(true);
-
-  };
-
-  const handleSubmit = () => {
-    
-    fetch(`http://localhost:8080/api/nota/${Eliminar.id_materia}/${Eliminar.id_usuario}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': sessionStorage.getItem('token')
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log('Elemento eliminado con éxito');
-          setShowModalDel(false);
-          window.location.reload();
-        
-        } else {
-          console.error('Error al eliminar el usuario');
-        }
-      })
-      .catch((error) => {
-        console.error('Error de red:', error);
-      });
-  } 
-
-  
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTermApellido, setSearchTermApellido] = useState('');
   
@@ -82,14 +42,8 @@ console.log(data)
     return materiaMatches && apellidoMatches;
   });
       
-  
-  
-    //Modal Crear nota
-    const [showModalCreate, setShowModalCreate] = useState(false);
-    const handleShowCreate = () => setShowModalCreate(true);
-  
     //Modal Editar nota
-    const [notaAEditar, setnotaAEditar] = useState(null); // Nuevo estado
+    const [notaAEditar, setnotaAEditar] = useState(""); // Nuevo estado
     const [showModalEdit, setShowModalEdit] = useState(false);
   
     const handleShowEdit = (id_usuario,id_materia) => {
@@ -102,7 +56,6 @@ console.log(data)
     };
 
     const handleClose = () => {
-      setShowModalCreate(false);
       setShowModalEdit(false);
     };
    
@@ -115,8 +68,8 @@ console.log(data)
       const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
   
       return {
-        id_materia:datos.id_mate,
-        id_usuario:datos.id_user,
+        id_materia:datos.id_materia,
+        id_usuario:datos.id_usuario,
         apellido:datos.apellido,
         nombre:datos.nombre,
         materia: datos.materia,
@@ -127,25 +80,20 @@ console.log(data)
       };
   });
 
+
     return (
 
-        <>
-            <hr></hr>
+      <>
 
             <div>
-                <h2>DASHBOARD PROFESOR </h2>
-                <br></br><br></br>
+          <h2>DASHBOARD PROFESOR </h2>
 
                 <div>
                 <TablaAlumnos />
             </div>
-            </div>
-            <br></br><br></br>
+        </div>
             <div className="container ">
                 <div class="row ">
-                    <div class="col-4">
-                        <button onClick={handleShowCreate} className="btn btn-dark  ">Agregar Nota</button>
-                    </div>
 
                     <div class="col-4 "><div className="container-fluid">
                         <form className="d-flex" role="search">
@@ -177,37 +125,15 @@ console.log(data)
 
                 </div>
 
-                <Modal show={showModalEdit || showModalCreate} onHide={handleClose}>
+          <Modal show={showModalEdit} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{showModalEdit ? 'Editar Nota' : 'Crear Nota' }</Modal.Title>
+              <Modal.Title> 'Editar Nota' </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                {showModalEdit ? <FormEditarNota data={notaAEditar} handleClose={handleClose} /> : <FormCrearNota handleClose={handleClose} />}
+              <FormEditarNota data={notaAEditar} handleClose={handleClose} /> 
                 </Modal.Body>
             </Modal>
-            
 
-<Modal show={showModalDel} onHide={handleCloseDel}>
-
-<Modal.Body >
-
-  <div className='container  text-center '>
-    <br></br>
-    <strong>¿Está seguro que desea eliminar esta nota?</strong><br></br><br></br>
-    <div className='row  '>
-      <div className='col'> <button onClick={handleSubmit} className="btn btn-danger">Eliminar</button></div>
-      <div className='col offset-1'> <Button className="btn btn-dark" variant="secondary" onClick={handleCloseDel}>
-        Cancelar
-      </Button></div>
-    </div>
-
-
-
-
-  </div>
-
-</Modal.Body>
-    </Modal>
 
             </div>
             <br></br> <br></br>
@@ -218,6 +144,8 @@ console.log(data)
                 <table class="table table-striped-columns">
                     <thead>
                         <tr>
+                            <th scope="col">id materia</th>
+                            <th scope="col">id usuario</th>
                             <th scope="col">Apellido</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Materia</th>
@@ -231,7 +159,8 @@ console.log(data)
                     {promedioColumna.map(nota => (
                         <tbody>
                             <tr >
-
+                              <td>{nota.id_materia}</td>
+                              <td>{nota.id_usuario}</td>
                                 <td>{nota.nombre}</td>
                                 <td>{nota.apellido}</td>
                                 <td>{nota.materia}</td>
@@ -240,28 +169,13 @@ console.log(data)
                                 <td>{nota.nota3}</td>
                                 <td>{nota.promedio}</td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button onClick={() => handleShowEdit(nota.id_usuario,nota.id_materia)} type="button" class="btn btn-dark">Editar</button>
-
-                                    <button  onClick={() => handleShowDel(nota.id_usuario,nota.id_materia)} type="button" class="btn btn-dark">Borrar</button>
+                            <button onClick={() => handleShowEdit(nota.id_usuario, nota.id_materia)} type="button" class="btn btn-dark">Editar</button>
                                 </div>
                             </tr>
 
                         </tbody>))}
-                </table>
-
-                <br></br>
-
-
-
-
+          </table>
             </div>
-
-
-          
-
-
-
-
         </>
     );
 }

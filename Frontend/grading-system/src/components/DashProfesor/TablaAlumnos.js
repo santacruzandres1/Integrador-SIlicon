@@ -13,8 +13,6 @@ const TablaAlumnos = () => {
 
   // Paso 1: Obtener las materias que el profesor da
   const { data: materias } = useFetch(`http://localhost:8080/api/materia/profesor-materias/${id_usuario}`);
-  console.log(materias);
-  debugger
 
   const [searchTerm, setSearchTerm] = useState('');
 

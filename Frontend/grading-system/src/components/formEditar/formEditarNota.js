@@ -1,41 +1,30 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
+const FormEditarNota  = ({ data, handleClose }) => {
 
-const FormEditarNota = () => {
-const navigate = useNavigate()
-
-const {id_materia,id_usuario}=useParams();
+  const [item, setItem] = useState({});
+  const id_materia = data.id_materia
+  const id_usuario = data.id_usuario
 debugger
-  const [item, setItem] = useState({
-    id_materia:null,
-    id_usuario:null,
-    periodo_1:null,
-    periodo_2:null,
-    periodo_3:null
-  });
-//  const id_materia = data.id_materia
-//  const id_usuario = data.id_usuario
-
-  // useEffect(() => {
-  //   if (data) {
-  //     setItem({
-    
-  //      periodo_1:data.periodo_1 || null,
-  //      periodo_2: data.periodo_2 || null,
-  //      periodo_3:data.periodo_3 || null,
-  //     });
-  //     }
-  // }, [data]);
-
+   useEffect(() => {
+     if (data) {
+       setItem({
+        periodo_1:data.periodo_1 || null,
+        periodo_2: data.periodo_2 || null,
+        periodo_3:data.periodo_3 || null,
+       });
+       }
+   }, [data]);
+debugger
 
   const handleInputChange = (e) => {
       const { name, value } = e.target;
       setItem({ ...item, [name]: value });
       
   };
-  debugger
+
   const handleSubmit = (e) => {
       e.preventDefault();
 
@@ -50,7 +39,7 @@ debugger
           .then((response) => {
               if (response.ok) {
                   console.log('Elemento actualizado con éxito');
-               navigate('/dashboard')
+               handleClose();
                  
 
               } else {
@@ -62,8 +51,6 @@ debugger
           });
   };
 debugger
-
-
   return (
     <>
             <div className='container text-center'><h2>Editar Nota</h2></div>
