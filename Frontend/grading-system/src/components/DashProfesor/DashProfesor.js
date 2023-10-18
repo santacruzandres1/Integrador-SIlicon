@@ -1,11 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import { Modal } from 'react-bootstrap';
-import FormEditarNota from '../formEditar/formEditarNota';
+
 import { useFetch } from '../../useFetch';
 import jwtDecode from 'jwt-decode';
 import TablaAlumnos from './TablaAlumnos';
-
+import { Link } from 'react-router-dom';
 
 
 const DashProfesor = () => {
@@ -29,8 +28,8 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
     setSearchTermApellido(e.target.value);
   };
   const filteredData = nota.filter((item) => {
-    const materia = item.materia;
-    const apellido = item.apellido;
+    const materia = item.materia[0];
+    const apellido = item.apellido[0];
     const searchTermMateriaLowerCase = searchTerm.toLowerCase();
     const searchTermApellidoLowerCase = searchTermApellido.toLowerCase();
     const notaMateriaLowerCase = materia.toLowerCase();
@@ -42,23 +41,9 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
     return materiaMatches && apellidoMatches;
   });
       
-    //Modal Editar nota
-    const [notaAEditar, setnotaAEditar] = useState(""); // Nuevo estado
-    const [showModalEdit, setShowModalEdit] = useState(false);
   
-    const handleShowEdit = (id_usuario,id_materia) => {
-      const notaParaEditar = nota.find((nota) => nota.id_usuario === id_usuario && nota.id_materia === id_materia);
-
-      if (notaParaEditar) {
-        setnotaAEditar(notaParaEditar);
-        setShowModalEdit(true);
-      }
-    };
-
-    const handleClose = () => {
-      setShowModalEdit(false);
-    };
-   
+  
+    
 
     const promedioColumna = filteredData.map(datos => {
       // Filtrar las notas no nulas ni 0
@@ -100,7 +85,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
                             <input className="form-control me-2"
                                 type="text"
-                                placeholder="Buscar por Apellido del alumno"
+                                placeholder="Buscar por Materia"
 
                                 onChange={handleSearch}
                                 value={searchTerm}
@@ -125,15 +110,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
                 </div>
 
-          <Modal show={showModalEdit} onHide={handleClose}>
-                <Modal.Header closeButton>
-              <Modal.Title> 'Editar Nota' </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-              <FormEditarNota data={notaAEditar} handleClose={handleClose} /> 
-                </Modal.Body>
-            </Modal>
-
+       
 
             </div>
             <br></br> <br></br>
@@ -144,10 +121,9 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                 <table class="table table-striped-columns">
                     <thead>
                         <tr>
-                            <th scope="col">id materia</th>
-                            <th scope="col">id usuario</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Nombre</th>
+                         
+                            <th scope="col">ALumno</th>
+                        
                             <th scope="col">Materia</th>
                             <th scope="col">Periodo 1</th>
                             <th scope="col">Periodo 2</th>
@@ -159,9 +135,8 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                     {promedioColumna.map(nota => (
                         <tbody>
                             <tr >
-                              <td>{nota.id_materia}</td>
-                              <td>{nota.id_usuario}</td>
-                                <td>{nota.nombre}</td>
+                            
+                        
                                 <td>{nota.apellido}</td>
                                 <td>{nota.materia}</td>
                                 <td>{nota.nota1}</td>
@@ -169,7 +144,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                                 <td>{nota.nota3}</td>
                                 <td>{nota.promedio}</td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                            <button onClick={() => handleShowEdit(nota.id_usuario, nota.id_materia)} type="button" class="btn btn-dark">Editar</button>
+                                <Link  to={`/dashboard/editarNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Editar Nota </Link>
                                 </div>
                             </tr>
 
