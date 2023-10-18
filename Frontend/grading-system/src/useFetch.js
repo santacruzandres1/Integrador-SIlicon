@@ -10,7 +10,6 @@ export function useFetch(url) {
     const abortController = new AbortController();
     setController(abortController);
     setLoading(true);
-
     // Opciones personalizadas para el fetch
     const requestOptions = {
       method: 'GET', // Método GET
@@ -18,7 +17,9 @@ export function useFetch(url) {
         'Content-Type': 'application/json',
         'authorization': sessionStorage.getItem('token')
       }
+     
     };
+  
 
     fetch(url, requestOptions)
       .then(response => response.json())
@@ -33,7 +34,7 @@ export function useFetch(url) {
       .finally(() => setLoading(false));
 
     return () => abortController.abort();
-  }, [url, data,data]);
+  }, [url, data]);
 
   const handleCancelRequest = () => {
     if (controller) {

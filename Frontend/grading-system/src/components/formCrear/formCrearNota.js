@@ -1,17 +1,19 @@
-import React, { useState, } from 'react';
-
+import React, { useState } from 'react';
+import { useParams, useNavigate  } from 'react-router-dom';
 
 
 const FormCrearNota = () => {
+  const {id_materia, id_usuario} = useParams();
+  const navigate = useNavigate()
 
   const [data , setData] = useState({
-    id_usuario: null,
-    id_materia: null,
+    id_usuario: id_usuario,
+    id_materia: id_materia,
     periodo_1: null,
     periodo_2: null,
     periodo_3: null
   });
-
+debugger
 const handleInputChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -35,62 +37,29 @@ const handleInputChange = (e) => {
     body: JSON.stringify(data),
   
   })
+  .then((response) => {
+    if (response.ok) {
+        console.log('Elemento actualizado con éxito');
+     navigate('/dashboard')
+       
 
-  .then((response) => 
-        
-  {
-
-    response.json()
-  }
-  
-  )
-
-.then((data) => {
-console.log("Usuario creado:", data);
-      alert('Nota creado con exito');
-window.location.reload();
-    
-    
-
-  })
-  .catch((error) => console.error("Error al crear el usuario: ", error));
-}
-
-
-
+    } else {
+        console.error('Error al actualizar el elemento');
+    }
+})
+.catch((error) => {
+    console.error('Error de red:', error);
+});
+};
   return (
     <>
+    <h4>Crear Nota</h4>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
 
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="id_usuario"><h4>Id Alumno</h4></label>
-                <input
-                  type="number"
-                  id="id_usuario"
-                  name='id_usuario'
-                  className="form-control"
-                  value={data.id_usuario}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="id_materia"><h4>Id Materia</h4></label>
-                <input
-                  type="number"
-                  id="id_materia"
-                  name='id_materia'
-                  className="form-control"
-                  value={data.id_materia}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <br></br>
-
+        
               <div className="form-group">
                 <label htmlFor="periodo_1"><h4>Periodo 1</h4></label>
                 <input

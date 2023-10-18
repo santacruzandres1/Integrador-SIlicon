@@ -3,7 +3,7 @@ import { useFetch } from '../../useFetch';
 import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router-dom';
 
-const ProfesorNotasApp = () => {
+const TablaAlumnos = () => {
 
   //const [selectedMateria, setSelectedMateria] = useState(null);
   const token = sessionStorage.getItem('token');
@@ -25,7 +25,7 @@ const ProfesorNotasApp = () => {
   
  
   const filteredData = materias.filter((item) => {
-    const apellido = item.materia;
+    const apellido = item.MATERIA;
      const searchTermLowerCase = searchTerm.toLowerCase();
     const apellidoLowerCase = apellido.toLowerCase();
      const apellidosSeparados = apellidoLowerCase.split(' ');
@@ -69,13 +69,12 @@ const ProfesorNotasApp = () => {
         <tbody>
             <tr >
             <td>{nota.curso}</td>
-                <td>{nota.materia}</td>
+                <td>{nota.MATERIA}</td>
                 <td>{nota.apellido} {nota.nombre} </td>
                 <td>{nota.id_usuario}</td>
                <div class="btn-group" role="group" aria-label="Basic example">
-                    <Link  to={`/dashboard/editNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Editar Nota </Link>
+                    <Link  to={`/dashboard/crearNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Crear Nota </Link>
 
-                    <button   type="button" class="btn btn-dark">Agregar Nota</button>
                 </div> 
             </tr>
 
@@ -93,4 +92,4 @@ const ProfesorNotasApp = () => {
   );
 };
 
-export default ProfesorNotasApp;
+export default TablaAlumnos;

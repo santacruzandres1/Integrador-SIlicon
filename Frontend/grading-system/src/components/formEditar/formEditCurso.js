@@ -36,7 +36,7 @@ const FormEditCurso = ({curso, handleClose }) => {
                 if (response.ok) {
                     console.log('Elemento actualizado con éxito');
                     handleClose();
-                    window.location.reload();
+                  
                     
 
                 } else {

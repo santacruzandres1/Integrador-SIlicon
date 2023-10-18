@@ -5,7 +5,7 @@ import FormCrearNota from '../formCrear/formCrearNota';
 import FormEditarNota from '../formEditar/formEditarNota';
 import { useFetch } from '../../useFetch';
 import jwtDecode from 'jwt-decode';
-import ProfesorNotasApp from './ProfesorNotasApp';
+import TablaAlumnos from './TablaAlumnos';
 
 
 
@@ -137,7 +137,7 @@ console.log(data)
                 <br></br><br></br>
 
                 <div>
-                <ProfesorNotasApp />
+                <TablaAlumnos />
             </div>
             </div>
             <br></br><br></br>
