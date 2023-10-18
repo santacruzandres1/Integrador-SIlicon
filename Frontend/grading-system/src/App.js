@@ -36,7 +36,7 @@ function App() {
         <Route path={`/dashboard/editMateria/:id_materia`} element={<FormEditMateria />} />
         <Route path={`/dashboard/editCurso/:id_curso`} element={<FormEditCurso />} />
         <Route path={`/dashboard/editarNota/:id_materia/:id_usuario`} element={<FormEditarNota />} />
-        <Route path={`/dashboard/crearNota/:id_materia/:id_usuario`} element={<FormCrearNota />} />
+        <Route path={`/dashboard/crearNota/:id_materia/:id_usuario/:apellido`} element={<FormCrearNota />} />
       </Routes>
     </div>
   );

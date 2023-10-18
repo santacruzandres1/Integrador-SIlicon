@@ -1,6 +1,7 @@
 import React, { useState, } from 'react';
 
 
+
 const FormCrearMateria = () => {
 
 
@@ -42,7 +43,7 @@ const handleInputChange = (e) => {
       .then((data) => {
         console.log("Usuario creado:", data);
         alert('Materia creado con exito');
-        window.location.reload();
+     
       
      
         

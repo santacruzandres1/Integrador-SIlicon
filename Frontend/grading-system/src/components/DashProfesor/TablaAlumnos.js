@@ -71,7 +71,7 @@ const TablaAlumnos = () => {
                 <td>{nota.apellido} {nota.nombre} </td>
                 <td>{nota.id_usuario}</td>
                <div class="btn-group" role="group" aria-label="Basic example">
-                    <Link  to={`/dashboard/crearNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Crear Nota </Link>
+                    <Link  to={`/dashboard/crearNota/${nota.id_materia}/${nota.id_usuario}/${nota.apellido}`} type="button" class="btn btn-dark">Crear Nota </Link>
 
                 </div> 
             </tr>

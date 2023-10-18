@@ -32,10 +32,10 @@ const TablaMaterias = () => {
         if (response.ok) {
           console.log('Elemento eliminado con éxito');
           setShowModalDel(false);
-          window.location.reload();
+          
         
         } else {
-          console.error('Error al eliminar el usuario');
+          console.error('Error al eliminar la materia');
         }
       })
       .catch((error) => {
@@ -141,7 +141,7 @@ const TablaMaterias = () => {
      
 
             <div className='container  text-center '>
-              <strong>¿Está seguro que desea eliminar este usuario?</strong>
+              <strong>¿Está seguro que desea eliminar esta materia?</strong>
               <div className='row  '>
                 <div className='col'> <button onClick={handleSubmit} className="btn btn-danger">Eliminar</button></div>
                 <div className='col offset-1'> <button className="btn btn-dark" variant="secondary" onClick={handleCloseDel}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-
+import { Modal } from "react-bootstrap";
 import { useFetch } from '../../useFetch';
 import jwtDecode from 'jwt-decode';
 import TablaAlumnos from './TablaAlumnos';
@@ -42,7 +42,46 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
   });
       
   
-  
+  const [Eliminar, setEliminar] = useState({
+    id_materia:null,
+    id_usuario:null
+  }
+
+
+  );
+  const [showModalDel, setShowModalDel] = useState(false);
+  const handleCloseDel = () => setShowModalDel(false);
+  const handleShowDel = (id_materia,id_usuario) => {
+    let data = {id_materia,id_usuario}
+    setEliminar(data);
+
+    setShowModalDel(true);
+
+  };
+
+  const handleSubmit = () => {
+    
+    fetch(`http://localhost:8080/api/nota/${Eliminar.id_materia}/${Eliminar.id_usuario}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Elemento eliminado con éxito');
+          setShowModalDel(false);
+          
+        
+        } else {
+          console.error('Error al eliminar la nota');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red:', error);
+      });
+  }
     
 
     const promedioColumna = filteredData.map(datos => {
@@ -110,7 +149,29 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
                 </div>
 
-       
+                <Modal show={showModalDel} onHide={handleCloseDel}>
+
+<Modal.Body >
+
+
+  <div className='container  text-center '>
+    <strong>¿Está seguro que desea eliminar esta nota?</strong>
+    <div className='row  '>
+      <div className='col'> <button onClick={handleSubmit} className="btn btn-danger">Eliminar</button></div>
+      <div className='col offset-1'> <button className="btn btn-dark" variant="secondary" onClick={handleCloseDel}>
+        Cancelar
+      </button></div>
+    </div>
+
+
+
+
+  </div>
+
+</Modal.Body>
+
+</Modal>
+
 
             </div>
             <br></br> <br></br>
@@ -145,6 +206,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                                 <td>{nota.promedio}</td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                 <Link  to={`/dashboard/editarNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Editar Nota </Link>
+                                <button onClick={() => handleShowDel(nota.id_materia,nota.id_usuario)} type="button" className="btn btn-dark">Borrar Nota</button>
                                 </div>
                             </tr>
 

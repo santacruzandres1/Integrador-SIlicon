@@ -3,7 +3,7 @@ import { useParams, useNavigate  } from 'react-router-dom';
 
 
 const FormCrearNota = () => {
-  const {id_materia, id_usuario} = useParams();
+  const {id_materia, id_usuario,apellido} = useParams();
   const navigate = useNavigate()
 
   const [data , setData] = useState({
@@ -53,7 +53,9 @@ const handleInputChange = (e) => {
 };
   return (
     <>
-    <h4>Crear Nota</h4>
+    <h4>Crear Nota </h4>
+    <h5>Alumno: {apellido}</h5>
+
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">

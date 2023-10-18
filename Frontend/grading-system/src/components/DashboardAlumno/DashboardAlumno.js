@@ -10,6 +10,8 @@ const DashboardAlumno = () => {
 
 
 
+ 
+
   const token = sessionStorage.getItem('token');
 
   const decodedToken = jwtDecode(token);
@@ -31,22 +33,25 @@ const DashboardAlumno = () => {
 
 
 
-    fetch(`http://localhost:8080/api/nota/${id_user}`, parametros)
-      .then(res => {
-        return res.json()
-          .then(body => {
-            setNota(body)
-
-          })
-      }).catch(
-        (error) => { console.log(error) }
-      );
-
-
-
+    fetch(`http://localhost:8080/api/nota/alumno/${id_user}`, parametros)
+  .then(res => {
+    if (!res.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return res.json()
+      .then(body => {
+        setNota(body);
+      });
   })
+  .catch(error => {
+    console.log('Fetch error:', error);
+  });
 
 
+
+  },[nota])
+
+debugger
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {
@@ -54,7 +59,7 @@ const DashboardAlumno = () => {
   };
 
   const filteredData = nota.filter((item) =>
-    item.materia[0].toLowerCase().includes(searchTerm.toLowerCase())
+    item.nombre[0].toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const promedioColumna = filteredData.map(datos => {
@@ -65,7 +70,7 @@ const DashboardAlumno = () => {
     const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
 
     return {
-        materia: datos.materia,
+        materia: datos.nombre,
         nota1: datos.periodo_1,
         nota2: datos.periodo_2,
         nota3: datos.periodo_3,
@@ -150,3 +155,10 @@ const DashboardAlumno = () => {
 
 
 export default DashboardAlumno;
+
+
+
+
+
+
+ 
