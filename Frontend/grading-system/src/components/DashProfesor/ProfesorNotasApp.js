@@ -1,67 +1,94 @@
 import React, { useState} from 'react';
 import { useFetch } from '../../useFetch';
 import jwtDecode from 'jwt-decode';
+import { Link } from 'react-router-dom';
 
 const ProfesorNotasApp = () => {
 
-  const [selectedMateria, setSelectedMateria] = useState(null);
+  //const [selectedMateria, setSelectedMateria] = useState(null);
   const token = sessionStorage.getItem('token');
   const decodedToken = jwtDecode(token);
   const id_usuario = decodedToken.id_usuario;
-  const [alumnos, setAlumnos] = useState([]);
+ // const [alumnos, setAlumnos] = useState([]);
 
   // Paso 1: Obtener las materias que el profesor da
   const { data: materias } = useFetch(`http://localhost:8080/api/materia/profesor-materias/${id_usuario}`);
   console.log(materias);
   debugger
 
-  const handleMateriaClick = (materia) => {
-    setSelectedMateria(materia);
-    // Realiza una solicitud a la API para obtener la lista de alumnos en la materia seleccionada
-   fetch(`http://localhost:8080/api/usuarios/materia-alumno/${selectedMateria.id_materia}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': sessionStorage.getItem('token')
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setAlumnos(data))
-      .catch((error) => console.error('Error:', error));
-  };
+  const [searchTerm, setSearchTerm] = useState('');
 
+  
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  
+ 
+  const filteredData = materias.filter((item) => {
+    const apellido = item.materia;
+     const searchTermLowerCase = searchTerm.toLowerCase();
+    const apellidoLowerCase = apellido.toLowerCase();
+     const apellidosSeparados = apellidoLowerCase.split(' ');
+    return apellidosSeparados.some((part) => part.startsWith(searchTermLowerCase));
+  });
+      
+
+
+
+  
   return (
     <>
-      <div>
-      <h1>Lista de Materias</h1>
-      <ul>
-        {materias.map((data, index) => (
-          <li key={index}>
-            <button
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                handleMateriaClick(data);
-              }}
-            >
-              <h3>{data.MATERIA}</h3>
-            </button>
-          </li>
-        ))}
-      </ul>
-      {selectedMateria && (
-        <div>
-          <h2>Alumnos inscritos en {selectedMateria.nombre}</h2>
-          <ul>
-            {alumnos.map((alumno) => (
-              <li key={alumno.id}>
-                {alumno.nombre} {alumno.apellido}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+     <div className="container col-4"><div className="container-fluid">
+                        <form className="d-flex" role="search">
+
+                            <input className="form-control me-2"
+                                type="text"
+                                placeholder="Buscar por Materia"
+
+                                onChange={handleSearch}
+                                value={searchTerm}
+                            />
+                            <span className="btn btn-dark" >Buscar</span>
+                        </form>
+                    </div></div><br></br>
+    <div className="container item">
+
+<table class="table table-striped-columns">
+    <thead>
+        <tr>
+        <th scope="col">Curso</th>
+            <th scope="col">Materia</th>
+            <th scope="col">Alumno</th>
+            <th scope="col">Id Alumno</th>
+         
+           
+
+        </tr>
+    </thead>
+    {filteredData.map(nota => (
+        <tbody>
+            <tr >
+            <td>{nota.curso}</td>
+                <td>{nota.materia}</td>
+                <td>{nota.apellido} {nota.nombre} </td>
+                <td>{nota.id_usuario}</td>
+               <div class="btn-group" role="group" aria-label="Basic example">
+                    <Link  to={`/dashboard/editNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Editar Nota </Link>
+
+                    <button   type="button" class="btn btn-dark">Agregar Nota</button>
+                </div> 
+            </tr>
+
+        </tbody>))}
+</table>
+
+<br></br>
+
+
+
+
+</div>
+     
     </>
   );
 };

@@ -1,33 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
+const FormEditarNota = () => {
+const navigate = useNavigate()
 
-const FormEditarNota = ({ data, handleClose }) => {
-  const [item, setItem] = useState({});
- const id_materia = data.id_materia
- const id_usuario = data.id_usuario
+const {id_materia,id_usuario}=useParams();
+debugger
+  const [item, setItem] = useState({
+    id_materia:null,
+    id_usuario:null,
+    periodo_1:null,
+    periodo_2:null,
+    periodo_3:null
+  });
+//  const id_materia = data.id_materia
+//  const id_usuario = data.id_usuario
 
-  useEffect(() => {
-    if (data) {
-      setItem({
-        apellido:data.apellido || null,
-        nombre:data.nombre || null,
-        materia: data.materia || null,
-          nota1: data.periodo_1 || null,
-          nota2: data.periodo_2 || null,
-          nota3: data.periodo_3 || null,
-      });
-      }
-  }, [data]);
-  
+  // useEffect(() => {
+  //   if (data) {
+  //     setItem({
+    
+  //      periodo_1:data.periodo_1 || null,
+  //      periodo_2: data.periodo_2 || null,
+  //      periodo_3:data.periodo_3 || null,
+  //     });
+  //     }
+  // }, [data]);
+
 
   const handleInputChange = (e) => {
       const { name, value } = e.target;
       setItem({ ...item, [name]: value });
       
   };
-  
+  debugger
   const handleSubmit = (e) => {
       e.preventDefault();
 
@@ -42,8 +50,8 @@ const FormEditarNota = ({ data, handleClose }) => {
           .then((response) => {
               if (response.ok) {
                   console.log('Elemento actualizado con éxito');
-                  handleClose();
-                  window.location.reload();
+               navigate('/dashboard')
+                 
 
               } else {
                   console.error('Error al actualizar el elemento');
@@ -53,7 +61,7 @@ const FormEditarNota = ({ data, handleClose }) => {
               console.error('Error de red:', error);
           });
   };
-
+debugger
 
 
   return (
@@ -103,7 +111,7 @@ const FormEditarNota = ({ data, handleClose }) => {
                   
                 />
               </div>
-              <button type="submit" className="btn btn-primary">Editar</button> 
+              <button className="btn btn-primary">Editar</button> 
             </form>
   
           </div>

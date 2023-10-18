@@ -13,6 +13,7 @@ import FormCrearUsuario from './components/formCrear/formCrearUsuario';
 import EditUser from './components/formEditar/formEditarUser';
 import FormEditMateria from './components/formEditar/formEditMateria';
 import FormEditCurso from './components/formEditar/formEditCurso';
+import FormEditarNota from './components/formEditar/formEditarNota';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path={`/dashboard/editUser/:id_usuario`} element={<EditUser />} />
         <Route path={`/dashboard/editMateria/:id_materia`} element={<FormEditMateria />} />
         <Route path={`/dashboard/editCurso/:id_curso`} element={<FormEditCurso />} />
+        <Route path={`/dashboard/editNota/:id_materia/:id_usuario`} element={<FormEditarNota />} />
       </Routes>
     </div>
   );

@@ -134,9 +134,13 @@ console.log(data)
 
             <div>
                 <h2>DASHBOARD PROFESOR </h2>
-                <br></br>
+                <br></br><br></br>
+
+                <div>
+                <ProfesorNotasApp />
             </div>
-            <br></br>
+            </div>
+            <br></br><br></br>
             <div className="container ">
                 <div class="row ">
                     <div class="col-4">
@@ -253,9 +257,7 @@ console.log(data)
             </div>
 
 
-            <div>
-                <ProfesorNotasApp />
-            </div>
+          
 
 
 
