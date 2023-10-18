@@ -1,5 +1,4 @@
 import React, { useState, } from 'react';
-import { toast} from 'react-toastify';
 
 
 
@@ -34,7 +33,7 @@ const handleInputChange = (e) => {
       'authorization': sessionStorage.getItem('token')
     },
     body: JSON.stringify(data),
-   
+  
   })
 
   .then((response) => 
@@ -48,13 +47,13 @@ const handleInputChange = (e) => {
 
 .then((data) => {
 console.log("Usuario creado:", data);
-alert('Nota creado con exito');
+      alert('Nota creado con exito');
 window.location.reload();
+    
+    
 
-
-
-})
-.catch((error) => console.error("Error al crear el usuario: ", error));
+  })
+  .catch((error) => console.error("Error al crear el usuario: ", error));
 }
 
 

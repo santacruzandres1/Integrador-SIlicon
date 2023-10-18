@@ -29,7 +29,6 @@ const TablaUsuarios = () => {
         if (response.ok) {
           console.log('Elemento eliminado con éxito');
           setShowModalDelUser(false);
-          window.location.reload();
          
         } else {
           console.error('Error al eliminar el usuario');

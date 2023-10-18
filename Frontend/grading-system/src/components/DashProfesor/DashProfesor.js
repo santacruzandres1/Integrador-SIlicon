@@ -5,6 +5,7 @@ import FormCrearNota from '../formCrear/formCrearNota';
 import FormEditarNota from '../formEditar/formEditarNota';
 import { useFetch } from '../../useFetch';
 import jwtDecode from 'jwt-decode';
+import ProfesorNotasApp from './ProfesorNotasApp';
 
 
 
@@ -17,6 +18,7 @@ const DashProfesor = () => {
   const id_user = decodedToken.id_usuario;
     
 const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
+
 
   const [Eliminar, setEliminar] = useState({id_materia:null,id_usuario:null});
 
@@ -53,13 +55,14 @@ console.log(data)
       .catch((error) => {
         console.error('Error de red:', error);
       });
-  }
- 
-  const [searchTerm, setSearchTermMateria] = useState('');
+  } 
+
+  
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchTermApellido, setSearchTermApellido] = useState('');
   
   const handleSearch = (e) => {
-    setSearchTermMateria(e.target.value);
+    setSearchTerm(e.target.value);
   };
   
   const handleApellidoSearch = (e) => {
@@ -86,11 +89,12 @@ console.log(data)
     const handleShowCreate = () => setShowModalCreate(true);
   
     //Modal Editar nota
-    const [notaAEditar, setnotaAEditar] = useState([]); // Nuevo estado
+    const [notaAEditar, setnotaAEditar] = useState(null); // Nuevo estado
     const [showModalEdit, setShowModalEdit] = useState(false);
   
     const handleShowEdit = (id_usuario,id_materia) => {
-      const notaParaEditar = nota.find((nota) => [nota.id_usuario = id_usuario, nota.id_materia=id_materia])
+      const notaParaEditar = nota.find((nota) => nota.id_usuario === id_usuario && nota.id_materia === id_materia);
+
       if (notaParaEditar) {
         setnotaAEditar(notaParaEditar);
         setShowModalEdit(true);
@@ -199,7 +203,7 @@ console.log(data)
   </div>
 
 </Modal.Body>
-</Modal>
+    </Modal>
 
             </div>
             <br></br> <br></br>
@@ -249,7 +253,9 @@ console.log(data)
             </div>
 
 
-
+            <div>
+                <ProfesorNotasApp />
+            </div>
 
 
 

@@ -61,10 +61,10 @@ const FormEditMateria = ({ data, handleClose }) => {
                         <form onSubmit={handleSubmit}>
 
                             <div className="form-group">
-                                <label htmlFor="nombre"><h4>Materia</h4></label>
+                                <label htmlFor="MATERIA"><h4>Materia</h4></label>
                                 <input
                                     type="text"
-                                    id="nombre"
+                                    id="MATERIA"
                                     name="MATERIA"
                                     className="form-control"
                                     value={item.MATERIA}

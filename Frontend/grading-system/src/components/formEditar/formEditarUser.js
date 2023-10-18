@@ -38,7 +38,6 @@ function EditUser({ user, handleClose }) {
         if (response.ok) {
           console.log('Elemento actualizado con éxito');
           handleClose();
-          window.location.reload();
           
         } else {
           console.error('Error al actualizar el elemento');
@@ -146,7 +145,7 @@ function EditUser({ user, handleClose }) {
                   className="form-control"
                   value={item.id_curso}
                   onChange={handleInputChange}
-                  required
+                  
                 />
               </div>
 
