@@ -16,10 +16,15 @@ const FormEditarNota = () => {
 debugger
 const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
+    if (value >= 0 && value <= 10) {
+      setData({
+        ...data,
+        [name]: value,
+      });
+    } else {
+     alert('El valor debe estar entre 1 y 10')
+      console.error('El valor debe estar entre 1 y 10');
+    }
   };
 
 
@@ -63,7 +68,7 @@ const handleInputChange = (e) => {
               <div className="form-group">
                 <label htmlFor="periodo_1"><h4>Periodo 1</h4></label>
                 <input
-                  type="number"
+                  type="float"
                   id="periodo_1"
                   name='periodo_1'
                   className="form-control"
@@ -76,7 +81,7 @@ const handleInputChange = (e) => {
                 <label htmlFor="periodo_2"><h4>Periodo 2</h4></label>
                 <input
 
-                  type="number"
+                  type="float"
                   id="periodo_2"
                   name='periodo_2'
                   className="form-control"
@@ -89,7 +94,7 @@ const handleInputChange = (e) => {
                 <label htmlFor="periodo_3"><h4>Periodo 3</h4></label>
                 <input
 
-                  type="number"
+                  type="float"
                   id="periodo_3"
                   name='periodo_3'
                   className="form-control"
