@@ -198,7 +198,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                             <tr >
                             
                         
-                                <td>{nota.apellido}</td>
+                                <td>{nota.apellido} {nota.nombre}</td>
                                 <td>{nota.materia}</td>
                                 <td>{nota.nota1}</td>
                                 <td>{nota.nota2}</td>
