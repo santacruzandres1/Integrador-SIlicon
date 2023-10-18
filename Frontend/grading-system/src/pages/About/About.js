@@ -8,6 +8,7 @@ const About = () => {
     return (
         <>
         <Header></Header>
+        <br></br><hr></hr>
               <div className='container  '>
       <h2 className=' ' >Sobre Nosotros</h2>
       <br></br>

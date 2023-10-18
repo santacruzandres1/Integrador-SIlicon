@@ -8,6 +8,7 @@ const Home = () => {
     return (
 <>
        <Header></Header>
+       <br></br><hr></hr>
         <div>
             <h2>Bienvenido al Sistema de Gestión Académica</h2>
             <hr></hr><br></br>
