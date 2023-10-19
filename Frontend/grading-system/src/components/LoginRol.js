@@ -13,7 +13,7 @@ const LoginRol = () => {
     
     return (
         <div>
-            <h3>Ingresa segun corresponda</h3>
+            <h3>Ingresá según corresponda</h3>
             <br></br>
 
            

@@ -116,6 +116,10 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                 <TablaAlumnos />
             </div>
         </div>
+
+        <br></br>
+    <h2>Notas de los Alumnos </h2>
+    <br></br>
             <div className="container ">
                 <div class="row ">
 
