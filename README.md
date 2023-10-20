@@ -1,10 +1,10 @@
-# Silicon-Project
+## Silicon-Project
 
-#Sistema de Calificaciones
+## Sistema de Calificaciones
 
 **Descripción General:** El proyecto tiene como objetivo desarrollar un sistema de calificaciones que permita a los usuarios, como estudiantes y profesores, gestionar y registrar calificaciones de manera eficiente. El sistema está respaldado por una base de datos SQL para almacenar y gestionar las notas de manera estructurada.
 
-**Características Clave:**
+## **Características Clave:**
 
 **Gestión de Usuarios:** El sistema permite a los usuarios registrarse, iniciar sesión y gestionar datos. Los usuarios  pueden ser de tres tipos: estudiantes, profesores y administradores.
 
@@ -46,16 +46,18 @@
                 Para cerrar sesión el usuario debe abrir la pestaña Usuario en el header del sistema y clickear en Cerrar Sesión.
 
 
-**Escalabilidad:** La idea del grupo es poder escalar en el proyecto y añadir más funciones como por ejemplo poder crear avisos , llevar a cabo la gestión de asistencias de los alumnos, entre otras funciones que un sistema de gestión educativo necesita.
+## **Escalabilidad:**
+
+La idea del grupo es poder escalar en el proyecto y añadir más funciones como por ejemplo poder crear avisos , llevar a cabo la gestión de asistencias de los alumnos, entre otras funciones que un sistema de gestión educativo necesita.
 
 
 
-**Despliegue:**
+## **Despliegue:**
 
-Frontend: Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install
+**Frontend:** Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install
           Luego es necesario ingresar desde la carpeta grading-system y y realizar el comando => npm start
           
-Backend: Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install
+**Backend:** Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install
          Luego es necesario realizar el comando => nodemon index.js (windows) / npx nodemon index.js (linux)
 
 De esta manera el sistema estará en funcionamiento en la url => localhost:3000
