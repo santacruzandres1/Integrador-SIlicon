@@ -31,9 +31,9 @@ const TablaCursos = () => {
         })
             .then((response) => {
             if (response.ok) {
-                console.log('Elemento eliminado con éxito');
                 setShowModalDel(false);
-                window.location.reload();
+                alert('Elemento eliminado con éxito');
+                handleCloseDel();
             } else {
                 console.error('Error al eliminar el usuario');
             }
@@ -127,12 +127,12 @@ const TablaCursos = () => {
             </tbody>
         </table>
             
-       <Modal show= {showModalCreate || showModalEdit} onHide={handleClose}>
+       <Modal show= {showModalEdit || showModalCreate } onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{showModalCreate ? 'Crear Curso' : 'Editar Curso'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {showModalCreate ? <FormCrearCurso handleClose={handleClose} /> : <FormEditCurso curso={cursoEditar} handleClose={handleClose} />}
+                    {showModalEdit ?  <FormEditCurso curso={cursoEditar} handleClose={handleClose} /> : <FormCrearCurso handleClose={handleClose} />}
                 </Modal.Body>
             </Modal>
                 

@@ -3,7 +3,7 @@ import React, { useState, } from 'react';
 
 
 
-const FormCrearCurso = () => {
+const FormCrearCurso = ({handleClose}) => {
 
   
     const [curso, setCurso] = useState({
@@ -41,8 +41,8 @@ const FormCrearCurso = () => {
       
             .then((data) => {
               console.log("Curso creado:", data);
-              alert('Curso creado con exito');
-              window.location.reload();
+              handleClose();
+           
            
               
             })
