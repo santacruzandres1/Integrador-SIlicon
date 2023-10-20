@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+
 import './Dashboard.css';
 import DashboardAlumno from '../DashboardAlumno/DashboardAlumno';
 import DashProfesor from '../DashProfesor/DashProfesor';
@@ -20,13 +20,15 @@ const {data} = DataUser()
 
   console.log('Rol:', rol);
 
-
+  const userName = [data.nombre , " ", data.apellido];
 
  if(rol===1){
   debugger 
   return (
     <>
       <Header></Header>
+
+      <br></br><h3>Bienvenid@ {userName} !</h3><br></br>
       <div class="container ">
         <h3>Seleccione que desea administrar</h3>
         <div class="row justify-content-center align-items-center g-2">
@@ -72,7 +74,7 @@ const {data} = DataUser()
      return (
       <>
         <Header></Header>
-       
+        <br></br><h3>Bienvenid@ {userName} !</h3><br></br>
   
   
        <DashboardAlumno></DashboardAlumno>
@@ -94,7 +96,7 @@ const {data} = DataUser()
        <Header></Header>
        
         
-  
+       <br></br><h3>Bienvenid@ {userName}  !</h3><br></br>
   
        
         <DashProfesor></DashProfesor>

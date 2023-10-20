@@ -14,7 +14,7 @@ const DashboardAlumno = () => {
 
   const {data} = DataUser()
   const id_user = data.id_usuario;
-const userName = data.nombre;
+
   const [nota, setNota] = useState([]);
 
   useEffect(function () {
@@ -45,9 +45,9 @@ const userName = data.nombre;
 
 
 
-  },[nota])
+  },[nota,id_user])
 
-debugger
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {
@@ -85,7 +85,7 @@ debugger
 
       </div>
       <br></br>
-<h3>Bienvenido {userName} !</h3>
+
       <br></br> <br></br>
 
       <p>Escriba el nombre de la materia que desea informarse</p>

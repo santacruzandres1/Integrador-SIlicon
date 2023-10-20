@@ -3,13 +3,13 @@ import { NavLink, useNavigate } from "react-router-dom"
 import './header.css'
 import { Navbar, Nav, NavDropdown, Modal, Button } from 'react-bootstrap';
 import { useState } from "react";
-import FormEditarUsuarioAlumno from "../formEditar/formEditarUserAlumno";
+import FormEditarUserAlumno from '../formEditar/formEditarUserAlumno';
 
 function Header() {
 
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
-   // const handleShow = () => setShowModal(true);
+   const handleShow = () => setShowModal(true);
 
 const navigate = useNavigate();
 
@@ -40,9 +40,9 @@ const navigate = useNavigate();
                             <li className="nav-item"><NavLink className="nav-link " to="/About">Sobre Nosotros</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link " to="/Contact">Contacto</NavLink></li>
                             <NavDropdown title="Usuario" id="basic-nav-dropdown">
-                                 {/* <NavDropdown.Item href="#action/3.2"><button onClick={handleShow} className="  btn btn-light" to="/">Editar información</button> 
+                                 <NavDropdown.Item href="#action/3.2"><button onClick={handleShow} className="  btn btn-light" to="/">Editar información</button> 
 
-                                </NavDropdown.Item> */}
+                                </NavDropdown.Item> 
                                 <NavDropdown.Item href="#action/3.1"><button onClick={logout} className="  btn  btn-light " to="/">Cerrar Sesión</button></NavDropdown.Item>
 
 
@@ -62,7 +62,7 @@ const navigate = useNavigate();
 
                 <Modal.Body>
 
-                    <FormEditarUsuarioAlumno></FormEditarUsuarioAlumno>
+                <FormEditarUserAlumno handleClose={handleClose} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
