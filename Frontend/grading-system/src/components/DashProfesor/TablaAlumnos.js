@@ -36,6 +36,9 @@ const TablaAlumnos = () => {
   
   return (
     <>
+    <br></br>
+    <h2>Alumnos Inscriptos en sus Materias</h2>
+    <br></br>
      <div className="container col-4"><div className="container-fluid">
                         <form className="d-flex" role="search">
 
