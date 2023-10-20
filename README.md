@@ -54,7 +54,9 @@ La idea del grupo es poder escalar en el proyecto y añadir más funciones como 
 
  **Despliegue:**
 
-"**Frontend:** 
+" 
+
+**Frontend:** 
 
 Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install 
 
