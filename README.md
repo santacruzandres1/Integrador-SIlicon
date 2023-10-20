@@ -27,7 +27,7 @@
 
 
 **Diagrama de Base de Datos:** La base de datos consiste en 5 tablas.
-![DER](https://drive.google.com/file/d/1LR1MJr77djob5ADEPvQs6Ag8C_jE0lF6/view?usp=sharing)
+
 
 **Flujo de Funcionamiento:** 
 
