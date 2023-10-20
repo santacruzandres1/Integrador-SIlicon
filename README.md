@@ -18,7 +18,7 @@
 
 **Tecnologías Utilizadas:**
 
- -   Lenguaje de programación para el backend node (Javascript)
+ -   Lenguaje de programación para el backend node (Javascript).
  -   Base de datos SQL MariaDB.
  -   Framework utilizado Express.
  -   React.
@@ -31,12 +31,12 @@
 
 **Flujo de Funcionamiento:** 
 
-***Administrador:***
+**Administrador:**
  - Tendrá una cuenta registrada de forma preestablecida en el servidor.
  - Podrá crear nuevos usuarios , materias y cursos.
 
 
-## **Seguridad:**
+ **Seguridad:**
 
 **Contraseñas:** Las contraseñas serán encriptadas con bcrypt y almacenadas en la base de datos.
 
@@ -46,19 +46,21 @@
                 Para cerrar sesión el usuario debe abrir la pestaña Usuario en el header del sistema y clickear en Cerrar Sesión.
 
 
-## **Escalabilidad:**
+ **Escalabilidad:**
 
 La idea del grupo es poder escalar en el proyecto y añadir más funciones como por ejemplo poder crear avisos , llevar a cabo la gestión de asistencias de los alumnos, entre otras funciones que un sistema de gestión educativo necesita.
 
 
 
-## **Despliegue:**
+ **Despliegue:**
 
-**Frontend:** Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install
-          Luego es necesario ingresar desde la carpeta grading-system y y realizar el comando => npm start
+**Frontend:** 
+Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install 
+Luego es necesario ingresar desde la carpeta grading-system y y realizar el comando => npm start 
           
-**Backend:** Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install
-         Luego es necesario realizar el comando => nodemon index.js (windows) / npx nodemon index.js (linux)
+**Backend:**
+Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install 
+Luego es necesario realizar el comando => nodemon index.js (windows) / npx nodemon index.js (linux) 
 
-De esta manera el sistema estará en funcionamiento en la url => localhost:3000
+De esta manera el sistema estará en funcionamiento en la url => localhost:3000 
 
