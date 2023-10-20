@@ -59,11 +59,27 @@ La idea del grupo es poder escalar en el proyecto y añadir más funciones como 
 Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install 
 
 Luego es necesario ingresar desde la carpeta grading-system y y realizar el comando => npm start "
+
+	npm install
+
+**luego**
+
+	cd Frontend/grading-system/
+    npm start
           
 **Backend:**
 Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install
 
 Luego es necesario realizar el comando => nodemon index.js (windows) / npx nodemon index.js (linux) 
 
+	npm install
+**Luego:**
+	    
+	nodemon index.js
+**En linux:**
+
+	npx nodemon index.js
+
 De esta manera el sistema estará en funcionamiento en la url => localhost:3000 "
 
+[Link al repositorio Backend](https://github.com/MatBenA/backend-calificaciones)
