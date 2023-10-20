@@ -73,7 +73,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
     })
       .then((response) => {
         if (response.ok) {
-          console.log('Elemento eliminado con éxito');
+         
           setShowModalDel(false);
           
         
