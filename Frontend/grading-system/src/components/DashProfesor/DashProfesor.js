@@ -5,16 +5,19 @@ import { useFetch } from '../../useFetch';
 import jwtDecode from 'jwt-decode';
 import TablaAlumnos from './TablaAlumnos';
 import { Link } from 'react-router-dom';
-
+import DataUser from '../datosUser';
 
 const DashProfesor = () => {
-  const token = sessionStorage.getItem('token');
+  // const token = sessionStorage.getItem('token');
 
-  const decodedToken = jwtDecode(token);
+  // const decodedToken = jwtDecode(token);
 
 
-  const id_user = decodedToken.id_usuario;
-    
+ 
+
+  const {data} = DataUser()
+  const id_user = data.id_usuario;
+
 const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
   const [searchTerm, setSearchTerm] = useState('');
