@@ -58,12 +58,12 @@ La idea del grupo es poder escalar en el proyecto y añadir más funciones como 
 
 Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install 
 
-Luego es necesario ingresar desde la carpeta grading-system y y realizar el comando => npm start "
+Luego es necesario ingresar desde la carpeta grading-system y y realizar el comando => npm start       "
           
-**Backend:**
+"**Backend:**
 Para iniciar se deben instalar las dependencias necesarias mediante el comando =>  npm install
 
 Luego es necesario realizar el comando => nodemon index.js (windows) / npx nodemon index.js (linux) 
 
-De esta manera el sistema estará en funcionamiento en la url => localhost:3000 "
+De esta manera el sistema estará en funcionamiento en la url => localhost:3000       "
 
