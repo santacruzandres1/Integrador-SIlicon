@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 function EditUser({ user, handleClose }) {
   const [item, setItem] = useState({});
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
   useEffect(() => {
     if (user) {
       setItem({
@@ -107,22 +107,34 @@ function EditUser({ user, handleClose }) {
                   className="form-control"
                   value={item.email}
             onChange={handleInputChange}
-                  required
+                  readOnly
                 />
               </div>
+              <div className=" row">
 
-              <div className="form-group">
-                <label htmlFor="password"><h4>Password</h4></label>
-                <input
-                 name='password'
-                  type="password"
+                <label htmlFor="password"><h4>Contraseña</h4></label>
+                <div className='col'><input
+                  type={passwordVisible ? 'text' : 'password'}
                   id="password"
+                  name='password'
                   className="form-control"
                   value={item.password}
-            onChange={handleInputChange}
+                  onChange={handleInputChange}
                   required
-                />
+
+                /></div>
+                <div className='col'>
+                  <button type='button' className='btn ' onClick={() => setPasswordVisible(!passwordVisible)}>
+                    {passwordVisible ? <span class="material-symbols-outlined">
+                      visibility_off
+                    </span> : <span class="material-symbols-outlined">
+                      visibility
+                    </span>}
+                  </button>
+                </div>
               </div>
+
+             
 
               <div className="form-group">
                 <label htmlFor="id_rol"><h4>Rol</h4></label>

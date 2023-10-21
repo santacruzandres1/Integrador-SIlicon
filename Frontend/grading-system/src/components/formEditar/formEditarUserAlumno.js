@@ -5,7 +5,7 @@ function EditUserAlumno({  handleClose }) {
 
   const {data:user}=DataUser()
   const [item, setItem] = useState({});
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
   useEffect(() => {
     if (user) {
       setItem({
@@ -29,7 +29,7 @@ function EditUserAlumno({  handleClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:8080/api/usuarios/${user.id_usuario}`, {
+    fetch(`http://localhost:8080/api/usuarios/editar/${user.id_usuario}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -54,86 +54,16 @@ function EditUserAlumno({  handleClose }) {
   };
 
  
-const rol =user.id_rol
 
-debugger
 
-if(rol===1){
-  return (
-    <>
-      <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
 
-            <form onSubmit={handleSubmit}>
-             
-              <label htmlFor="nombre"><h4>Nombre</h4></label>
-              <div className="form-group">
-                <input
-                placeholder='nombre'
-                  type="text"
-                  id="nombre"
-                  name='nombre'
-                  className="form-control"
-                  value={item.nombre}
-            onChange={handleInputChange}
-                  required
-                />
-              </div>
 
-              <div className="form-group">
-                <label htmlFor="apellido"><h4>Apellido</h4></label>
-                <input
-                  type="text"
-                  id="apellido"
-                  name='apellido'
-                  className="form-control"
-                  value={item.apellido}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
 
-              <div className="form-group">
-                <label htmlFor="dni"><h4>DNI</h4></label>
-                <input
-                  type="tel"
-                  id="dni"
-                  name='dni'
-                  className="form-control"
-                  value={item.dni}
-            onChange={handleInputChange}
-                  required
-                />
-              </div>
-            
-
-              <div className="form-group">
-                <label htmlFor="password"><h4>Password</h4></label>
-                <input
-                 name='password'
-                  type="password"
-                  id="password"
-                  className="form-control"
-                  value={item.password}
-            onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-            
-
-              <button type="submit" className="btn btn-primary">Editar</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      </>
-  );}
-  if(rol===1 || rol===2){
     return (
       <>
         <div className="container mt-5">
+          <div className=' container text-center'><h3>Editar Información</h3></div>
+          <br></br>
           <div className="row justify-content-center">
             <div className="col-md-6">
   
@@ -166,18 +96,7 @@ if(rol===1){
                   />
                 </div>
   
-                <div className="form-group">
-                  <label htmlFor="dni"><h4>DNI</h4></label>
-                  <input
-                    type="number"
-                    id="dni"
-                    name='dni'
-                    className="form-control"
-                    value={item.dni}
-              onChange={handleInputChange}
-                    required
-                  />
-                </div>
+               
                 <div className="form-group">
                   <label htmlFor="email"><h4>Email</h4></label>
                   <input
@@ -187,22 +106,35 @@ if(rol===1){
                     className="form-control"
                     value={item.email}
               onChange={handleInputChange}
-                    required
+                   readOnly
                   />
                 </div>
   
-                <div className="form-group">
-                  <label htmlFor="password"><h4>Password</h4></label>
-                  <input
-                   name='password'
-                    type="password"
-                    id="password"
-                    className="form-control"
-                    value={item.password}
-              onChange={handleInputChange}
-                    required
-                  />
-                </div>
+                <div className=" row">
+
+  <label htmlFor="password"><h4>Contraseña</h4></label>
+  <div className='col'><input
+    type={passwordVisible ? 'text' : 'password'}
+    id="password"
+    name='password'
+    className="form-control"
+    value={item.password}
+    onChange={handleInputChange}
+    required
+    
+  /></div>
+  <div className='col'>
+    <button type='button' className='btn '  onClick={() => setPasswordVisible(!passwordVisible)}>
+    {passwordVisible ? <span class="material-symbols-outlined">
+visibility_off
+</span> : <span class="material-symbols-outlined">
+visibility
+</span>} 
+  </button>
+  </div>
+  </div>
+
+
   
               
                
@@ -215,7 +147,7 @@ if(rol===1){
         </>
     );}
 
-};
+;
 
 export default EditUserAlumno;     
 

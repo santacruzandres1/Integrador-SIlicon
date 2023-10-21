@@ -83,7 +83,7 @@ function FormCrearUsuario({ handleClose }) {
               <div className="form-floating">
                
                 <input
-                  type="tel"
+                  type="number"
                   id="floatingdni"
                   name='dni'
                   className="form-control"
