@@ -215,12 +215,12 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                     <thead>
                         <tr>
                          
-                            <th scope="col">ALumno</th>
+                            <th scope="col">Alumno</th>
                         
                             <th scope="col">Materia</th>
-                            <th scope="col">Periodo 1</th>
-                            <th scope="col">Periodo 2</th>
-                            <th scope="col">Periodo 3</th>
+                            <th scope="col">1° Trimestre</th>
+                            <th scope="col">2° Trimestre</th>
+                            <th scope="col">3° Trimestre</th>
                             <th scope="col">Promedio</th>
 
                         </tr>

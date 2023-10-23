@@ -36,6 +36,7 @@ const TablaCursos = () => {
                 handleCloseDel();
             } else {
                 console.error('Error al eliminar el usuario');
+                alert('Para eliminar el curso primero debe borrar todos los datos relacionados al mismo.');
             }
             })
             .catch((error) => {

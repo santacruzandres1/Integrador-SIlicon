@@ -19,7 +19,7 @@ const EditarNota = ({ notas, handleClose }) => {
 
 
  
-debugger
+
 
 
 
@@ -66,7 +66,7 @@ const handleInputChange = (e) => {
 });
 };
 
-debugger
+
 
   return (
     <>

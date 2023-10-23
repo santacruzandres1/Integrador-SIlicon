@@ -1,8 +1,27 @@
 import { useState, useEffect } from 'react';
 
 function EditUser({ user, handleClose }) {
+
+
+
+  const [options, setOptions] = useState([]);
+  
   const [item, setItem] = useState({});
+
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  useEffect(() => {
+    // Reemplaza la URL con la que corresponda a tu API
+    fetch('http://localhost:8080/api/curso/nombres')
+      .then(response => response.json())
+      .then(data => {
+        setOptions(data); // Actualiza el estado con las opciones obtenidas del servidor
+      })
+      .catch(error => {
+        console.error('Error al obtener las opciones de cursos:', error);
+      });
+  }, []);
+
   useEffect(() => {
     if (user) {
       setItem({
@@ -136,29 +155,43 @@ function EditUser({ user, handleClose }) {
 
              
 
-              <div className="form-group">
-                <label htmlFor="id_rol"><h4>Rol</h4></label>
-                <input
-                  type="number"
+              <div className="form-floating">
+                <select
+                  required
+                  placeholder="Rol"
                   id="id_rol"
                   name='id_rol'
-                  className="form-control"
+                  className="form-select"
                   value={item.id_rol}
                   onChange={handleInputChange}
-                  required
-                />
+                >
+                  <option value="">Seleccione un Rol</option>
+                  <option value="1">Administrador</option>
+                  <option value="2">Alumno</option>
+                  <option value="3">Profesor</option>
+
+                </select>
+                <label htmlFor="id_rol"><h4>Rol</h4></label>
               </div>
-              <div className="form-group">
-                <label htmlFor="id_curso"><h4>Curso</h4></label>
-                <input
-                  type="number"
+
+
+              <div className="form-floating">
+                <select
+                  required
                   id="id_curso"
                   name='id_curso'
-                  className="form-control"
+                  className="form-select"
                   value={item.id_curso}
                   onChange={handleInputChange}
-                  
-                />
+                >
+                  <option value="">Seleccione un curso</option>
+                  {options.map(option => (
+                    <option key={option.id_curso} value={option.id_curso}>
+                      {option.nombre}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="id_curso"><h4>Curso</h4></label>
               </div>
 
               <button type="submit" className="btn btn-primary">Editar</button>

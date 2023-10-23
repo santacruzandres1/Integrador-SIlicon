@@ -20,9 +20,9 @@ const LoginRol = () => {
             <div className='rol container'>
 
                 <ul> 
-                <div class="row justify-content-center align-items-center g-2">
+                <div className="row justify-content-center align-items-center g-2">
                 {rol.map(rol => (
-                     <div class="col">
+                     <div className="col">
                        <Card style={{ width: '18rem' }}>
     
       <Card.Body>
@@ -30,7 +30,7 @@ const LoginRol = () => {
         <Card.Text>
          {rol.descripcion}
         </Card.Text>
-        <Link  class="btn btn-dark " to={`/login/${rol.name}`}>Ingresar</Link> 
+        <Link  className="btn btn-dark " to={`/login/${rol.name}`}>Ingresar</Link> 
       </Card.Body>
     </Card>
                     <li key={rol.id}>
@@ -47,14 +47,14 @@ const LoginRol = () => {
 }
 export default LoginRol;
 
-<div class="container ">
+<div className="container ">
 <h3>Seleccione que desea administrar</h3><br></br><br></br>
-<div class="row justify-content-center align-items-center g-2">
-  <div class="col">
-    <Link to='#usuario' class="btn btn-dark">Usuarios</Link>
+<div className="row justify-content-center align-items-center g-2">
+  <div className="col">
+    <Link to='#usuario' className="btn btn-dark">Usuarios</Link>
   </div>
-  <div class="col">
-    <Link to="#materia" class="btn btn-dark">Materias</Link></div>
-  <div Link to="#curso" class="col"><button type="button" class="btn btn-dark">Cursos</button></div>
+  <div className="col">
+    <Link to="#materia" className="btn btn-dark">Materias</Link></div>
+  <div Link to="#curso" className="col"><button type="button" className="btn btn-dark">Cursos</button></div>
 </div>
 </div>

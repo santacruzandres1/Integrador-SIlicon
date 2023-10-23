@@ -23,7 +23,7 @@ const {data} = DataUser()
   const userName = [data.nombre , " ", data.apellido];
 
  if(rol===1){
-  debugger 
+
   return (
     <>
       <Header></Header>

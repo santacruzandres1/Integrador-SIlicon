@@ -13,7 +13,7 @@ const FormCrearNota = () => {
     periodo_2: null,
     periodo_3: null
   });
-debugger
+
 const handleInputChange = (e) => {
     const { name, value } = e.target;
 
