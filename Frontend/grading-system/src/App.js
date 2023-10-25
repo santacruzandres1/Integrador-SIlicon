@@ -15,19 +15,21 @@ import FormEditMateria from './components/formEditar/formEditMateria';
 import FormEditCurso from './components/formEditar/formEditCurso';
 import FormEditarNota from './components/formEditar/formEditarNota';
 import FormCrearNota from './components/formCrear/formCrearNota';
+import Dashboard2 from './components/Dashboard/Dashboard2'
 
 
 function App() {
 
  
   return (
-    <div className="App">
+    <div className="App container-fluid">
      
     <ToastContainer></ToastContainer>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={`/login/:rol`}  element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard2" element={<Dashboard2 />} />
         <Route path="/About" element={<About />} />
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/not-found" element={<h1>Not Found</h1>} />

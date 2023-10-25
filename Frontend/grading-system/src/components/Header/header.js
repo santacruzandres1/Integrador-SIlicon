@@ -77,11 +77,11 @@ const navigate = useNavigate();
     else{
         return (
 
-            <>
+            <div className="container-fluid header">
     
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar collapseOnSelect expand="lg">
                     <Navbar.Brand > <h1 className="nav">Sistema de Calificaciones</h1></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Toggle aria-controls="r1onsive-navbar-nav" />
                     <Navbar.Collapse className="justify-content-center" id="responsive-navbar-nav">
                         <Nav >
     
@@ -104,7 +104,8 @@ const navigate = useNavigate();
                 </Navbar>
                
     
-              </>)
+              </div>
+              );
     }
 
 

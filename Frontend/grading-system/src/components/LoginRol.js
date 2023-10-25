@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card'; 
+import * as FaIcons from 'react-icons/fa';
+import { CardGroup } from 'react-bootstrap';
+
 
 
 export const rol = [
@@ -17,7 +20,7 @@ const LoginRol = () => {
             <br></br>
 
            
-            <div className='rol container'>
+            <div className='rol'>
 
                 <ul> 
                 <div className="row justify-content-center align-items-center g-2">
@@ -26,11 +29,13 @@ const LoginRol = () => {
                        <Card style={{ width: '18rem' }}>
     
       <Card.Body>
+        { rol.name === 'Alumnos' ? <Card.Img variant="top" src="" /> : null }
+      <Card.Img variant="top" src="holder.js/100px180" />
         <Card.Title>{rol.name}</Card.Title>
         <Card.Text>
          {rol.descripcion}
         </Card.Text>
-        <Link  className="btn btn-dark " to={`/login/${rol.name}`}>Ingresar</Link> 
+        <Link  class="btn btn-primary " to={`/login/${rol.name}`}>Ingresar</Link> 
       </Card.Body>
     </Card>
                     <li key={rol.id}>
@@ -41,20 +46,51 @@ const LoginRol = () => {
                 </div>
                 </ul>
             </div>
-            
+    <CardGroup>
+      <Card>
+        <Card.Img variant="top" src="holder.js/100px160" />
+        <Card.Body>
+          <Card.Title>Card title</Card.Title>
+          <Card.Text>
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This content is a little bit longer.
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer>
+          <small className="text-muted">Last updated 3 mins ago</small>
+        </Card.Footer>
+      </Card>
+      <Card>
+        <Card.Img variant="top" src="holder.js/100px160" />
+        <Card.Body>
+          <Card.Title>Card title</Card.Title>
+          <Card.Text>
+            This card has supporting text below as a natural lead-in to
+            additional content.{' '}
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer>
+          <small className="text-muted">Last updated 3 mins ago</small>
+        </Card.Footer>
+      </Card>
+      <Card>
+        <Card.Img variant="top" src="holder.js/100px160" />
+        <Card.Body>
+          <Card.Title>Card title</Card.Title>
+          <Card.Text>
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This card has even longer content than the
+            first to show that equal height action.
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer>
+          <small className="text-muted">Last updated 3 mins ago</small>
+        </Card.Footer>
+      </Card>
+    </CardGroup>
+
         </div>
     )
 }
 export default LoginRol;
 
-<div className="container ">
-<h3>Seleccione que desea administrar</h3><br></br><br></br>
-<div className="row justify-content-center align-items-center g-2">
-  <div className="col">
-    <Link to='#usuario' className="btn btn-dark">Usuarios</Link>
-  </div>
-  <div className="col">
-    <Link to="#materia" className="btn btn-dark">Materias</Link></div>
-  <div Link to="#curso" className="col"><button type="button" className="btn btn-dark">Cursos</button></div>
-</div>
-</div>

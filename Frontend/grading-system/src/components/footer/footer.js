@@ -3,10 +3,8 @@ import './footer.css';
 
 const Footer = () => {
     return (
-        <div className=" text-center foot  bg-dark">
-           
-        
-           <hr></hr>
+        <div className=" container-fluid text-center foot  bg-dark">
+
                <p >© 2023 Company, Inc</p>
            
             
