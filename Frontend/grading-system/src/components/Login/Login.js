@@ -49,7 +49,7 @@ const Login = () => {
           if (result.ok) {
             sessionStorage.setItem('token', result.body.accessToken);
 
-            navigate('/dashboard2')
+            navigate('/dashboard')
             toast.success("Bienvenido", {
               position: "bottom-center",
               autoClose: 5000,
