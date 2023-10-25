@@ -28,17 +28,12 @@ const navigate = useNavigate();
 
         <>
 
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand > <h1 className="nav">Sistema de Calificaciones</h1></Navbar.Brand>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">  
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className="justify-content-center" id="responsive-navbar-nav">
                     <Nav >
 
                         <ul className="nav nav-underline ul ">
-                          
-                            <li className="nav-item"><NavLink className="nav-link " to="/dashboard">DASHBOARD</NavLink></li>
-                       <li className="nav-item"><NavLink className="nav-link " to="/About">Sobre Nosotros</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link " to="/Contact">Contacto</NavLink></li>
                             <NavDropdown title="Usuario" id="basic-nav-dropdown">
                                  <NavDropdown.Item href="#action/3.2"><button onClick={handleShow} className="  btn btn-light" to="/">Editar información</button> 
 
@@ -47,9 +42,6 @@ const navigate = useNavigate();
 
 
                             </NavDropdown>
-
-
-
 
 
                         </ul>
@@ -80,7 +72,6 @@ const navigate = useNavigate();
             <div className="container-fluid header">
     
                 <Navbar collapseOnSelect expand="lg">
-                    <Navbar.Brand > <h1 className="nav">Sistema de Calificaciones</h1></Navbar.Brand>
                     <Navbar.Toggle aria-controls="r1onsive-navbar-nav" />
                     <Navbar.Collapse className="justify-content-center" id="responsive-navbar-nav">
                         <Nav >

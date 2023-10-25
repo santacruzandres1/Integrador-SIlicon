@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Header from '../Header/header';
-
 
 
 const Login = () => {
@@ -17,7 +15,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-
     const { name, value } = e.target;
     setUser({
       ...user,
@@ -27,9 +24,7 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-
-
+    
     fetch("http://localhost:8080/api/login",
       {
         method: "POST",
@@ -54,7 +49,7 @@ const Login = () => {
           if (result.ok) {
             sessionStorage.setItem('token', result.body.accessToken);
 
-            navigate('/dashboard')
+            navigate('/dashboard2')
             toast.success("Bienvenido", {
               position: "bottom-center",
               autoClose: 5000,
@@ -97,64 +92,57 @@ const Login = () => {
 
 
 
-
   return (
     <>
-      <Header></Header>
       <br></br>
-      <div className=' container text-center'><h2>Inicio Sesión {rol} </h2></div>
+      <div className='container text-center'>
+        <h2>Iniciar Sesión {rol}</h2>
+      </div>
 
       <div className="container mt-5">
         <div className="row justify-content-center">
-          <div className="col-md-8">
+          <div className="col-md-6">
             <form onSubmit={handleSubmit}>
-              <div className="form-floating">
-
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">Email</label>
                 <input
                   type="email"
                   className="form-control"
-                  id="floatingEmail"
-                  placeholder='email'
+                  id="email"
+                  placeholder="Ingrese su email"
                   value={user.email}
                   onChange={handleInputChange}
-                  name='email'
+                  name="email"
                   required
                 />
-                <label htmlFor="floatingEmail"><h4>Email</h4></label>
-              </div>
-              <div className="form-floating">
-                <input
-                  type={passwordVisible ? 'text' : 'password'}
-                  id="floatingPassword"
-                  name='password'
-                  className="form-control"
-                  value={user.password}
-                  onChange={handleInputChange}
-                  required
-                  placeholder='password'
-                /> <button type='button' className='btn ' onClick={() => setPasswordVisible(!passwordVisible)}>
-                  {passwordVisible ? <span class="material-symbols-outlined">
-                    visibility_off
-                  </span> : <span class="material-symbols-outlined">
-                    visibility
-                  </span>}
-                </button>
-                <label htmlFor="floatingPassword"><h4>Password</h4></label>
-
               </div>
 
-              <br></br>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">Password</label>
+                <div className="input-group">
+                  <input
+                    type={passwordVisible ? 'text' : 'password'}
+                    id="password"
+                    name="password"
+                    className="form-control"
+                    value={user.password}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Ingrese su contraseña"
+                  />
+                  <button type="button" className="btn btn-outline-secondary" onClick={() => setPasswordVisible(!passwordVisible)}>
+                    {passwordVisible ? "Ocultar" : "Mostrar"}
+                  </button>
+                </div>
+              </div>
+
               <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
             </form>
           </div>
         </div>
       </div>
-
     </>
   );
 };
 
-
-
 export default Login;
-
