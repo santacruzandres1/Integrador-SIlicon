@@ -14,14 +14,16 @@ function FormCrearUsuario({ handleClose }) {
     dni: null,
     id_rol: "",
     id_curso: "",
+    imagen: null,
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
+    const { name, value, type, files } = e.target;
+
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: type === 'file' ? files[0] : value,
+    }));
   };
 
 
@@ -42,13 +44,17 @@ function FormCrearUsuario({ handleClose }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const formData = new FormData();
+    Object.entries(user).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
     fetch("http://localhost:8080/api/usuarios", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        'authorization': sessionStorage.getItem('token')
+        'authorization': sessionStorage.getItem('token'),
       },
-      body: JSON.stringify(user),
+      body: formData,
     })
       .then((response) => {
         if (response.ok) {
@@ -60,12 +66,11 @@ function FormCrearUsuario({ handleClose }) {
       .then((data) => {
         console.log("Usuario creado:", data);
         handleClose();
-        window.location.reaload();
 
       })
       .catch((error) => console.error("Error al crear el usuario: ", error));
-
   };
+
   return (
     <>
       <div className="container mt-5">
@@ -177,6 +182,18 @@ function FormCrearUsuario({ handleClose }) {
                 </select>
                 <label htmlFor="id_curso"><h4>Curso</h4></label>
               </div>
+
+              <div className="form-floating">
+                <input
+                  type="file"
+                  className="form-control"
+                  id="imagen"
+                  name="imagen"
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="imagen"><h4>Imagen de Perfil</h4></label>
+              </div>
+
 
               <button type="submit" className="btn btn-primary">Crear</button>
             </form>

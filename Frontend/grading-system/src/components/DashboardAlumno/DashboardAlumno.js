@@ -45,7 +45,7 @@ const DashboardAlumno = () => {
 
 
 
-  },[nota,id_user])
+  },[id_user])
 
 
   const [searchTerm, setSearchTerm] = useState('');

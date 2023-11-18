@@ -1,17 +1,16 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { Modal } from "react-bootstrap";
 import FormCrearMateria from "../formCrear/formCrearMateria";
 import FormEditMateria from "../formEditar/formEditMateria";
-import { useFetch } from "../../useFetch";
+
 
 
 const TablaMaterias = () => {
 
-  const { data: materia } = useFetch("http://localhost:8080/api/materia");
-    
+ const [materia, setData] = useState([]);
   const [Eliminar, setEliminar] = useState();
   const [showModalDel, setShowModalDel] = useState(false);
-  const handleCloseDel = () => setShowModalDel(false);
+  const handleCloseDel = () => {setShowModalDel(false)}
   const handleShowDel = (id) => {
     setEliminar(id);
 
@@ -75,9 +74,35 @@ const TablaMaterias = () => {
   const handleClose = () => {
     setShowModalCreate(false);
     setShowModalEdit(false);
+    
+ 
   };
 
+  useEffect(() => {
+    
+    // Opciones personalizadas para el fetch
+    const requestOptions = {
+      method: 'GET', // Método GET
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
+      }
+     
+    };
+  
 
+    fetch("http://localhost:8080/api/materia", requestOptions)
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch((error) => {
+        if (error.name === 'AbortError') {
+          console.log('Request aborted');
+        } else {
+         
+        }
+      })
+     
+  }, [showModalDel,showModalCreate,showModalEdit]);
     return(
         <>
         <div className="container">

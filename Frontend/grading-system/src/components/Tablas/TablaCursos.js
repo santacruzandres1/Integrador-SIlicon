@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { useFetch } from "../../useFetch";
+import React, {useState, useEffect} from 'react';
+
 import { Modal } from 'react-bootstrap';
 import FormCrearCurso from '../formCrear/formCrearCurso';
 import FormEditCurso from '../formEditar/formEditCurso';
@@ -7,11 +7,11 @@ import FormEditCurso from '../formEditar/formEditCurso';
 
 const TablaCursos = () => {
 
-    const {data : curso} = useFetch("http://localhost:8080/api/curso");
-
+   
+    const [curso, setData] = useState([]);
     const [Eliminar, setEliminar] = useState();
     const [showModalDel, setShowModalDel] = useState(false);
-    const handleCloseDel = () => setShowModalDel(false);
+    const handleCloseDel = () => {setShowModalDel(false)}
     const handleShowDel = (id) => {
       setEliminar(id);
 
@@ -78,8 +78,33 @@ const TablaCursos = () => {
     const handleClose = () => {
         setShowModalCreate(false);
         setShowModalEdit(false);
+       
     }
-
+    useEffect(() => {
+    
+        // Opciones personalizadas para el fetch
+        const requestOptions = {
+          method: 'GET', // Método GET
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': sessionStorage.getItem('token')
+          }
+         
+        };
+      
+    
+        fetch("http://localhost:8080/api/curso", requestOptions)
+          .then(response => response.json())
+          .then(data => setData(data))
+          .catch((error) => {
+            if (error.name === 'AbortError') {
+              console.log('Request aborted');
+            } else {
+             
+            }
+          })
+         
+      }, [showModalDel,showModalCreate,showModalEdit]);
 
     return(
         <>

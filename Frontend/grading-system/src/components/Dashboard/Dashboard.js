@@ -12,103 +12,158 @@ import DataUser from '../datosUser';
 
 const DashboardUser = () => {
 
-//Obtenemos la informacion del usuario a traves del token
-const {data} = DataUser()
+
+
+  //Obtenemos la informacion del usuario a traves del token
+  const { data } = DataUser()
 
 
   let rol = data.id_rol
 
   console.log('Rol:', rol);
 
-  const userName = [data.nombre , " ", data.apellido];
+  const userName = [data.nombre, " ", data.apellido];
 
- if(rol===1){
+  if (rol === 1) {
 
-  return (
-    <>
-      <Header></Header>
-
-      <br></br><h3>Bienvenid@ {userName} !</h3><br></br>
-      <div class="container ">
-        <h3>Seleccione que desea administrar</h3>
-        <div class="row justify-content-center align-items-center g-2">
-          <div class="col">
-            <a href="#usuarios" class="btn btn-dark">Usuarios</a>
-          </div>
-          <div class="col">
-            <a href='#materias' class="btn btn-dark">Materias</a></div>
-          <div class="col"><a href='#cursos' type="button" class="btn btn-dark">Cursos</a></div>
-        </div>
-      </div>
-      <div className='titulo'>
-      </div>
-
-      <div className="container ">
-        
-
-  
-      <div className="container" id="usuarios">
-      <TablaUsuarios/>
-      </div>
-     <div className='container'  id="materias">
-     <TablaMaterias/>
-     </div>
-      <div className='container' id="cursos">
-      <TablaCursos/>
-      </div>
-      </div>
-      
-
-
-
-
-
-
-      <Footer></Footer>
-
-
-
-    </>
-  );}
- else if(rol ===2){
-     return (
-      <>
-        <Header></Header>
-        <br></br><h3>Bienvenid@ {userName} !</h3><br></br>
-  
-  
-       <DashboardAlumno></DashboardAlumno>
-    
-  
-  
-  
-     <Footer></Footer>
-  
-  
-  
-    </>
-   );
-
-}
-  else if(rol===3){
     return (
       <>
-       <Header></Header>
-       
-        
-       <br></br><h3>Bienvenid@ {userName}  !</h3><br></br>
-  
-       
+        <Header></Header>
+
+        <br></br>
+        <div className='row'>
+          <div className='col'>
+            <div className='image-container'>
+              <img
+                src={`http://localhost:8080/upload/${data.imagen}`}
+                alt=""
+                className='background rounded-circle'
+              />
+            </div>
+          </div>
+          <div className='col'>
+            <h3>Bienvenid@ {userName} !</h3>
+          </div>
+        </div>
+
+
+        <br></br>
+
+        <div class="container text-center ">
+          <h3>Seleccione que desea administrar</h3>
+          <br></br>
+          <div class="row justify-content-center align-items-center g-2">
+            <div class="col">
+              <a href="#usuarios" class="btn btn-dark">Usuarios</a>
+            </div>
+            <div class="col">
+              <a href='#materias' class="btn btn-dark">Materias</a></div>
+            <div class="col"><a href='#cursos' type="button" class="btn btn-dark">Cursos</a></div>
+          </div>
+        </div>
+        <div className='titulo'>
+        </div>
+        <br></br>
+        <div className="container ">
+
+
+
+          <div className="container" id="usuarios">
+            <TablaUsuarios />
+          </div>
+          <div className='container' id="materias">
+            <TablaMaterias />
+          </div>
+          <div className='container' id="cursos">
+            <TablaCursos />
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <Footer></Footer>
+
+
+
+      </>
+    );
+  }
+  else if (rol === 2) {
+    return (
+      <>
+        <Header></Header>
+        <br></br>
+        <div className='row'>
+          <div className='col'>
+            <div className='image-container'>
+              <img
+                src={`http://localhost:8080/upload/${data.imagen}`}
+                alt=""
+                className='background rounded-circle'
+              />
+            </div>
+          </div>
+          <div className='col'>
+            <h3>Bienvenid@ {userName} !</h3>
+          </div>
+        </div>
+
+
+        <br></br>
+
+
+        <DashboardAlumno></DashboardAlumno>
+
+
+
+
+        <Footer></Footer>
+
+
+
+      </>
+    );
+
+  }
+  else if (rol === 3) {
+    return (
+      <>
+        <Header></Header>
+
+        <br></br>
+        <div className='row'>
+          <div className='col'>
+            <div className='image-container'>
+              <img
+                src={`http://localhost:8080/upload/${data.imagen}`}
+                alt=""
+                className='background rounded-circle'
+              />
+            </div>
+          </div>
+          <div className='col'>
+            <h3>Bienvenid@ {userName} !</h3>
+          </div>
+        </div>
+
+
+        <br></br>
+
+
         <DashProfesor></DashProfesor>
-  
-  
-  
-         <Footer></Footer>
-  
-  
-     </>
-     );
-  }else {return("Usuario incorrecto")}
+
+
+
+        <Footer></Footer>
+
+
+      </>
+    );
+  } else { return ("Usuario incorrecto") }
 }
 
 

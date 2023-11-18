@@ -1,17 +1,24 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import FormCrearUsuario from '../formCrear/formCrearUsuario';
 import FormEditarUsuario from '../formEditar/formEditarUser';
-import { useFetch } from '../../useFetch';
+
 
 
 const TablaUsuarios = () => {
   
-  const { data} = useFetch("http://localhost:8080/api/usuarios");
+  
+
+  const [data, setData] = useState([]);
+
+
+  
+ 
+  
  
   const [usuarioAEliminar, setUsuarioAEliminar] = useState();
   const [showModalDelUser, setShowModalDelUser] = useState(false);
-  const handleCloseDelUser = () => setShowModalDelUser(false);
+  const handleCloseDelUser = () => {setShowModalDelUser(false)}
   const handleShowDelUser = (id) => {
     setUsuarioAEliminar(id);
     setShowModalDelUser(true);
@@ -28,10 +35,11 @@ const TablaUsuarios = () => {
       .then((response) => {
         if (response.ok) {
           console.log('Elemento eliminado con éxito');
-          setShowModalDelUser(false);
+          handleClose()
          
         } else {
           console.error('Error al eliminar el usuario');
+          alert('Para eliminar el profesor primero debe borrar todos los datos relacionados al mismo.');
         }
       })
       .catch((error) => {
@@ -73,8 +81,35 @@ const TablaUsuarios = () => {
   const handleClose = () => {
     setShowModalCreate(false);
     setShowModalEdit(false);
+    setShowModalDelUser(false);
+   
   };
 
+  useEffect(() => {
+    
+    // Opciones personalizadas para el fetch
+    const requestOptions = {
+      method: 'GET', // Método GET
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
+      }
+     
+    };
+  
+
+    fetch("http://localhost:8080/api/usuarios", requestOptions)
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch((error) => {
+        if (error.name === 'AbortError') {
+          console.log('Request aborted');
+        } else {
+         
+        }
+      })
+     
+  }, [showModalDelUser,showModalCreate,showModalEdit]);
 
   return (
     <>

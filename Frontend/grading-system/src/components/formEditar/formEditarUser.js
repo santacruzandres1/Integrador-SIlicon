@@ -58,7 +58,7 @@ function EditUser({ user, handleClose }) {
           console.log('Elemento actualizado con éxito');
           handleClose();
 
-          window.location.reload();
+         
           
         } else {
           console.error('Error al actualizar el elemento');
