@@ -5,8 +5,8 @@ const Welcome = ({userName}) => {
    
     return (
     <>
-    <h2> Bienvenid@ {userName} </h2>
- 
+    <h2> Bienvenido/a {userName} </h2>
+        
     </>
 )}
 

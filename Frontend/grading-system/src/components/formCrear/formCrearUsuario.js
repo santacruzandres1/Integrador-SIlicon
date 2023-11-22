@@ -105,6 +105,7 @@ function FormCrearUsuario({ handleClose }) {
               </div>
               <div className="form-floating">
 
+
                 <input
                   type="number"
                   id="floatingdni"
@@ -193,8 +194,8 @@ function FormCrearUsuario({ handleClose }) {
                 />
                 <label htmlFor="imagen"><h4>Imagen de Perfil</h4></label>
               </div>
-
-
+              
+              
               <button type="submit" className="btn btn-primary">Crear</button>
             </form>
           </div>
