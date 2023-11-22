@@ -16,6 +16,8 @@ const TablaUsuarios = () => {
 
   //iniciar cantidad de datos por página
   const ITEMS_PER_PAGE = 5;
+
+  
   const [sortColumn, setSortColumn] = useState(null);
   const [sortOrder, setSortOrder] = useState('asc');
   

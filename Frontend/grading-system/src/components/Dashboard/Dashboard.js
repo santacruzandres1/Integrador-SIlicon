@@ -8,6 +8,7 @@ import Footer from '../footer/footer';
 import TablaMaterias from '../Tablas/TablaMaterias';
 import TablaCursos from '../Tablas/TablaCursos';
 import DataUser from '../datosUser';
+import { useState } from 'react';
 
 
 const DashboardUser = () => {
@@ -17,14 +18,34 @@ const DashboardUser = () => {
   //Obtenemos la informacion del usuario a traves del token
   const { data } = DataUser()
 
+const [usuario,setusuario] = useState(false)
+const [materia,setMateria] = useState(false)
+const [curso,setCurso] = useState(false)
 
+const handleUsuario = () => {
+  setusuario(true);
+  setMateria(false);
+  setCurso(false);
+
+}; 
+const handleMateria = () => {
+  setMateria(true);
+  setusuario(false);
+setCurso(false)
+};
+const handleCurso = () => {
+  setCurso(true);
+  setMateria(false);
+  setusuario(false);
+
+};
   let rol = data.id_rol
 
   console.log('Rol:', rol);
 
   const userName = [data.nombre, " ", data.apellido];
 
-  if (rol === 1) {
+  if (rol === 1  ) {
 
     return (
       <>
@@ -48,37 +69,41 @@ const DashboardUser = () => {
 
 
         <br></br>
-
-        <div class="container text-center ">
+        <div className='container text-center '>
           <h3>Seleccione que desea administrar</h3>
           <br></br>
-          <div class="row justify-content-center align-items-center g-2">
-            <div class="col">
-              <a href="#usuarios" class="btn btn-dark">Usuarios</a>
+          <div className='row justify-content-center align-items-center g-2'>
+            <div className='col'>
+              <button onClick={handleUsuario}>Usuario</button>
             </div>
-            <div class="col">
-              <a href='#materias' class="btn btn-dark">Materias</a></div>
-            <div class="col"><a href='#cursos' type="button" class="btn btn-dark">Cursos</a></div>
+            <div className='col'>
+              <button onClick={handleMateria}>Materias</button>
+            </div>
+            <div className='col'>
+              <button onClick={handleCurso}>Curso</button>
+            </div>
           </div>
         </div>
-        <div className='titulo'>
-        </div>
+
+        <div className='titulo'></div>
         <br></br>
-        <div className="container ">
-
-
-
-          <div className="container" id="usuarios">
-            <TablaUsuarios />
-          </div>
-          <div className='container' id="materias">
-            <TablaMaterias />
-          </div>
-          <div className='container' id="cursos">
-            <TablaCursos />
-          </div>
+        <div className='container '>
+          {usuario && (
+            <div className='container' id='usuarios'>
+              <TablaUsuarios />
+            </div>
+          )}
+          {materia && (
+            <div className='container' id='materias'>
+              <TablaMaterias />
+            </div>
+          )}
+          {curso && (
+            <div className='container' id='cursos'>
+              <TablaCursos />
+            </div>
+          )}
         </div>
-
 
 
 
