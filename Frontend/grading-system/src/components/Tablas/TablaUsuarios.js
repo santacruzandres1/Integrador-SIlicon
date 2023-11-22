@@ -1,4 +1,4 @@
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import FormCrearUsuario from '../formCrear/formCrearUsuario';
 import FormEditarUsuario from '../formEditar/formEditarUser';
@@ -6,19 +6,23 @@ import FormEditarUsuario from '../formEditar/formEditarUser';
 
 
 const TablaUsuarios = () => {
-  
-  
+
+
 
   const [data, setData] = useState([]);
 
+  
+  const [paginaActual, setPaginaActual] = useState(1);
 
+  //iniciar cantidad de datos por página
+  const ITEMS_PER_PAGE = 5;
+  const [sortColumn, setSortColumn] = useState(null);
+  const [sortOrder, setSortOrder] = useState('asc');
   
- 
-  
- 
+
   const [usuarioAEliminar, setUsuarioAEliminar] = useState();
   const [showModalDelUser, setShowModalDelUser] = useState(false);
-  const handleCloseDelUser = () => {setShowModalDelUser(false)}
+  const handleCloseDelUser = () => { setShowModalDelUser(false) }
   const handleShowDelUser = (id) => {
     setUsuarioAEliminar(id);
     setShowModalDelUser(true);
@@ -36,7 +40,7 @@ const TablaUsuarios = () => {
         if (response.ok) {
           console.log('Elemento eliminado con éxito');
           handleClose()
-         
+
         } else {
           console.error('Error al eliminar el usuario');
           alert('Para eliminar el profesor primero debe borrar todos los datos relacionados al mismo.');
@@ -45,7 +49,7 @@ const TablaUsuarios = () => {
       .catch((error) => {
         console.error('Error de red:', error);
       });
-   
+
   }
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,13 +58,68 @@ const TablaUsuarios = () => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = data.filter((item) => {
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortColumn(column);
+      setSortOrder('asc');
+    }
+  };
+
+  const sortedData = () => {
+    if (!sortColumn) {
+      return data;
+    }
+
+    const comparator = (a, b) => {
+      const valueA = a[sortColumn].toLowerCase();  // Convert to lowercase
+  const valueB = b[sortColumn].toLowerCase(); 
+
+      if (valueA < valueB) {
+        return sortOrder === 'asc' ? -1 : 1;
+      }
+      if (valueA > valueB) {
+        return sortOrder === 'asc' ? 1 : -1;
+      }
+      return 0;
+    };
+
+    return [...data].sort(comparator);
+  };
+
+  const filteredData = sortedData().filter((item) => {
     const apellido = item.apellido;
-     const searchTermLowerCase = searchTerm.toLowerCase();
     const apellidoLowerCase = apellido.toLowerCase();
-     const apellidosSeparados = apellidoLowerCase.split(' ');
-    return apellidosSeparados.some((part) => part.startsWith(searchTermLowerCase));
+    const apellidosSeparados = apellidoLowerCase.split(' ');
+    return apellidosSeparados.some((part) => part.startsWith(searchTerm.toLowerCase()));
   });
+
+  const paginatedData = filteredData.slice(
+    (paginaActual - 1) * ITEMS_PER_PAGE,
+    paginaActual * ITEMS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+
+  const handlePageChange = (pageNumber) => {
+    setPaginaActual(pageNumber);
+  };
+
+  const handlePreviousPage = () => {
+    setPaginaActual((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setPaginaActual((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+  const getSortIndicator = (column) => {
+    if (column === sortColumn) {
+      return sortOrder === 'asc' ? '↑' : '↓';
+    }else {return '↑↓'}
+    
+  };
 
   //Modal Crear Usuario
   const [showModalCreate, setShowModalCreate] = useState(false);
@@ -82,11 +141,11 @@ const TablaUsuarios = () => {
     setShowModalCreate(false);
     setShowModalEdit(false);
     setShowModalDelUser(false);
-   
+
   };
 
   useEffect(() => {
-    
+
     // Opciones personalizadas para el fetch
     const requestOptions = {
       method: 'GET', // Método GET
@@ -94,9 +153,9 @@ const TablaUsuarios = () => {
         'Content-Type': 'application/json',
         'authorization': sessionStorage.getItem('token')
       }
-     
+
     };
-  
+
 
     fetch("http://localhost:8080/api/usuarios", requestOptions)
       .then(response => response.json())
@@ -105,67 +164,110 @@ const TablaUsuarios = () => {
         if (error.name === 'AbortError') {
           console.log('Request aborted');
         } else {
-         
+
         }
       })
-     
-  }, [showModalDelUser,showModalCreate,showModalEdit]);
+
+  }, [showModalDelUser, showModalCreate, showModalEdit]);
+
 
   return (
     <>
-    <div className="container">
+      <div className="container">
         <div class="row justify-content-center align-items-center g-2">
-        <h3>Administracion de Usuarios</h3>
+          <h3>Administracion de Usuarios</h3>
           <div className="col-2 ">  <button onClick={handleShowCreate} className="btn btn-dark">
             Agregar Usuario
           </button></div>
-      <div className="col-4 offset-4">
-      <div className="input-group mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Buscar por Apellido"
-          onChange={handleSearch}
-          value={searchTerm}
-        />
-       <span className="btn btn-dark">Buscar</span>
-      </div>
-      </div>
-      </div>
+          <div className="col-4 offset-4">
+            <div className="input-group mb-3">
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Buscar por Apellido"
+                onChange={handleSearch}
+                value={searchTerm}
+              />
+              <span className="btn btn-dark">Buscar</span>
+            </div>
+          </div>
+        </div>
 
-      <br></br>
-      <table className="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Dni</th>
-            <th scope="col">Email</th>
-            <th scope="col">Rol</th>
+        <br></br>
+        <table className="table table-striped table-hover">
+          <thead>
+            <tr>
+            
+             
+            <th> <button className='btn-dark btn' onClick={() => handleSort('nombre')}>Nombre {getSortIndicator('nombre')}</button> </th>
+            <th> <button className='btn-dark btn' onClick={() => handleSort('apellido')}>Apellido {getSortIndicator('apellido')}</button></th>
+            <th><button className='btn-dark btn' onClick={() => handleSort('dni')}>Dni {getSortIndicator('dni')}</button></th>
+            <th>  <button className='btn-dark btn' onClick={() => handleSort('email')}>Email {getSortIndicator('email')}</button></th>
+            <th>  <button className='btn-dark btn' onClick={() => handleSort('rol')}>Rol {getSortIndicator('rol')}</button></th>
+           
+            
           
-          </tr>
-        </thead>
-          <tbody>
-          {filteredData.map((USUARIO, index) => (
-            <tr key={index}>
-              <th scope="row">{USUARIO.id_usuario}</th>
-              <td>{USUARIO.nombre}</td>
-              <td>{USUARIO.apellido}</td>
-              <td>{USUARIO.dni}</td>
-              <td>{USUARIO.email}</td>
-              <td>{USUARIO.rol}</td>
-              <td>
-                <div className="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" onClick={() => handleShowEdit(USUARIO.id_usuario)} className="btn btn-dark">Editar</button>
+          
+          
 
-                <button onClick={() => handleShowDelUser(USUARIO.id_usuario)} type="button" className="btn btn-dark">Borrar</button>
-                </div>
-              </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {paginatedData.map((USUARIO, index) => (
+              <tr key={index}>
+                
+                <td>{USUARIO.nombre}</td>
+                <td>{USUARIO.apellido}</td>
+                <td>{USUARIO.dni}</td>
+                <td>{USUARIO.email}</td>
+                <td>{USUARIO.rol}</td>
+                <td>
+
+
+                  
+                  <div className="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" onClick={() => handleShowEdit(USUARIO.id_usuario)} className="btn btn-dark">Editar</button>
+
+                    <button onClick={() => handleShowDelUser(USUARIO.id_usuario)} type="button" className="btn btn-dark">Borrar</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <br></br>
+
+        <nav aria-label="Page navigation">
+          <ul className="pagination justify-content-center">
+            <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
+              <button className="page-link  " onClick={handlePreviousPage}>
+                <span class="material-symbols-outlined">
+                  keyboard_double_arrow_left
+                </span>
+              </button>
+            </li>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <li
+                key={index}
+                className={`page-item ${paginaActual === index + 1 ? 'active' : ''}`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            ))}
+            <li className={`page-item ${paginaActual === totalPages ? 'disabled' : ''}`} >
+              <button className="page-link " onClick={handleNextPage} >
+                <span className="material-symbols-outlined">
+                  keyboard_double_arrow_right
+                </span>
+              </button>
+            </li>
+          </ul>
+        </nav>
 
         <Modal show={showModalEdit || showModalCreate} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -179,7 +281,7 @@ const TablaUsuarios = () => {
         <Modal show={showModalDelUser} onHide={handleCloseDelUser}>
 
           <Modal.Body >
-     
+
 
             <div className='container  text-center '>
               <strong>¿Está seguro que desea eliminar este usuario?</strong>
@@ -194,7 +296,7 @@ const TablaUsuarios = () => {
 
         </Modal>
 
-    </div></>
+      </div></>
   );
 }
 
