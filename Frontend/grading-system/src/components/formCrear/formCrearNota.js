@@ -13,7 +13,7 @@ const FormCrearNota = () => {
     periodo_2: null,
     periodo_3: null
   });
-debugger
+
 const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -60,11 +60,15 @@ const handleInputChange = (e) => {
 };
   return (
     <>
-    <h4>Crear Nota </h4>
-    <h5>Alumno: {apellido}</h5>
+   
 
-      <div className="container mt-5">
+      <div className="container mt-5  ">
+      <h4>Crear Nota </h4>
+      <br></br>
+    <h4>Alumno: {apellido}</h4>
+    <br></br>
         <div className="row justify-content-center">
+
           <div className="col-md-6">
 
             <form onSubmit={handleSubmit}>

@@ -2,19 +2,23 @@ import React from 'react';
 import { useState } from 'react';
 import { Modal } from "react-bootstrap";
 import { useFetch } from '../../useFetch';
-import jwtDecode from 'jwt-decode';
-import TablaAlumnos from './TablaAlumnos';
-import { Link } from 'react-router-dom';
 
+import TablaAlumnos from './TablaAlumnos';
+
+import DataUser from '../datosUser';
+import FormEditarNota from '../formEditar/formEditarNota';
 
 const DashProfesor = () => {
-  const token = sessionStorage.getItem('token');
+  // const token = sessionStorage.getItem('token');
 
-  const decodedToken = jwtDecode(token);
+  // const decodedToken = jwtDecode(token);
 
 
-  const id_user = decodedToken.id_usuario;
-    
+ 
+
+  const {data} = DataUser()
+  const id_user = data.id_usuario;
+
 const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -58,6 +62,23 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
     setShowModalDel(true);
 
   };
+  const [usuarioAEditar, setUsuarioAEditar] = useState({ 
+    id_materia:null,
+    id_usuario:null}); // Nuevo estado
+  const [showModalEdit, setShowModalEdit] = useState(false);
+
+  const handleShowEdit = (id_materia,id_usuario) => {
+    let data = {id_materia,id_usuario}
+      setUsuarioAEditar(data);
+      setShowModalEdit(true);
+    }
+  
+
+  const handleClose = () => {
+  
+    setShowModalEdit(false);
+  };
+
 
   const handleSubmit = () => {
     
@@ -175,7 +196,14 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 </Modal.Body>
 
 </Modal>
-
+<Modal show={showModalEdit } onHide={handleClose}>
+          <Modal.Header closeButton>
+         
+          </Modal.Header>
+          <Modal.Body>
+          <FormEditarNota notas={usuarioAEditar} handleClose={handleClose} /> 
+          </Modal.Body>
+        </Modal>
 
             </div>
             <br></br> <br></br>
@@ -187,12 +215,12 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                     <thead>
                         <tr>
                          
-                            <th scope="col">ALumno</th>
+                            <th scope="col">Alumno</th>
                         
                             <th scope="col">Materia</th>
-                            <th scope="col">Periodo 1</th>
-                            <th scope="col">Periodo 2</th>
-                            <th scope="col">Periodo 3</th>
+                            <th scope="col">1° Trimestre</th>
+                            <th scope="col">2° Trimestre</th>
+                            <th scope="col">3° Trimestre</th>
                             <th scope="col">Promedio</th>
 
                         </tr>
@@ -209,8 +237,10 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                                 <td>{nota.nota3}</td>
                                 <td>{nota.promedio}</td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                <Link  to={`/dashboard/editarNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Editar Nota </Link>
+                                {/* <Link  to={`/dashboard/editarNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Editar Nota </Link> */}
                                 <button onClick={() => handleShowDel(nota.id_materia,nota.id_usuario)} type="button" className="btn btn-dark">Borrar Nota</button>
+                                <button onClick={() => handleShowEdit(nota.id_materia,nota.id_usuario)} type="button" className="btn btn-dark">Editar Nota</button>
+
                                 </div>
                             </tr>
 
@@ -219,7 +249,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
             </div>
         </>
     );
-}
+                    }
 
 
 

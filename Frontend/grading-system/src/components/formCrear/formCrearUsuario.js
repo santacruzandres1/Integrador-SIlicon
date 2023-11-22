@@ -1,36 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 
 function FormCrearUsuario({ handleClose }) {
+
+
+  const [options, setOptions] = useState([]);
   const [user, setUser] = useState({
     nombre: "",
     apellido: "",
     email: "",
     password: "",
     dni: null,
-    id_rol: null,
-    id_curso: null,
+    id_rol: "",
+    id_curso: "",
+    imagen: null,
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
+    const { name, value, type, files } = e.target;
+
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: type === 'file' ? files[0] : value,
+    }));
   };
+
+
+
+  useEffect(() => {
+    // Reemplaza la URL con la que corresponda a tu API
+    fetch('http://localhost:8080/api/curso/nombres')
+      .then(response => response.json())
+      .then(data => {
+        setOptions(data); // Actualiza el estado con las opciones obtenidas del servidor
+      })
+      .catch(error => {
+        console.error('Error al obtener las opciones de cursos:', error);
+      });
+  }, []);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const formData = new FormData();
+    Object.entries(user).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
     fetch("http://localhost:8080/api/usuarios", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        'authorization': sessionStorage.getItem('token')
+        'authorization': sessionStorage.getItem('token'),
       },
-      body: JSON.stringify(user),
+      body: formData,
     })
       .then((response) => {
         if (response.ok) {
@@ -42,12 +66,11 @@ function FormCrearUsuario({ handleClose }) {
       .then((data) => {
         console.log("Usuario creado:", data);
         handleClose();
-        window.location.reaload();
-       
+
       })
       .catch((error) => console.error("Error al crear el usuario: ", error));
-    
   };
+
   return (
     <>
       <div className="container mt-5">
@@ -81,9 +104,9 @@ function FormCrearUsuario({ handleClose }) {
                 <label htmlFor="floatingLastName"><h4>Apellido</h4></label>
               </div>
               <div className="form-floating">
-               
+
                 <input
-                  type="tel"
+                  type="number"
                   id="floatingdni"
                   name='dni'
                   className="form-control"
@@ -92,7 +115,7 @@ function FormCrearUsuario({ handleClose }) {
                   placeholder='Dni'
                   required
                 />
-                 <label htmlFor="floatingdni"><h4>DNI</h4></label>
+                <label htmlFor="floatingdni"><h4>DNI</h4></label>
               </div>
               <div className="form-floating">
                 <input
@@ -120,40 +143,64 @@ function FormCrearUsuario({ handleClose }) {
                 />
                 <label htmlFor="floatingPassword"><h4>Password</h4></label>
               </div>
+
               <div className="form-floating">
-                <input
-                  type="number"
+                <select
+                  required
+                  placeholder="Rol"
                   id="id_rol"
                   name='id_rol'
-                  className="form-control"
+                  className="form-select"
                   value={user.id_rol}
                   onChange={handleInputChange}
-                  placeholder='ID Rol'
-                  required
-                />
-                 <label htmlFor="id_rol"><h4>Rol</h4></label>
+                >
+                  <option value="">Seleccione un Rol</option>
+                  <option value="1">Administrador</option>
+                  <option value="2">Alumno</option>
+                  <option value="3">Profesor</option>
+
+                </select>
+                <label htmlFor="id_rol"><h4>Rol</h4></label>
               </div>
+
+
               <div className="form-floating">
-                <input
-                  type="number"
+                <select
+                  required
                   id="id_curso"
                   name='id_curso'
-                  className="form-control"
+                  className="form-select"
                   value={user.id_curso}
                   onChange={handleInputChange}
-                  placeholder='ID Curso'
-              
-                />
-                 <label htmlFor="id_curso"><h4>Curso</h4></label>
+                >
+                  <option value="">Seleccione un curso</option>
+                  {options.map(option => (
+                    <option key={option.id_curso} value={option.id_curso}>
+                      {option.nombre}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="id_curso"><h4>Curso</h4></label>
               </div>
-              
-              
+
+              <div className="form-floating">
+                <input
+                  type="file"
+                  className="form-control"
+                  id="imagen"
+                  name="imagen"
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="imagen"><h4>Imagen de Perfil</h4></label>
+              </div>
+
+
               <button type="submit" className="btn btn-primary">Crear</button>
             </form>
           </div>
         </div>
       </div>
-      </>
+    </>
   );
 };
 

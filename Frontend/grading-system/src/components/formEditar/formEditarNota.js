@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate  } from 'react-router-dom';
+import React, { useState,  } from 'react';
 
 
-const FormEditarNota = () => {
-  const {id_materia, id_usuario} = useParams();
-  const navigate = useNavigate()
+const EditarNota = ({ notas, handleClose }) => {
+ 
+  
 
-  const [data , setData] = useState({
-    id_usuario: id_usuario,
-    id_materia: id_materia,
-    periodo_1: null,
-    periodo_2: null,
-    periodo_3: null
+
+  
+  const [data , setData] = useState({  
+    id_usuario:  notas.id_usuario,
+    id_materia: notas.id_materia,
+      periodo_1: null,
+      periodo_2: null,
+      periodo_3: null
+  
+   
   });
-debugger
+
+
+ 
+
+
+
+
 const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (value >= 0 && value <= 10) {
@@ -45,8 +54,8 @@ const handleInputChange = (e) => {
   .then((response) => {
     if (response.ok) {
         console.log('Elemento actualizado con éxito');
-     navigate('/dashboard')
-       
+    handleClose()
+  
 
     } else {
         console.error('Error al actualizar el elemento');
@@ -56,10 +65,16 @@ const handleInputChange = (e) => {
     console.error('Error de red:', error);
 });
 };
+
+
+
   return (
     <>
-    <h4>Editar Nota</h4>
+
+
       <div className="container mt-5">
+       <div className='container text-center'><h3>Editar Nota</h3></div> 
+      <br></br>
         <div className="row justify-content-center">
           <div className="col-md-6">
 
@@ -109,6 +124,6 @@ const handleInputChange = (e) => {
         </div>
       </div></>
   );
-};
+  }
 
-export default FormEditarNota      
+export default EditarNota      

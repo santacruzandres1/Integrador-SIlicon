@@ -1,102 +1,177 @@
-import React, { useState,  } from 'react';
+import React, { useState, useEffect } from 'react';
+import DataUser from '../datosUser';
 
+const EditUserAlumno = ({ handleClose }) => {
+  const { data: user } = DataUser();
+  const [item, setItem] = useState({
+    nombre: '',
+    apellido: '',
+    email: '',
+    password: '',
+    imagen: null,
+  });
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
+  useEffect(() => {
+    if (user) {
+      setItem({
+        nombre: user.nombre,
+        apellido: user.apellido,
+        email: user.email,
+        password: user.password,
+        imagen: user.imagen,
+      });
+    }
+  }, [user]);
 
-
-const FormEditarUsuarioAlumno = () => {
-
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApeliido] = useState('');
-  const [password, setPassword] = useState('');
-  const [mail, setMail] = useState('');
-  
-
-
-
-
+  const handleInputChange = (e) => {
+    const { name, value, type, files } = e.target;
+    setItem((prevUser) => ({
+      ...prevUser,
+      [name]: type === 'file' ? files[0] : value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append('nombre', item.nombre);
+    formData.append('apellido', item.apellido);
+    formData.append('email', item.email);
+    formData.append('password', item.password);
+    formData.append('imagen', item.imagen);
 
-
+    fetch(`http://localhost:8080/api/usuarios/editar/${user.id_usuario}`, {
+      method: 'PUT',
+      headers: {
+        'authorization': sessionStorage.getItem('token'),
+      },
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error al editar el usuario');
+        }
+      })
+      .then((data) => {
+        console.log('Usuario editado:', data);
+        handleClose();
+        window.location.reload();
+      })
+      .catch((error) => console.error('Error al editar el usuario: ', error));
   };
-
 
   return (
     <>
-     <br></br>
-            <div className='container text-center'><h2>Editar Usuario</h2></div>
       <div className="container mt-5">
+        <div className="container text-center">
+          <h3>Editar Información</h3>
+        </div>
+        <br></br>
         <div className="row justify-content-center">
           <div className="col-md-6">
-
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="nombre"><h4>Nombre</h4></label>
+                <label htmlFor="nombre">
+                  <h4>Nombre</h4>
+                </label>
                 <input
+                  placeholder="nombre"
                   type="text"
                   id="nombre"
+                  name="nombre"
                   className="form-control"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
+                  value={item.nombre}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
-              <br></br>
 
               <div className="form-group">
-                <label htmlFor="apellido"><h4>Apellido</h4></label>
+                <label htmlFor="apellido">
+                  <h4>Apellido</h4>
+                </label>
                 <input
                   type="text"
                   id="apellido"
+                  name="apellido"
                   className="form-control"
-                  value={apellido}
-                  onChange={(e) => setApeliido(e.target.value)}
+                  value={item.apellido}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
-              <br></br>
-
 
               <div className="form-group">
-                <label htmlFor="password"><h4>Password</h4></label>
+                <label htmlFor="imagen">
+                  <h4>Imagen</h4>
+                </label>
                 <input
-                 
-                  type="password"
-                  id="password"
+                  type="file"
                   className="form-control"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
+                  id="imagen"
+                  name="imagen"
+                  onChange={handleInputChange}
                 />
+                
               </div>
-              <br></br>
-
-              
-
-          
 
               <div className="form-group">
-                <label htmlFor="mail"><h4>Mail</h4></label>
+                <label htmlFor="email">
+                  <h4>Email</h4>
+                </label>
                 <input
-                  type="mail"
-                  id="mail"
-                  name='mail'
+                  type="email"
+                  id="email"
+                  name="email"
                   className="form-control"
-                  value={mail}
-                  onChange={(e) => setMail(e.target.value)}
-                  required
+                  value={item.email}
+                  readOnly
                 />
               </div>
-              <br></br>
 
-              <button type="submit" className="btn btn-primary">Editar</button>
+              <div className="row">
+                <label htmlFor="password">
+                  <h4>Contraseña</h4>
+                </label>
+                <div className="col">
+                  <input
+                    type={passwordVisible ? 'text' : 'password'}
+                    id="password"
+                    name="password"
+                    className="form-control"
+                    value={item.password}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="col">
+                  <button
+                    type="button"
+                    className="btn "
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                  >
+                    {passwordVisible ? (
+                      <span class="material-symbols-outlined">visibility_off</span>
+                    ) : (
+                      <span class="material-symbols-outlined">visibility</span>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <button type="submit" className="btn btn-primary">
+                Editar
+              </button>
             </form>
           </div>
         </div>
-      </div></>
+      </div>
+    </>
   );
 };
 
-export default FormEditarUsuarioAlumno       
+export default EditUserAlumno;
