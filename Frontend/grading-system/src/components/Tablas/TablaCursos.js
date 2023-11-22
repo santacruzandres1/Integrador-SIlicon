@@ -36,6 +36,7 @@ const TablaCursos = () => {
                 handleCloseDel();
             } else {
                 console.error('Error al eliminar el usuario');
+                alert('Para eliminar el curso primero debe borrar todos los datos relacionados al mismo.');
             }
             })
             .catch((error) => {
@@ -129,7 +130,7 @@ const TablaCursos = () => {
             
        <Modal show= {showModalEdit || showModalCreate } onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{showModalCreate ? 'Crear Curso' : 'Editar Curso'}</Modal.Title>
+                 
                 </Modal.Header>
                 <Modal.Body>
                     {showModalEdit ?  <FormEditCurso curso={cursoEditar} handleClose={handleClose} /> : <FormCrearCurso handleClose={handleClose} />}

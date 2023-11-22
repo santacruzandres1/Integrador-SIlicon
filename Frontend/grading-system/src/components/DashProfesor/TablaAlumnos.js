@@ -1,14 +1,13 @@
 import React, { useState} from 'react';
 import { useFetch } from '../../useFetch';
-import jwtDecode from 'jwt-decode';
+import DataUser from '../datosUser';
 import { Link } from 'react-router-dom';
 
 const TablaAlumnos = () => {
 
   //const [selectedMateria, setSelectedMateria] = useState(null);
-  const token = sessionStorage.getItem('token');
-  const decodedToken = jwtDecode(token);
-  const id_usuario = decodedToken.id_usuario;
+  const {data} = DataUser()
+  const id_usuario = data.id_usuario;
  // const [alumnos, setAlumnos] = useState([]);
 
   // Paso 1: Obtener las materias que el profesor da

@@ -1,46 +1,34 @@
-import React from 'react';
+
 import './Dashboard.css';
 import DashboardAlumno from '../DashboardAlumno/DashboardAlumno';
 import DashProfesor from '../DashProfesor/DashProfesor';
 import Header from '../Header/header';
-
 import TablaUsuarios from '../Tablas/TablaUsuarios';
 import Footer from '../footer/footer';
 import TablaMaterias from '../Tablas/TablaMaterias';
 import TablaCursos from '../Tablas/TablaCursos';
-
-import jwtDecode from 'jwt-decode';
-
-
-
-
-
-
-
+import DataUser from '../datosUser';
 
 
 const DashboardUser = () => {
 
-  const token = sessionStorage.getItem('token');
-  console.log('Token:', token); // Agrega esta línea para verificar el token
+//Obtenemos la informacion del usuario a traves del token
+const {data} = DataUser()
 
-  const decodedToken = jwtDecode(token);
-  console.log('Decoded Token:', decodedToken); // Agrega esta línea para verificar el token decodificado
 
-  const rol = decodedToken.id_rol;
+  let rol = data.id_rol
+
   console.log('Rol:', rol);
 
-  const userId = decodedToken.id_usuario;
-const userEmail = decodedToken.email;
-
-console.log(`User ID: ${userId}`);
-console.log(`User Email: ${userEmail}`);
+  const userName = [data.nombre , " ", data.apellido];
 
  if(rol===1){
-     
+
   return (
     <>
       <Header></Header>
+
+      <br></br><h3>Bienvenid@ {userName} !</h3><br></br>
       <div class="container ">
         <h3>Seleccione que desea administrar</h3>
         <div class="row justify-content-center align-items-center g-2">
@@ -86,7 +74,7 @@ console.log(`User Email: ${userEmail}`);
      return (
       <>
         <Header></Header>
-       
+        <br></br><h3>Bienvenid@ {userName} !</h3><br></br>
   
   
        <DashboardAlumno></DashboardAlumno>
@@ -108,7 +96,7 @@ console.log(`User Email: ${userEmail}`);
        <Header></Header>
        
         
-  
+       <br></br><h3>Bienvenid@ {userName}  !</h3><br></br>
   
        
         <DashProfesor></DashProfesor>
@@ -117,7 +105,7 @@ console.log(`User Email: ${userEmail}`);
   
          <Footer></Footer>
   
-        
+  
      </>
      );
   }else {return("Usuario incorrecto")}

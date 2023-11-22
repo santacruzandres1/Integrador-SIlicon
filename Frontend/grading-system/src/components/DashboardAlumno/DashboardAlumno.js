@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-import jwtDecode from 'jwt-decode';
+import DataUser from '../datosUser';
 
 
 
@@ -12,12 +12,8 @@ const DashboardAlumno = () => {
 
  
 
-  const token = sessionStorage.getItem('token');
-
-  const decodedToken = jwtDecode(token);
-
-
-  const id_user = decodedToken.id_usuario;
+  const {data} = DataUser()
+  const id_user = data.id_usuario;
 
   const [nota, setNota] = useState([]);
 
@@ -49,9 +45,9 @@ const DashboardAlumno = () => {
 
 
 
-  },[nota])
+  },[nota,id_user])
 
-debugger
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {

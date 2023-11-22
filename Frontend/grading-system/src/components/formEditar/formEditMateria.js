@@ -4,25 +4,59 @@ const FormEditMateria = ({ data, handleClose }) => {
     const [item, setItem] = useState({});
     const id_materia = data.id_materia;
 
+    const [profe, setProfe] = useState([])
+    const [cursos, setCursos] = useState([]);
     useEffect(() => {
-      if (data) {
-        setItem({
-            MATERIA : data.MATERIA || '',
-          id_materia: data.id_materia || '',
-          nombre: data.nombre || '',
-          id_usuario: data.id_usuario || '',
-          id_curso: data.id_curso || '',
-        });
+        const requestOptions = {
+            method: 'GET', // Método GET
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem('token')
+            }
+
+        };
+        // Reemplaza la URL con la que corresponda a tu API
+        fetch('http://localhost:8080/api/curso/nombres', requestOptions)
+            .then(response => response.json())
+            .then(curso => {
+                setCursos(curso); // Actualiza el estado con las opciones obtenidas del servidor
+            })
+            .catch(error => {
+                console.error('Error al obtener las opciones de cursos:', error);
+            });
+
+
+        // Reemplaza la URL con la que corresponda a tu API
+        fetch('http://localhost:8080/api/profesor', requestOptions)
+            .then(response => response.json())
+            .then(profes => {
+                setProfe(profes); // Actualiza el estado con las opciones obtenidas del servidor
+            })
+            .catch(error => {
+                console.error('Error al obtener profesores:', error);
+            });
+
+    }, []);
+
+    useEffect(() => {
+        if (data) {
+            setItem({
+                MATERIA: data.MATERIA || '',
+                id_materia: data.id_materia || '',
+                nombre: data.nombre || '',
+                id_usuario: data.id_usuario || '',
+                id_curso: data.id_curso || '',
+            });
         }
     }, [data]);
-    
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setItem({ ...item, [name]: value });
-        
+
     };
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -38,7 +72,7 @@ const FormEditMateria = ({ data, handleClose }) => {
                 if (response.ok) {
                     console.log('Elemento actualizado con éxito');
                     handleClose();
-                 
+
 
                 } else {
                     console.error('Error al actualizar el elemento');
@@ -72,29 +106,41 @@ const FormEditMateria = ({ data, handleClose }) => {
                                     required
                                 />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="id_usuario"><h4>ID Profesor</h4></label>
-                                <input
-                                    type="number"
+                            <div className="form-floating">
+                                <select
+                                    required
                                     id="id_usuario"
                                     name='id_usuario'
-                                    className="form-control"
+                                    className="form-select"
                                     value={item.id_usuario}
                                     onChange={handleInputChange}
-                                    required
-                                />
+                                >
+                                    <option value="">Seleccione un Profesor</option>
+                                    {profe.map(option => (
+                                        <option key={option.id_usuario} value={option.id_usuario}>
+                                            {option.nombre} {option.apellido}
+                                        </option>
+                                    ))}
+                                </select>
+                                <label htmlFor="id_usuario"><h4>Profesor</h4></label>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="id_curso"><h4>ID Curso</h4></label>
-                                <input
-                                    type="number"
+                            <div className="form-floating">
+                                <select
+                                    required
                                     id="id_curso"
                                     name='id_curso'
-                                    className="form-control"
+                                    className="form-select"
                                     value={item.id_curso}
                                     onChange={handleInputChange}
-                                    required
-                                />
+                                >
+                                    <option value="">Seleccione un curso</option>
+                                    {cursos.map(option => (
+                                        <option key={option.id_curso} value={option.id_curso}>
+                                            {option.nombre}
+                                        </option>
+                                    ))}
+                                </select>
+                                <label htmlFor="id_curso"><h4>Curso</h4></label>
                             </div>
 
                             <button type="submit" className="btn btn-primary">Editar</button>

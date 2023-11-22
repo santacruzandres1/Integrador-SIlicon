@@ -36,6 +36,7 @@ const TablaMaterias = () => {
         
         } else {
           console.error('Error al eliminar la materia');
+          alert('Para eliminar la materia primero debe borrar todos los datos relacionados a la misma.');
         }
       })
       .catch((error) => {

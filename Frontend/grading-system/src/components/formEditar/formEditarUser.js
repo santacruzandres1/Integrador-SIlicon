@@ -1,7 +1,26 @@
 import { useState, useEffect } from 'react';
 
 function EditUser({ user, handleClose }) {
+
+
+
+  const [options, setOptions] = useState([]);
+  
   const [item, setItem] = useState({});
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  useEffect(() => {
+    // Reemplaza la URL con la que corresponda a tu API
+    fetch('http://localhost:8080/api/curso/nombres')
+      .then(response => response.json())
+      .then(data => {
+        setOptions(data); // Actualiza el estado con las opciones obtenidas del servidor
+      })
+      .catch(error => {
+        console.error('Error al obtener las opciones de cursos:', error);
+      });
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -38,6 +57,8 @@ function EditUser({ user, handleClose }) {
         if (response.ok) {
           console.log('Elemento actualizado con éxito');
           handleClose();
+
+          window.location.reload();
           
         } else {
           console.error('Error al actualizar el elemento');
@@ -107,46 +128,72 @@ function EditUser({ user, handleClose }) {
                   className="form-control"
                   value={item.email}
             onChange={handleInputChange}
-                  required
+                  readOnly
                 />
               </div>
+              <div className=" row">
 
-              <div className="form-group">
-                <label htmlFor="password"><h4>Password</h4></label>
-                <input
-                 name='password'
-                  type="password"
+                <label htmlFor="password"><h4>Contraseña</h4></label>
+                <div className='col'><input
+                  type={passwordVisible ? 'text' : 'password'}
                   id="password"
+                  name='password'
                   className="form-control"
                   value={item.password}
-            onChange={handleInputChange}
+                  onChange={handleInputChange}
                   required
-                />
+
+                /></div>
+                <div className='col'>
+                  <button type='button' className='btn ' onClick={() => setPasswordVisible(!passwordVisible)}>
+                    {passwordVisible ? <span class="material-symbols-outlined">
+                      visibility_off
+                    </span> : <span class="material-symbols-outlined">
+                      visibility
+                    </span>}
+                  </button>
+                </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="id_rol"><h4>Rol</h4></label>
-                <input
-                  type="number"
+             
+
+              <div className="form-floating">
+                <select
+                  required
+                  placeholder="Rol"
                   id="id_rol"
                   name='id_rol'
-                  className="form-control"
+                  className="form-select"
                   value={item.id_rol}
                   onChange={handleInputChange}
-                  required
-                />
+                >
+                  <option value="">Seleccione un Rol</option>
+                  <option value="1">Administrador</option>
+                  <option value="2">Alumno</option>
+                  <option value="3">Profesor</option>
+
+                </select>
+                <label htmlFor="id_rol"><h4>Rol</h4></label>
               </div>
-              <div className="form-group">
-                <label htmlFor="id_curso"><h4>Curso</h4></label>
-                <input
-                  type="number"
+
+
+              <div className="form-floating">
+                <select
+                  required
                   id="id_curso"
                   name='id_curso'
-                  className="form-control"
+                  className="form-select"
                   value={item.id_curso}
                   onChange={handleInputChange}
-                  
-                />
+                >
+                  <option value="">Seleccione un curso</option>
+                  {options.map(option => (
+                    <option key={option.id_curso} value={option.id_curso}>
+                      {option.nombre}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="id_curso"><h4>Curso</h4></label>
               </div>
 
               <button type="submit" className="btn btn-primary">Editar</button>
