@@ -49,7 +49,6 @@ const DashboardAlumno = () => {
 
 
   const [searchTerm, setSearchTerm] = useState('');
-
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };

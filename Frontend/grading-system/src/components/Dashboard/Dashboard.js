@@ -8,7 +8,6 @@ import Footer from '../footer/footer';
 import TablaMaterias from '../Tablas/TablaMaterias';
 import TablaCursos from '../Tablas/TablaCursos';
 import DataUser from '../datosUser';
-import DataUser from '../datosUser';
 import { useState } from 'react';
 
 
