@@ -2,11 +2,14 @@
 import React, { useState } from "react";
 import "./sideBar.css";
 import DataUser from "../datosUser";
-import { FaUsersGear, FaBook, FaPeopleRoof } from "react-icons/fa6";
+import { FaUsersGear, FaBook, FaPeopleRoof, FaBars, FaCalendarDays  } from "react-icons/fa6";
 import { FaHome } from "react-icons/fa";
 import Logout from "../Login/LogOut";
+import { MdAssignment } from "react-icons/md";
 
-const SideBar = () => {
+
+
+const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, handleCalificaciones, handleCalendar }) => {
   const { data } = DataUser();
   let rol = data.id_rol;
 
@@ -45,11 +48,6 @@ const SideBar = () => {
         icon: <FaPeopleRoof />,
         text: "Cursos",
         id: "cursos", // Agrega el ID de la sección correspondiente
-      },
-      {
-        icon: <Logout />,
-        text: "Logout",
-        id: "logout", // Agrega el ID de la sección correspondiente
       }
      
     ];
@@ -61,148 +59,120 @@ const SideBar = () => {
           style={expanded ? { left: "60%" } : { left: "5%" }}
           onClick={() => setExpanded(!expanded)}
         >
-          {/*<UilBars />*/}
+         <FaBars/>
         </div>
         <div
           className="sidebar"
           variants={sidebarVariants}
           animate={window.innerWidth <= 768 ? `${expanded}` : ""}
         >
+             <div className="logo">
+              <img
+                src={`http://localhost:8080/upload/${data.imagen}`}
+                alt=""
+                className='background rounded-circle'
+              />
+              <span>Administrador</span>
+            </div>
           <div className="menu">
-          <div className="logo">
-            <span>Administrador</span>
-          </div>
+         
             {menuItems.map((item, index) => (
-              <a
+              <button
                 key={index}
-                href={`#${item.id}`} // Usar el href para dirigir a los IDs
-                className={`menuItem ${
-                  selected === index ? "active" : ""
-                }`}
-                onClick={() => setSelected(index)}
+                className={`menuItem ${selected === index ? "active-menu" : ""}`}
+                onClick={() => {
+                  setSelected(index);
+                  if (item.id === "usuarios") {
+                    handleUsuario(); 
+                  } else if (item.id === "materias") {
+                    handleMateria(); 
+                  } else if (item.id === "cursos") {
+                    handleCurso(); 
+                  }
+                  else if (item.id === "dash") {
+                    handleWelcome(); 
+                  }
+                }}
               >
                 <div className="icon">{item.icon}</div>
                 <span>{item.text}</span>
-              </a>
+              </button>
             ))}
+            
           </div>
+          <Logout className="logout" />
         </div>
       </>
     );
   } else if (rol === 2) {
     const menuItems = [
       {
-        icon: <FaUsersGear />,
+        icon: <FaHome />,
         text: "Dashboaard",
-        id: "usuarios", // Agrega el ID de la sección correspondiente
-      },
-  
-      {
-        icon: <FaBook />,
-        text: "Materias",
-        id: "materias", // Agrega el ID de la sección correspondiente
+        id: "dash",
       },
       {
-        icon: <FaBook />,
+        icon: <MdAssignment />,
         text: "Calificaciones",
-        id: "materias", // Agrega el ID de la sección correspondiente
+        id: "calificaciones",
       },
       {
-        icon: <Logout />,
+        icon: <FaCalendarDays />,
+        text: "Calendario",
+        id: "calendar", // Agrega el ID de la sección correspondiente
       },
+     
     ];
     return (
       <>
-           <div
+        <div
           className="bars"
           style={expanded ? { left: "60%" } : { left: "5%" }}
           onClick={() => setExpanded(!expanded)}
         >
-          {/*<UilBars />*/}
+         <FaBars/>
         </div>
         <div
           className="sidebar"
           variants={sidebarVariants}
           animate={window.innerWidth <= 768 ? `${expanded}` : ""}
         >
-          <div className="logo">
-            <span>alumno</span>
-          </div>
+             <div className="logo">
+              <img
+                src={`http://localhost:8080/upload/${data.imagen}`}
+                alt=""
+                className='background rounded-circle'
+              />
+              <span>Alumno</span>
+            </div>
           <div className="menu">
+         
             {menuItems.map((item, index) => (
-              <a
+              <button
                 key={index}
-                href={`#${item.id}`} // Usar el href para dirigir a los IDs
-                className={`menuItem ${
-                  selected === index ? "active" : ""
-                }`}
-                onClick={() => setSelected(index)}
+                className={`menuItem ${selected === index ? "active-menu" : ""}`}
+                onClick={() => {
+                  setSelected(index);
+                  if (item.id === "calificaciones") {
+                    handleCalificaciones(); 
+                  } else if (item.id === "calendar") {
+                    handleCalendar(); 
+                  }
+                  else if (item.id === "dash") {
+                    handleWelcome(); 
+                  }
+                }}
               >
                 <div className="icon">{item.icon}</div>
                 <span>{item.text}</span>
-              </a>
+              </button>
             ))}
+            
           </div>
+          <Logout className="logout" />
         </div>
       </>
-    );
-  } else {
-    const menuItems = [
-      {
-        icon: <FaUsersGear />,
-        text: "Dashboaard",
-        id: "usuarios", // Agrega el ID de la sección correspondiente
-      },
-  
-      {
-        icon: <FaBook />,
-        text: "Materias",
-        id: "materias", // Agrega el ID de la sección correspondiente
-      },
-      {
-        icon: <FaBook />,
-        text: "Notas",
-        id: "materias", // Agrega el ID de la sección correspondiente
-      },
-      {
-        icon: <Logout />,
-      },
-    ];
-    return (
-      <>
-         <div
-          className="bars"
-          style={expanded ? { left: "60%" } : { left: "5%" }}
-          onClick={() => setExpanded(!expanded)}
-        >
-          {/*<UilBars />*/}
-        </div>
-        <div
-          className="sidebar"
-          variants={sidebarVariants}
-          animate={window.innerWidth <= 768 ? `${expanded}` : ""}
-        >
-          <div className="logo">
-            <span>alumno</span>
-          </div>
-          <div className="menu">
-            {menuItems.map((item, index) => (
-              <a
-                key={index}
-                href={`#${item.id}`} // Usar el href para dirigir a los IDs
-                className={`menuItem ${
-                  selected === index ? "active" : ""
-                }`}
-                onClick={() => setSelected(index)}
-              >
-                <div className="icon">{item.icon}</div>
-                <span>{item.text}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </>
-    );
+    )
   }
 };
 
