@@ -1,33 +1,35 @@
 @import '../../Assets/colors/colors.css';
 
+/* Sidebar */
 .sidebar {
   display: flex;
   flex-direction: column;
-  position: relative;
   padding-top: 4rem;
   transition: all 300ms ease;
   background-color: #cccccc;
+  height: 100%;
   width: 100%;
-  border-radius: 5rem 0 5rem 0;
-  justify-content: flex-start;
+  gap: 8px;
+  border-radius: 5rem 0 0 5rem;
+  justify-content: space-evenly;
   align-items: center;
-
 }
 
-/* logo */
 .bars {
   display: none;
 }
 
+/* Logo */
 .logo {
   display: flex;
-  height: 5rem;
+  flex-direction: column;
+  height: 10%;
   font-weight: bold;
   font-size: 22px;
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  height: 4%;
+  margin: 20px;
 }
 
 .logo>span>span {
@@ -35,63 +37,56 @@
 }
 
 .logo>img {
-  width: 3rem;
-  height: 3rem;
+  height: 5rem;
+  width: auto;
 }
 
-
-/* menu */
+/* Menu */
 .menu {
-  height: 100%;
-  margin-top: 1rem;
+  height: 60%;
+  width: 100%;
+  margin: 10px 0;
   display: flex;
-  position: fixed;
   flex-direction: column;
-  gap: 2rem;
-  justify-content:flex-start
+  gap: 8px;
 }
 
 .menuItem {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
+  gap: .5rem;
   height: 2.5rem;
   margin-left: 0px;
-  /* Cambia este valor a la cantidad deseada */
   position: relative;
   transition: all 200ms ease;
   border-radius: 0.7rem;
   font-size: 14px;
   transform: translateX(0);
-  /* Añade esta propiedad */
- 
-  
-
+  cursor: pointer;
 }
 
-.active {
+.active-menu {
   background: var(--activeItem);
-  justify-content: flex-start;
+  justify-content: start;
   margin-left: 0px;
   width: 100%;
   transition: all 300ms ease;
   transform: translateX(10px);
 }
 
-.menuItem:not(.active):hover {
+.menuItem:not(.active-menu):hover,
+.logout:hover {
   width: 100%;
   background: #e6e6e6;
   border-radius: 0.7rem;
   justify-content: flex-start;
   margin-left: 0px;
-  /* Asegúrate de establecerlo en 0px para que se mueva a la posición correcta */
   transition: all 100ms ease;
   transform: translateX(10px);
-  /* Cambia este valor a la cantidad deseada */
-
 }
 
-.active::before {
+.active-menu::before {
   position: relative;
   content: "";
   width: 8px;
@@ -100,8 +95,7 @@
   margin-right: calc(1rem - 8px);
 }
 
-
-/* Tablets */
+/* Media Queries */
 @media screen and (max-width: 1200px) {
   .menuItem>span {
     display: none;
@@ -114,14 +108,12 @@
 
 @media screen and (max-width: 768px) {
   .sidebar {
-
     position: fixed;
     z-index: 9;
     background: rgba(47, 46, 65, 0.54);
     width: 55%;
     padding-right: 1rem;
     height: 100%;
-
   }
 
   .menuItem>span {
@@ -155,7 +147,40 @@
   }
 }
 
+/* General */
 a {
   text-decoration: none;
   color: var(--color-text);
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: 0.5rem;
+  margin-left: 10px;
+  position: relative;
+  transition: all 200ms ease;
+  border-radius: 0.7rem;
+  font-size: 14px;
+  transform: translateX(0);
+  cursor: pointer;
+}
+
+.logout:hover {
+  width: 90%;
+  background: #e6e6e6;
+  font-weight: bold;
+  color: #dc3545;
+  border-radius: 0.7rem;
+  justify-content: flex-start;
+  margin-left: 0px;
+  transition: all 150ms ease;
+  transform: translateX(5px);
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
