@@ -49,7 +49,7 @@ const Login = () => {
           if (result.ok) {
             sessionStorage.setItem('token', result.body.accessToken);
 
-            navigate('/dashboard')
+            navigate('/dashboard2')
             toast.success("Bienvenido", {
               position: "bottom-center",
               autoClose: 5000,
@@ -94,7 +94,6 @@ const Login = () => {
 
   return (
     <>
-      <br></br>
       <div className='container text-center'>
         <h2>Iniciar Sesión {rol}</h2>
       </div>
