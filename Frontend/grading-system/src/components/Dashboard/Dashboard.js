@@ -185,7 +185,7 @@ const handleCurso = () => {
 
         <Footer></Footer>
 
-
+      
       </>
     );
   } else { return ("Usuario incorrecto") }

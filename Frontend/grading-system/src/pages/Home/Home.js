@@ -8,9 +8,9 @@ import { Typewriter} from 'react-simple-typewriter';
 
 const Home = () => {
     return (
-        <>
-    <Header className="header" />
-            <div className="hero container-fluid text-align-start justify-content-round" >
+        <div className='home'>
+                <Header className="header" />
+            <div className="hero text-align-start justify-content-round" >
             
             <h1 id='title'>Sistema de Gestión Académica</h1>
             <div className='text'>
@@ -34,13 +34,13 @@ const Home = () => {
             </div>
            
            
-            <Button className='btn-secondary ' href='#login'>Get Started!</Button>
+            <Button className='btn-secondary ' href='#login' id="button">Get Started!</Button>
             </div>
             <section className="container-fluid" id="login">
             <LoginRol />
             </section>
         <Footer/>
-</>
+</div>
             
     )
 }

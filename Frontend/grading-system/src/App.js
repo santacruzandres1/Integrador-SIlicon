@@ -18,13 +18,16 @@ import FormCrearNota from './components/formCrear/formCrearNota';
 //import Dashboard2 from './components/Dashboard/Dashboard2'
 //import Usuarios from './components/Dashboard/Usuarios';
 //import Cursos from './components/Dashboard/Cursos';
+import Dashboard2 from './components/Dashboard/Dashboard2'
+//import Usuarios from './components/Dashboard/Usuarios';
+//import Cursos from './components/Dashboard/Cursos';
 
 
 function App() {
 
  
   return (
-    <div className="App container">
+    <div className="App">
      
     <ToastContainer></ToastContainer>
       <Routes>
@@ -33,7 +36,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         {/* <Route path="/usuarios" element={<Usuarios/>} />
         <Route path="/cursos" element={<Cursos/>} /> */}
-        {/* <Route path="/dashboard2" element={<Dashboard2 />} /> */}
+       <Route path="/dashboard2" element={<Dashboard2 />} /> 
         <Route path="/About" element={<About />} />
         <Route path="/Contact" element={<Contact/>} />
         <Route path="/not-found" element={<h1>Not Found</h1>} />

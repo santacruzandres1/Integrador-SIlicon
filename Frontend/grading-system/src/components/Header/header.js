@@ -76,7 +76,7 @@ const navigate = useNavigate();
                     <Navbar.Collapse className="justify-content-center" id="responsive-navbar-nav">
                         <Nav >
     
-                            <ul className="nav nav-underline ul ">
+                            <ul className="nav  nav-underline ul ">
                                 <li className="nav-item"><NavLink className="nav-link " to="/">Inicio</NavLink></li>
                            
                                 <li className="nav-item"><NavLink className="nav-link " to="/About">Sobre Nosotros</NavLink></li>

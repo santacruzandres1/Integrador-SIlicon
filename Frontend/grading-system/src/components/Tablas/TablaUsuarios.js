@@ -240,36 +240,33 @@ const TablaUsuarios = () => {
         <br></br>
 
         <nav aria-label="Page navigation">
-          <ul className="pagination justify-content-center">
-            <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
-              <button className="page-link  " onClick={handlePreviousPage}>
-                <span class="material-symbols-outlined">
-                  keyboard_double_arrow_left
-                </span>
-              </button>
-            </li>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <li
-                key={index}
-                className={`page-item ${paginaActual === index + 1 ? 'active' : ''}`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            ))}
-            <li className={`page-item ${paginaActual === totalPages ? 'disabled' : ''}`} >
-              <button className="page-link " onClick={handleNextPage} >
-                <span className="material-symbols-outlined">
-                  keyboard_double_arrow_right
-                </span>
-              </button>
-            </li>
-          </ul>
-        </nav>
+  <ul className="pagination justify-content-center">
+    <li className={`page-item ${paginaActual === 1 ? 'disabled' : ''}`}>
+      <button className="page-link" onClick={handlePreviousPage}>
+        Previous
+      </button>
+    </li>
+    {Array.from({ length: totalPages }, (_, index) => (
+      <li
+        key={index}
+        className={`page-item ${paginaActual === index + 1 ? 'active' : ''}`}
+      >
+        <button
+          className="page-link"
+          onClick={() => handlePageChange(index + 1)}
+        >
+          {index + 1}
+        </button>
+      </li>
+    ))}
+    <li className={`page-item ${paginaActual === totalPages ? 'disabled' : ''}`}>
+      <button className="page-link" onClick={handleNextPage}>
+        Next
+      </button>
+    </li>
+  </ul>
+</nav>
+
 
         <Modal show={showModalEdit || showModalCreate} onHide={handleClose}>
           <Modal.Header closeButton>

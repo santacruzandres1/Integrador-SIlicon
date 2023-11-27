@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Welcome = () => {
+
+const Welcome = ({userName}) => {
+   
     return (
     <>
-    <h2> {`Welcome `}</h2>
+    <h2> Bienvenido/a {userName} </h2>
+        
     </>
 )}
 

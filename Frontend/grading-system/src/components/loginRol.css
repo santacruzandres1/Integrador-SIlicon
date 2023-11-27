@@ -2,6 +2,7 @@
 .custom-card {
     width: 250px;
     height: 350px;
+    margin: 20px;
     perspective: 1000px;
     cursor: pointer;
     position: relative;
@@ -9,18 +10,31 @@
   }
   #btn-card {
     display: flex;
-    box-sizing: content-box;
+    box-sizing: border-box;
     text-decoration: none;
-    height: 40px;
-    width: 100px;
-    color: white;
-    background-color:#2F2E41;
-    border-radius: 30px;
+    width: 60%;
+    height: 60px;
+    color: var(--color-accent-light);
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: var(--color-accent-blue)  ;
+    border-radius: 15px;
     justify-content: center;
     align-items: center;
+    transition: .5s;
+    border: 1px solid var(--color-accent-blue);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+
   }
+  #btn-card:hover {
+    background-color: #fac166;
+    color: var(--color-accent-blue);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--color-accent-blue);
+}
+
   .custom-card .front {
-    background-color: #6C757D;
+    background-color: #D1D1D2;
   }
   
   
@@ -102,6 +116,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -109,4 +124,21 @@
     backface-visibility: hidden;
     border-radius: 50px;
     transition: transform 1s, opacity 1s;
+  }
+
+  #card-desc{
+    font-size: 1.2rem;
+    font-weight: lighter;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  @media screen and (max-width: 768px) {
+    .custom-card {
+      width: 200px;
+      height: 300px;
+    }
+    
   }

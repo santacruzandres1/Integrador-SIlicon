@@ -34,7 +34,7 @@ export function useFetch(url) {
       .finally(() => setLoading(false));
 
     return () => abortController.abort();
-  }, [url, data]);
+  }, [url]);
 
   const handleCancelRequest = () => {
     if (controller) {

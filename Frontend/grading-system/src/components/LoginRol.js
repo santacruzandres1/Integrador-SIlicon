@@ -7,7 +7,7 @@ import './loginRol.css';
 
 export const rol = [
   { id: 1, name: 'Docentes', descripcion: 'Gestione las calificaciones de los alumnos', imageID: iconDocente },
-  { id: 2, name: 'Alumnos', descripcion: 'Vea sus calificaciones', imageID: iconAlumno },
+  { id: 2, name: 'Alumnos', descripcion: 'Accceda a sus calificaciones y horarios de clases', imageID: iconAlumno },
   { id: 3, name: 'Administracion', descripcion: 'Gestione usuarios, cursos y materias de la institución', imageID: iconAdmin }
 ];
 
@@ -41,7 +41,7 @@ const LoginRol = () => {
                       <h4 className="title">{rol.name}</h4>
                     </div>
                     <div className="back">
-                      <p>{rol.descripcion}</p>
+                      <p id="card-desc">{rol.descripcion}</p>
                       <Link id="btn-card" to={`/login/${rol.name}`}>
                         Ingresar
                       </Link>
