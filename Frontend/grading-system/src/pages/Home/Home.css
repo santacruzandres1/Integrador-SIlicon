@@ -21,6 +21,7 @@ a {
     justify-content: center;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 /* Estilos del héroe, sección principal */

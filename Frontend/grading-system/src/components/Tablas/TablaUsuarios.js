@@ -176,7 +176,7 @@ const TablaUsuarios = () => {
   return (
     <>
       <div className="container">
-        <div class="row justify-content-center align-items-center g-2">
+        <div className="row justify-content-center align-items-center g-2">
           <h3>Administracion de Usuarios</h3>
           <div className="col-2 ">  <button onClick={handleShowCreate} className="btn btn-dark">
             Agregar Usuario

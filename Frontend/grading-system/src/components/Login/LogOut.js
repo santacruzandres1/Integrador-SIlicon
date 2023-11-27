@@ -18,7 +18,7 @@ function Logout() {
 
     return (
         <div className='logout'>
-            <FaSignOutAlt icon={FaSignOutAlt} onClick={handleShow} className="logout-icon" />
+            <FaSignOutAlt onClick={handleShow} className="logout-icon" />
             <a onClick={handleShow} className="logout-text">Logout</a>
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Body>
