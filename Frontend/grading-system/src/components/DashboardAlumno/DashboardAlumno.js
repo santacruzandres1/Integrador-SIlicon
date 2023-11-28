@@ -82,7 +82,7 @@ const DashboardAlumno = () => {
     <>
       <hr />
       <div>
-        <h2>DASHBOARD ALUMNO</h2>
+        <h2>CALIFICACIONES</h2>
         <p>Escriba el nombre de la materia que desea informarse</p>
         <div className="container col-6">
           <form className="d-flex" role="search">
@@ -108,7 +108,7 @@ const DashboardAlumno = () => {
               </tr>
             </thead>
             {filteredData.map(datos => (
-              <tbody key={datos.nombre}>
+              <tbody >
                 <tr>
                   <td>{datos.nombre}</td>
                   <td>{datos.descripcion}</td>
