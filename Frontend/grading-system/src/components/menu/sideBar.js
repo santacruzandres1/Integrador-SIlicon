@@ -13,8 +13,6 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
   const { data } = DataUser();
   let rol = data.id_rol;
 
-  console.log("Rol:", rol);
-
   const [selected, setSelected] = useState(0);
   const [expanded, setExpanded] = useState(true);
 
@@ -30,22 +28,22 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
   if (rol === 1) {
     const menuItems = [
       {
-        icon: <FaHome />,
+        icono: <FaHome />,
         text: "Dashboaard",
         id: "dash", // Agrega el ID de la sección correspondiente
       },
       {
-        icon: <FaUsersGear />,
+        icono: <FaUsersGear />,
         text: "Usuarios",
         id: "usuarios", // Agrega el ID de la sección correspondiente
       },
       {
-        icon: <FaBook />,
+        icono: <FaBook />,
         text: "Materias",
         id: "materias", // Agrega el ID de la sección correspondiente
       },
       {
-        icon: <FaPeopleRoof />,
+        icono: <FaPeopleRoof />,
         text: "Cursos",
         id: "cursos", // Agrega el ID de la sección correspondiente
       }
@@ -94,7 +92,7 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
                   }
                 }}
               >
-                <div className="icon">{item.icon}</div>
+                <div className="icons">{item.icono}</div>
                 <span>{item.text}</span>
               </button>
             ))}
@@ -107,17 +105,17 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
   } else if (rol === 2) {
     const menuItems = [
       {
-        icon: <FaHome />,
+        icono: <FaHome />,
         text: "Dashboaard",
         id: "dash",
       },
       {
-        icon: <MdAssignment />,
+        icono: <MdAssignment />,
         text: "Calificaciones",
         id: "calificaciones",
       },
       {
-        icon: <FaCalendarDays />,
+        icono: <FaCalendarDays />,
         text: "Calendario",
         id: "calendar", // Agrega el ID de la sección correspondiente
       },
@@ -163,7 +161,7 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
                   }
                 }}
               >
-                <div className="icon">{item.icon}</div>
+                <div className="icons">{item.icono}</div>
                 <span>{item.text}</span>
               </button>
             ))}
