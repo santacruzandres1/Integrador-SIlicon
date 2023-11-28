@@ -96,6 +96,8 @@ const Dashboard2 = () => {
     }
 
     const userName = [data.nombre, " ", data.apellido];
+    const avatar = (data.id_usuario + 100);
+   
     
     if (rol === 1) {
 
@@ -108,6 +110,9 @@ const Dashboard2 = () => {
                             handleMateria={handleMateria}
                             handleCurso={handleCurso}
                             handleWelcome={handleWelcome}
+                            avatar={avatar}
+                            
+
                         />
                         
                         <div className='container '>
@@ -152,12 +157,16 @@ const Dashboard2 = () => {
                             handleCurso={handleCurso}
                             handleWelcome={handleWelcome}
                             handleCalendar={handleCalendar}
+                            avatar={avatar}
                         />
                         
                         <div className='container '>
                             {welcome && (
                              <div className='container' id='welcome'>
-                            <Welcome userName={userName} rol={rol} />
+                            <Welcome userName={userName}
+                                     rol={rol}
+                                    avatar={avatar}         
+                            />
                             <img className='dash-img' src={imageSrc} alt='dashboard' />
                         
                                 </div>

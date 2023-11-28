@@ -6,10 +6,10 @@ import { FaUsersGear, FaBook, FaPeopleRoof, FaBars, FaCalendarDays  } from "reac
 import { FaHome } from "react-icons/fa";
 import Logout from "../Login/LogOut";
 import { MdAssignment } from "react-icons/md";
+import CustomAvatar from "../menu/Avatar";
 
 
-
-const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, handleCalificaciones, handleCalendar }) => {
+const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, handleCalificaciones, handleCalendar, avatar }) => {
   const { data } = DataUser();
   let rol = data.id_rol;
 
@@ -64,12 +64,19 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
           variants={sidebarVariants}
           animate={window.innerWidth <= 768 ? `${expanded}` : ""}
         >
-             <div className="logo">
-              <img
-                src={`http://localhost:8080/upload/${data.imagen}`}
-                alt=""
-                className='background rounded-circle'
-              />
+             <div className="avatar">
+             {data.imagen ? (
+        <img
+            src={`http://localhost:8080/upload/${data.imagen}`}
+            alt=""
+            className='background rounded-circle'
+        />
+    ) : (
+        <CustomAvatar
+            avatar={avatar}
+            colors={['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90']}
+        />
+    )}
               <span>Administrador</span>
             </div>
           <div className="menu">
@@ -135,12 +142,19 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
           variants={sidebarVariants}
           animate={window.innerWidth <= 768 ? `${expanded}` : ""}
         >
-             <div className="logo">
-              <img
-                src={`http://localhost:8080/upload/${data.imagen}`}
-                alt=""
-                className='background rounded-circle'
-              />
+             <div className="avatar">
+             {data.imagen ? (
+        <img
+            src={`http://localhost:8080/upload/${data.imagen}`}
+            alt=""
+            className='background rounded-circle'
+        />
+    ) : (
+        <CustomAvatar
+            avatar={avatar}
+            colors={['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90']}
+        />
+    )}
               <span>Alumno</span>
             </div>
           <div className="menu">
