@@ -58,21 +58,21 @@ const DashboardAlumno = () => {
     item.nombre[0].toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const promedioColumna = filteredData.map(datos => {
-    // Filtrar las notas no nulas ni 0
-    const notasValidas = [datos.periodo_1, datos.periodo_2, datos.periodo_3].filter(nota => nota !== 0 && nota !== null);
+  // const promedioColumna = filteredData.map(datos => {
+  //   // Filtrar las notas no nulas ni 0
+  //   const notasValidas = [datos.periodo_1, datos.periodo_2, datos.periodo_3].filter(nota => nota !== 0 && nota !== null);
 
-    // Calcular el promedio solo con las notas válidas
-    const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
+  //   // Calcular el promedio solo con las notas válidas
+  //   const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
 
-    return {
-        materia: datos.nombre,
-        nota1: datos.periodo_1,
-        nota2: datos.periodo_2,
-        nota3: datos.periodo_3,
-        promedio: promedio
-    };
-  });
+  //   return {
+  //       materia: datos.nombre,
+  //       nota1: datos.periodo_1,
+  //       nota2: datos.periodo_2,
+  //       nota3: datos.periodo_3,
+  //       promedio: promedio
+  //   };
+  // });
 
   if (loading) {
     return <p>Cargando...</p>; // Mientras se obtiene el ID del usuario, muestra un indicador de carga
@@ -102,20 +102,18 @@ const DashboardAlumno = () => {
             <thead>
               <tr>
                 <th scope="col">Materia</th>
-                <th scope="col">1° Trimestre</th>
-                <th scope="col">2° Trimestre</th>
-                <th scope="col">3° Trimestre</th>
-                <th scope="col">Promedio</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Nota</th>
+           
               </tr>
             </thead>
-            {promedioColumna.map(datos => (
-              <tbody key={datos.materia}>
+            {filteredData.map(datos => (
+              <tbody key={datos.nombre}>
                 <tr>
-                  <td>{datos.materia}</td>
-                  <td>{datos.nota1}</td>
-                  <td>{datos.nota2}</td>
-                  <td>{datos.nota3}</td>
-                  <td>{datos.promedio}</td>
+                  <td>{datos.nombre}</td>
+                  <td>{datos.descripcion}</td>
+                  <td>{datos.valor}</td>
+                 
                 </tr>
               </tbody>
             ))}

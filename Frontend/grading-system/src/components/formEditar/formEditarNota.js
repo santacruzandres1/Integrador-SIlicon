@@ -1,41 +1,50 @@
-import React, { useState,  } from 'react';
+import React, { useState, useEffect  } from 'react';
 
 
 const EditarNota = ({ notas, handleClose }) => {
  
-  
+  const [item, setItem] = useState({});
 
-
-  
-  const [data , setData] = useState({  
-    id_usuario:  notas.id_usuario,
-    id_materia: notas.id_materia,
-      periodo_1: null,
-      periodo_2: null,
-      periodo_3: null
-  
-   
-  });
-
-
+  useEffect(() => {
+    if (notas) {
+        setItem({
+          id_usuario:  notas.id_usuario,
+          id_materia: notas.id_materia,
+          descripcion : notas.descripcion,
+          valor : notas.valor 
+        });
+    }
+}
+, [notas]);
  
 
 
-
-
-const handleInputChange = (e) => {
+  const handleInputChangeNota = (e) => {
     const { name, value } = e.target;
+
     if (value >= 0 && value <= 10) {
-      setData({
-        ...data,
+      setItem({
+        ...item,
         [name]: value,
       });
     } else {
      alert('El valor debe estar entre 1 y 10')
       console.error('El valor debe estar entre 1 y 10');
     }
+    
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    
+      setItem({
+        ...item,
+        [name]: value,
+      });
+   
+    
+  };
 
 
 
@@ -48,7 +57,7 @@ const handleInputChange = (e) => {
       "Content-Type": "application/json",
       'authorization': sessionStorage.getItem('token')
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(item),
   
   })
   .then((response) => {
@@ -81,43 +90,32 @@ const handleInputChange = (e) => {
             <form onSubmit={handleSubmit}>
         
               <div className="form-group">
-                <label htmlFor="periodo_1"><h4>Periodo 1</h4></label>
+                <label htmlFor="descripcion"><h4>Descripcion</h4></label>
                 <input
-                  type="float"
-                  id="periodo_1"
-                  name='periodo_1'
+                  type="text"
+                  id="descripcion"
+                  name='descripcion'
                   className="form-control"
-                  value={data.periodo_1}
+                  value={item.descripcion}
                   onChange={handleInputChange}
+                  required
                 
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="periodo_2"><h4>Periodo 2</h4></label>
+                <label htmlFor="valor"><h4>Nota</h4></label>
                 <input
 
                   type="float"
-                  id="periodo_2"
-                  name='periodo_2'
+                  id="valor"
+                  name='valor'
                   className="form-control"
-                  value={data.periodo_2}
-                  onChange={handleInputChange}
-                 
+                  value={item.valor}
+                  onChange={handleInputChangeNota}
+                 required
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="periodo_3"><h4>Periodo 3</h4></label>
-                <input
-
-                  type="float"
-                  id="periodo_3"
-                  name='periodo_3'
-                  className="form-control"
-                  value={data.periodo_3}
-                  onChange={handleInputChange}
-                 
-                />
-              </div>
+              
               <button type="submit" className="btn btn-primary">Editar</button>
             </form>
           </div>

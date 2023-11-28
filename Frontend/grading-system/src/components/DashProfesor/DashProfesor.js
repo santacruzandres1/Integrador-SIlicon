@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Modal } from "react-bootstrap";
-import { useFetch } from '../../useFetch';
+
 
 import TablaAlumnos from './TablaAlumnos';
 
@@ -19,7 +19,33 @@ const DashProfesor = () => {
   const {data} = DataUser()
   const id_user = data.id_usuario;
 
-const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModalDel, setShowModalDel] = useState(false);
+
+const [nota, setNota] = useState([])
+
+useEffect(() => {
+
+  const requestOptions = {
+    method: 'GET', // Método GET
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': sessionStorage.getItem('token')
+    }
+   
+  };
+
+
+  fetch(`http://localhost:8080/api/nota/${id_user}`, requestOptions)
+    .then(response => response.json())
+    .then(data => setNota(data))
+    .catch((error) => {
+      if (error.name === 'AbortError') {
+        console.log('Request aborted');
+      } 
+    })
+    
+}, [showModalDel,showModalEdit,id_user]);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTermApellido, setSearchTermApellido] = useState('');
@@ -53,7 +79,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
 
 
   );
-  const [showModalDel, setShowModalDel] = useState(false);
+ 
   const handleCloseDel = () => setShowModalDel(false);
   const handleShowDel = (id_materia,id_usuario) => {
     let data = {id_materia,id_usuario}
@@ -65,7 +91,7 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
   const [usuarioAEditar, setUsuarioAEditar] = useState({ 
     id_materia:null,
     id_usuario:null}); // Nuevo estado
-  const [showModalEdit, setShowModalEdit] = useState(false);
+ 
 
   const handleShowEdit = (id_materia,id_usuario) => {
     let data = {id_materia,id_usuario}
@@ -105,25 +131,25 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
   }
     
 
-    const promedioColumna = filteredData.map(datos => {
-      // Filtrar las notas no nulas ni 0
-      const notasValidas = [datos.periodo_1, datos.periodo_2, datos.periodo_3].filter(nota => nota !== 0 && nota !== null);
+  //   const promedioColumna = filteredData.map(datos => {
+  //     // Filtrar las notas no nulas ni 0
+  //     const notasValidas = [datos.periodo_1, datos.periodo_2, datos.periodo_3].filter(nota => nota !== 0 && nota !== null);
   
-      // Calcular el promedio solo con las notas válidas
-      const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
+  //     // Calcular el promedio solo con las notas válidas
+  //     const promedio = (notasValidas.reduce((total, nota) => total + nota, 0) / notasValidas.length).toFixed(2);
   
-      return {
-        id_materia:datos.id_materia,
-        id_usuario:datos.id_usuario,
-        apellido:datos.apellido,
-        nombre:datos.nombre,
-        materia: datos.materia,
-          nota1: datos.periodo_1,
-          nota2: datos.periodo_2,
-          nota3: datos.periodo_3,
-          promedio: promedio
-      };
-  });
+  //     return {
+  //       id_materia:datos.id_materia,
+  //       id_usuario:datos.id_usuario,
+  //       apellido:datos.apellido,
+  //       nombre:datos.nombre,
+  //       materia: datos.materia,
+  //         nota1: datos.periodo_1,
+  //         nota2: datos.periodo_2,
+  //         nota3: datos.periodo_3,
+  //         promedio: promedio
+  //     };
+  // });
 
 
     return (
@@ -218,26 +244,26 @@ const { data: nota } = useFetch(`http://localhost:8080/api/nota/${id_user}`);
                             <th scope="col">Alumno</th>
                         
                             <th scope="col">Materia</th>
-                            <th scope="col">1° Trimestre</th>
-                            <th scope="col">2° Trimestre</th>
-                            <th scope="col">3° Trimestre</th>
-                            <th scope="col">Promedio</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col" >Nota</th>
+
+                          
 
                         </tr>
                     </thead>
-                    {promedioColumna.map(nota => (
+                    {filteredData.map(nota => (
                         <tbody>
                             <tr >
                             
                         
                                 <td>{nota.apellido} {nota.nombre}</td>
                                 <td>{nota.materia}</td>
-                                <td>{nota.nota1}</td>
-                                <td>{nota.nota2}</td>
-                                <td>{nota.nota3}</td>
-                                <td>{nota.promedio}</td>
+                               
+                                <td>{nota.descripcion}</td>
+                                <td>{nota.valor}</td>
+                             
+                               
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                {/* <Link  to={`/dashboard/editarNota/${nota.id_materia}/${nota.id_usuario}`} type="button" class="btn btn-dark">Editar Nota </Link> */}
                                 <button onClick={() => handleShowDel(nota.id_materia,nota.id_usuario)} type="button" className="btn btn-dark">Borrar Nota</button>
                                 <button onClick={() => handleShowEdit(nota.id_materia,nota.id_usuario)} type="button" className="btn btn-dark">Editar Nota</button>
 
