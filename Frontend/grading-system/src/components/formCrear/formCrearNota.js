@@ -58,7 +58,7 @@ const handleInputChangeNota = (e) => {
   .then((response) => {
     if (response.ok) {
         console.log('Elemento actualizado con éxito');
-     navigate('/dashboard')
+     navigate('/dashboard2')
        
 
     } else {

@@ -232,9 +232,6 @@ useEffect(() => {
         </Modal>
 
             </div>
-            <br></br> <br></br>
-
-
             <div className="container item">
 
                 <table class="table table-striped-columns">

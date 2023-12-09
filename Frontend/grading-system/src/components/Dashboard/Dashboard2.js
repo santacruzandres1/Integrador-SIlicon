@@ -11,14 +11,7 @@ import TablaUsuarios from '../Tablas/TablaUsuarios';
 import { useState } from 'react';
 import DashboardAlumno from '../DashboardAlumno/DashboardAlumno';
 import DashProfesor from '../DashProfesor/DashProfesor';
-import Header from '../Header/header';
-import Footer from '../footer/footer';
 import CalendarioAlumno from '../DashboardAlumno/Calendario';
-
-
-
-
-
 
 const Dashboard2 = () => {
     const { data } = DataUser()
@@ -28,6 +21,7 @@ const Dashboard2 = () => {
     const [curso, setCurso] = useState(false)
     const [calificaciones, setCalificaciones] = useState(false)
     const [calendar, setCalendar] = useState(false)
+    const [settings, setSettings] = useState(false)
 
     const handleUsuario = () => {
         setusuario(true);
@@ -36,6 +30,7 @@ const Dashboard2 = () => {
         setWelcome(false);
         setCalificaciones(false);
         setCalendar(false);
+        setSettings(false);
 
     };
     const handleMateria = () => {
@@ -44,6 +39,7 @@ const Dashboard2 = () => {
         setCurso(false)
         setWelcome(false);
         setCalificaciones(false);
+        setSettings(false);
         setCalendar(false);
     };
     const handleCurso = () => {
@@ -53,6 +49,7 @@ const Dashboard2 = () => {
         setWelcome(false);
         setCalificaciones(false);
         setCalendar(false);
+        setSettings(false);
 
     };
 
@@ -62,6 +59,7 @@ const Dashboard2 = () => {
         setMateria(false);
         setusuario(false);
         setCalificaciones(false);
+        setSettings(false);
         setCalendar(false);
     };
 
@@ -71,6 +69,7 @@ const Dashboard2 = () => {
         setMateria(false);
         setusuario(false);
         setCurso(false);
+        setSettings(false);
         setCalendar(false);
     }
 
@@ -81,6 +80,17 @@ const Dashboard2 = () => {
         setusuario(false);
         setCurso(false);
         setCalendar(true);
+        setSettings(false);
+    }
+
+    const handleSettings = () => {
+        setWelcome(false);
+        setCalificaciones(false);
+        setMateria(false);
+        setusuario(false);
+        setCurso(false);
+        setCalendar(false);
+        setSettings(true);
     }
 
     const rol = data.id_rol;
@@ -105,13 +115,14 @@ const Dashboard2 = () => {
             <>
                 <div className='Dash' id="dash">
                     <div className='DashGlass'>
+                        
                         <SideBar
                             handleUsuario={handleUsuario}
                             handleMateria={handleMateria}
                             handleCurso={handleCurso}
                             handleWelcome={handleWelcome}
                             avatar={avatar}
-                            
+                            handleSettings={handleSettings}
 
                         />
                         
@@ -136,6 +147,11 @@ const Dashboard2 = () => {
                     {curso && (
                         <div className='container' id='cursos'>
                             <TablaCursos />
+                        </div>
+                    )}
+                    {settings && (
+                        <div className='container' id='settings'>
+                            <h1>Settings</h1>
                         </div>
                     )}
                 </div>
@@ -198,34 +214,42 @@ const Dashboard2 = () => {
     else if (rol === 3) {
         return (
             <>
-                <Header></Header>
-
-                <br></br>
-                <div className='row'>
-                    <div className='col'>
-                        <div className='image-container'>
-                            <img
-                                src={`http://localhost:8080/upload/${data.imagen}`}
-                                alt=""
-                                className='background rounded-circle'
+                <div className='Dash' id="dash">
+                    <div className='DashGlass'>
+                        <SideBar
+                            handleCalificaciones={handleCalificaciones}
+                            handleMateria={handleMateria}
+                            handleCurso={handleCurso}
+                            handleWelcome={handleWelcome}
+                            handleCalendar={handleCalendar}
+                            avatar={avatar}
+                        />
+                        
+                        <div className='container '>
+                            {welcome && (
+                             <div className='container' id='welcome'>
+                            <Welcome userName={userName}
+                                     rol={rol}
+                                    avatar={avatar}         
                             />
+                            <img className='dash-img' src={imageSrc} alt='dashboard' />
+                        
+                                </div>
+                            )}
+                    {calificaciones && (
+                        <div className='container' id='calificaciones'>
+                            <DashProfesor />
                         </div>
-                    </div>
-                    <div className='col'>
-                        <h3>Bienvenid@ {userName} !</h3>
-                    </div>
+                    )}
+                    {calendar && (
+                        <div className='container' id='calendar'>
+                           <CalendarioAlumno />
+                        </div>
+                    )}
                 </div>
 
-
-                <br></br>
-
-
-                <DashProfesor></DashProfesor>
-
-
-
-                <Footer></Footer>
-
+                    </div>
+                </div>
 
             </>
         );
