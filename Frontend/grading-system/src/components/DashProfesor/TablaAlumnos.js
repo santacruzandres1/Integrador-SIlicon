@@ -1,14 +1,33 @@
 import React, { useState} from 'react';
 import { useFetch } from '../../useFetch';
 import DataUser from '../datosUser';
-import { Link } from 'react-router-dom';
+
+import AlumnosMateria from './AlumnosMateria';
 
 const TablaAlumnos = () => {
 
   //const [selectedMateria, setSelectedMateria] = useState(null);
   const {data} = DataUser()
   const id_usuario = data.id_usuario;
- // const [alumnos, setAlumnos] = useState([]);
+  const [selectedMateria, setSelectedMateria] = useState(null);
+  
+
+  const { data: materias } = useFetch(`http://localhost:8080/api/materia/profesor-materias/${id_usuario}`);
+  
+
+const [listaAlumnos, setLista] = useState(false)
+ 
+  
+const handleListaAlumnos = (idMateria) => {
+  setSelectedMateria(idMateria);
+  setLista(true);
+};
+
+
+
+   
+
+ 
 
  const [paginaActual, setPaginaActual] = useState(1);
 
@@ -16,7 +35,9 @@ const TablaAlumnos = () => {
  const ITEMS_PER_PAGE = 5;
 
   // Paso 1: Obtener las materias que el profesor da
-  const { data: materias } = useFetch(`http://localhost:8080/api/materia/profesor-materias/${id_usuario}`);
+
+
+ 
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -55,11 +76,11 @@ const TablaAlumnos = () => {
 
 
 
-  
+ 
   return (
     <>
     <br></br>
-    <h2>Alumnos Inscriptos en sus Materias</h2>
+    <h2>Materias</h2>
     <br></br>
      <div className="container "><div className="container-fluid">
                         <form className="d-flex" role="search">
@@ -76,7 +97,38 @@ const TablaAlumnos = () => {
                     </div></div><br></br>
     <div className="container item">
 
-<table class="table table-striped-columns">
+    <table class="table table-striped-columns">
+        <thead>
+          <tr>
+            <th scope="col">Materia</th>
+            <th scope="col">Curso</th>
+          </tr>
+        </thead>
+        {paginatedData.map((nota) => (
+          <tbody key={nota.id_materia}>
+            <tr>
+              <td>{nota.MATERIA}</td>
+              <td>{nota.curso}</td>
+              <button
+                className='btn btn-dark'
+                onClick={() => handleListaAlumnos(nota.id_materia)}
+              >
+                Alumnos
+              </button>
+            </tr>
+            {listaAlumnos && selectedMateria === nota.id_materia && (
+              <AlumnosMateria idMateria={nota.id_materia}></AlumnosMateria>
+            )}
+          </tbody>
+        ))}
+      </table>
+
+
+
+
+
+
+{/* <table class="table table-striped-columns">
     <thead>
         <tr>
         <th scope="col">Curso</th>
@@ -102,7 +154,7 @@ const TablaAlumnos = () => {
             </tr>
 
         </tbody>))}
-</table>
+</table> */}
 
 <br></br>
 
@@ -139,8 +191,14 @@ const TablaAlumnos = () => {
 
 </div>
      
+<br></br>
+
+
+
     </>
   );
+
+
 };
 
 export default TablaAlumnos;
