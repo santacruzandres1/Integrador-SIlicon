@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Modal } from "react-bootstrap";
-
-
 import TablaAlumnos from './TablaAlumnos';
-
 import DataUser from '../datosUser';
 import FormEditarNota from '../formEditar/formEditarNota';
 
@@ -157,16 +154,11 @@ useEffect(() => {
       <>
 
             <div>
-          <h2>DASHBOARD PROFESOR </h2>
-
                 <div>
                 <TablaAlumnos />
             </div>
         </div>
-
-        <br></br>
     <h2>Notas de los Alumnos </h2>
-    <br></br>
             <div className="container ">
                 <div class="row ">
 

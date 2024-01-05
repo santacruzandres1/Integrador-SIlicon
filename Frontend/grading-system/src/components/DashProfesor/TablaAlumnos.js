@@ -3,6 +3,7 @@ import { useFetch } from '../../useFetch';
 import DataUser from '../datosUser';
 
 import AlumnosMateria from './AlumnosMateria';
+import './styles.css';
 
 const TablaAlumnos = () => {
 
@@ -79,9 +80,7 @@ const handleListaAlumnos = (idMateria) => {
  
   return (
     <>
-    <br></br>
-    <h2>Materias</h2>
-    <br></br>
+    <h2>Alumnos Inscriptos en sus Materias</h2>
      <div className="container "><div className="container-fluid">
                         <form className="d-flex" role="search">
 
@@ -94,7 +93,7 @@ const handleListaAlumnos = (idMateria) => {
                             />
                             <span className="btn btn-dark" >Buscar</span>
                         </form>
-                    </div></div><br></br>
+                    </div></div>
     <div className="container item">
 
     <table class="table table-striped-columns">

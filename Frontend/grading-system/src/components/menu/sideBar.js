@@ -70,9 +70,16 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
           variants={sidebarVariants}
           animate={window.innerWidth <= 768 ? `${expanded}` : ""}
         >
-             <div className="avatar">
+          <div
+  className={`avatar `}
+  onClick={() => {
+    handleSettings()
+    setSelected(menuItems.findIndex(item => item.id === 'settings')); // Establece el índice activo
+  }}
+>
+             
              {data.imagen ? (
-        <img
+        <img 
             src={`http://localhost:8080/upload/${data.imagen}`}
             alt=""
             className='background rounded-circle'
@@ -86,7 +93,8 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
       
     )}
               <span>Administrador</span>
-            </div>
+            
+</div>
           <div className="menu">
          
             {menuItems.map((item, index) => (
@@ -207,6 +215,11 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
         id: "dash",
       },
       {
+        icono: <FaBook />,
+        text: "Materias",
+        id: "materias", // Agrega el ID de la sección correspondiente
+      },
+      {
         icono: <MdAssignment />,
         text: "Calificaciones",
         id: "calificaciones",
@@ -215,6 +228,11 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
         icono: <FaCalendarDays />,
         text: "Calendario",
         id: "calendar", // Agrega el ID de la sección correspondiente
+      },
+      {
+        icono: <MdManageAccounts />,
+        text: "Settings",
+        id: "settings",
       },
      
     ];
@@ -232,15 +250,15 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
           variants={sidebarVariants}
           animate={window.innerWidth <= 768 ? `${expanded}` : ""}
         >
-             <div className="avatar">
+             <div className="avatar " >
              {data.imagen ? (
-        <img
+        <img 
             src={`http://localhost:8080/upload/${data.imagen}`}
             alt=""
             className='background rounded-circle'
         />
     ) : (
-        <CustomAvatar
+        <CustomAvatar 
             avatar={avatar}
             colors={['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90']}
         />
@@ -262,6 +280,9 @@ const SideBar = ({ handleUsuario, handleMateria, handleCurso, handleWelcome, han
                   }
                   else if (item.id === "dash") {
                     handleWelcome(); 
+                  }
+                  else if (item.id === "settings") {
+                    handleSettings(); 
                   }
                 }}
               >

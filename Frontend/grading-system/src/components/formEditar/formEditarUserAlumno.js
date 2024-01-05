@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import DataUser from '../datosUser';
 
-const EditUserAlumno = ({ handleClose }) => {
+const EditUserAlumno = () => {
   const { data: user } = DataUser();
   const [item, setItem] = useState({
     nombre: '',
     apellido: '',
     email: '',
     password: '',
+    id_usuario:'',
     imagen: null,
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -19,10 +20,12 @@ const EditUserAlumno = ({ handleClose }) => {
         apellido: user.apellido,
         email: user.email,
         password: user.password,
+        id: user.id_usuario,
         imagen: user.imagen,
       });
     }
   }, [user]);
+
 
   const handleInputChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -40,7 +43,7 @@ const EditUserAlumno = ({ handleClose }) => {
     formData.append('apellido', item.apellido);
     formData.append('email', item.email);
     formData.append('password', item.password);
-    formData.append('imagen', item.imagen);
+    formData.append('id', item.id_usuario)
 
     fetch(`http://localhost:8080/api/usuarios/editar/${user.id_usuario}`, {
       method: 'PUT',
@@ -58,8 +61,8 @@ const EditUserAlumno = ({ handleClose }) => {
       })
       .then((data) => {
         console.log('Usuario editado:', data);
-        handleClose();
-        window.location.reload();
+        //window.location.reload();
+        
       })
       .catch((error) => console.error('Error al editar el usuario: ', error));
   };
@@ -76,7 +79,7 @@ const EditUserAlumno = ({ handleClose }) => {
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="nombre">
-                  <h4>Nombre</h4>
+                  <h4>Nombre</h4>          
                 </label>
                 <input
                   placeholder="nombre"
@@ -103,20 +106,6 @@ const EditUserAlumno = ({ handleClose }) => {
                   onChange={handleInputChange}
                   required
                 />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="imagen">
-                  <h4>Imagen</h4>
-                </label>
-                <input
-                  type="file"
-                  className="form-control"
-                  id="imagen"
-                  name="imagen"
-                  onChange={handleInputChange}
-                />
-                
               </div>
 
               <div className="form-group">

@@ -12,6 +12,7 @@ import { useState } from 'react';
 import DashboardAlumno from '../DashboardAlumno/DashboardAlumno';
 import DashProfesor from '../DashProfesor/DashProfesor';
 import CalendarioAlumno from '../DashboardAlumno/Calendario';
+import Settings from '../Settings/Settings';
 
 const Dashboard2 = () => {
     const { data } = DataUser()
@@ -150,9 +151,7 @@ const Dashboard2 = () => {
                         </div>
                     )}
                     {settings && (
-                        <div className='container' id='settings'>
-                            <h1>Settings</h1>
-                        </div>
+                      <Settings/>
                     )}
                 </div>
 
@@ -222,6 +221,7 @@ const Dashboard2 = () => {
                             handleCurso={handleCurso}
                             handleWelcome={handleWelcome}
                             handleCalendar={handleCalendar}
+                            handleSettings={handleSettings}
                             avatar={avatar}
                         />
                         
@@ -245,6 +245,9 @@ const Dashboard2 = () => {
                         <div className='container' id='calendar'>
                            <CalendarioAlumno />
                         </div>
+                    )}
+                    {settings && (
+                      <Settings/>
                     )}
                 </div>
 

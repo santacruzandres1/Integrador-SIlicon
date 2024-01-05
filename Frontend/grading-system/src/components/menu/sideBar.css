@@ -42,15 +42,16 @@
   justify-content: center;
   margin: auto;
   padding: 1rem;
+  cursor: pointer;
 }
-
 .avatar>span>span {
   color: var(--color-text);
 }
 
 .avatar>img {
-  height: 5rem;
+  height: 6rem;
   width: auto;
+  cursor: pointer;
 }
 
 /* Menu */
