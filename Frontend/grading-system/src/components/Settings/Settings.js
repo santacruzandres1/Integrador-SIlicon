@@ -4,49 +4,80 @@ import DataUser from '../datosUser';
 import { TbPhotoEdit } from "react-icons/tb";
 import Dropdown from 'react-bootstrap/Dropdown'
 import './styles.css';
+import React, { useState, useEffect } from 'react';
+
+
 
 const Settings = () => {
-    const { data } = DataUser();
-    const avatar = data.id_usuario;
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (!file) {
-            // Si no se selecciona ningún archivo, salir de la función
-            return;
+
+    const { data: user } = DataUser();
+    const avatar = user.id_usuario;
+   
+
+
+      const [item, setItem] = useState({
+   
+        imagen: null,
+      });
+      
+    
+      useEffect(() => {
+        if (user) {
+          setItem({
+         
+            imagen: user.imagen,
+          });
         }
-
+      }, [user]);
+    
+      const handleInputChange = (e) => {
+        const { name, value, type, files } = e.target;
+        setItem((prevUser) => ({
+          ...prevUser,
+          [name]: type === 'file' ? files[0] : value,
+        }));
+      };
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+    
         const formData = new FormData();
-        formData.append('imagen', file);
-
-        fetch(`http://localhost:8080/api/usuarios/${data.id_usuario}/imagen`, {
-            method: 'PUT',
-            headers: {
-                'authorization': sessionStorage.getItem('token'),
-            },
-            body: formData,
+      
+        formData.append('imagen', item.imagen);
+    
+        fetch(`http://localhost:8080/api/usuarios/editarFoto/${user.id_usuario}`, {
+          method: 'PUT',
+          headers: {
+            'authorization': sessionStorage.getItem('token'),
+          },
+          body: formData,
         })
-            .then((response) => {
-                if (response.ok) {
-                    console.log('Imagen actualizada con éxito');
-                } else {
-                    console.error('Error al actualizar la imagen');
-                    alert('Error al actualizar la imagen, Intente nuevamente');
-                }
-            })
-            .catch((error) => {
-                console.error('Error de red:', error);
-                alert('Error de red:', error);
-            });
-    };
-
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al editar el usuario');
+            }
+          })
+          .then((data) => {
+            console.log('Usuario editado:', data);
+      
+            window.location.reload();
+          })
+          .catch((error) => console.error('Error al editar el usuario: ', error));
+      };
+    
+   
+          
+    
     return (
         <>
             <div className='wrapper'>
-                {data.imagen ? (
+                {user.imagen ? (
                     <div className='avatar image'>
                         <img
-                            src={`http://localhost:8080/upload/${data.imagen}`}
+                            src={`http://localhost:8080/upload/${user.imagen}`}
                             alt=""
                             className='background rounded-circle'
                         />
@@ -56,19 +87,21 @@ const Settings = () => {
                                 <TbPhotoEdit />
                                 <span> Edit</span>
                             </Dropdown.Toggle>
+                          
                             <Dropdown.Menu>
-                                <Dropdown.Item>
-                                    <label htmlFor="file-upload" className="file-upload-label">
-                                        Editar Foto
-                                    </label>
+                            
+                                    <form onSubmit={handleSubmit}>
                                     <input
                                         id="file-upload"
                                         type="file"
-                                        onChange={handleImageChange}
+                                        onChange={handleInputChange}
                                         style={{ display: 'block' }}
                                     />
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Eliminar Foto</Dropdown.Item>
+                                     <button type="submit" className="btn btn-primary">
+                Editar
+              </button>
+                         </form>
+                              
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
@@ -80,7 +113,7 @@ const Settings = () => {
                         />
                         <div className='content avatar'>
                             <TbPhotoEdit />
-                            <span>Edit</span>
+                           
                         </div>
                     </div>
                 )}
